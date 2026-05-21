@@ -1,0 +1,75 @@
+name: hakeem
+description: "حكيم — طبيبك الرقمي الذكي"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # UI
+  cupertino_icons: ^1.0.8
+  google_fonts: any
+  flutter_animate: any
+  flutter_svg: ^2.3.0
+  gap: any
+
+  # State & Navigation
+  flutter_riverpod: any
+  riverpod_annotation: any
+  go_router: any
+
+  # Network
+  dio: any
+
+  # Storage
+  flutter_secure_storage: any
+  shared_preferences: any
+
+  # Auth
+  local_auth: any
+
+  # Connectivity
+  connectivity_plus: any
+
+  # OTP input (for future OTP screen)
+  pinput: any
+
+  # Forms
+  flutter_form_builder: any
+
+  # Charts & Calendar
+  fl_chart: any
+  table_calendar: any
+
+  # Code gen
+  freezed_annotation: any
+  json_annotation: any
+
+  # i18n
+  intl: any
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+  hugeicons: ^1.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: any
+  riverpod_generator: any
+  build_runner: any
+  freezed: any
+  json_serializable: any
+  riverpod_lint: any
+  custom_lint: any
+
+flutter:
+  generate: true
+  uses-material-design: true
