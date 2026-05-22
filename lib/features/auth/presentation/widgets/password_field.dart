@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import 'field_label.dart';
@@ -37,7 +36,7 @@ class PasswordField extends StatelessWidget {
           obscureText: obscureText,
           textInputAction: TextInputAction.done,
           style: TextStyle(
-            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
             fontSize: 15,
             letterSpacing: 2,
           ),
@@ -46,12 +45,12 @@ class PasswordField extends StatelessWidget {
           decoration: InputDecorationFactory.build(
             context: context,
             hint: '••••••••',
-            prefixIcon: const Padding(
+            prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
               child: HugeIcon(
                 icon: HugeIcons.strokeRoundedLockPassword, 
                 size: 20, 
-                color: HakimColors.accent,
+                color: HakimColorScheme.of(context).accent,
               ),
             ),
             suffixIcon: IconButton(
@@ -61,7 +60,7 @@ class PasswordField extends StatelessWidget {
                     ? HugeIcons.strokeRoundedView
                     : HugeIcons.strokeRoundedViewOffSlash,
                 size: 20,
-                color: HakimColors.textHint,
+                color: HakimColorScheme.of(context).textHint,
               ),
             ),
           ),

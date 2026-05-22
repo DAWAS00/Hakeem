@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import 'trust_badge.dart';
 
@@ -21,7 +20,7 @@ class BrandHeader extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             shape: BoxShape.circle,
-            border: Border.all(color: HakimColors.border, width: 1.5),
+            border: Border.all(color: HakimColorScheme.of(context).border, width: 1.5),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x304C6A8D),
@@ -33,7 +32,7 @@ class BrandHeader extends StatelessWidget {
           child: HugeIcon(
             icon: HugeIcons.strokeRoundedHospital02,
             size: 32,
-            color: HakimColors.accent,
+            color: HakimColorScheme.of(context).accent,
           ),
         ).animate().scale(
               duration: 400.ms,
@@ -46,10 +45,10 @@ class BrandHeader extends StatelessWidget {
 
         Text(
           l10n.appTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600,
-            color: HakimColors.accent,
+            color: HakimColorScheme.of(context).accent,
             letterSpacing: -0.5,
           ),
         ).animate().fadeIn(delay: 150.ms),
@@ -60,7 +59,7 @@ class BrandHeader extends StatelessWidget {
           l10n.appSlogan,
           style: TextStyle(
             fontSize: 13,
-            color: Theme.of(context).textTheme.bodySmall?.color ?? HakimColors.textSecondary,
+            color: Theme.of(context).textTheme.bodySmall?.color ?? HakimColorScheme.of(context).textSecondary,
           ),
         ).animate().fadeIn(delay: 200.ms),
 

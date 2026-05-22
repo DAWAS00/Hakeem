@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_locked_step_row.dart';
@@ -74,10 +73,10 @@ class _Step3HealthState extends State<Step3Health> {
                         prefixIcon: Icons.water_drop_outlined),
                     dropdownColor: Theme.of(context).cardColor,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
-                    icon: const Icon(Icons.keyboard_arrow_down_rounded,
-                        color: HakimColors.textHint),
+                    icon: Icon(Icons.keyboard_arrow_down_rounded,
+                        color: HakimColorScheme.of(context).textHint),
                     onChanged: widget.onBloodTypeChanged,
                     items: _bloodTypes
                         .map((t) => DropdownMenuItem(
@@ -104,12 +103,12 @@ class _Step3HealthState extends State<Step3Health> {
                                 horizontal: 14, vertical: 8),
                             decoration: BoxDecoration(
                               color: selected
-                                  ? HakimColors.primary
-                                  : (isDark ? HakimColors.bgInput : HakimColors.bgInputLight),
+                                  ? HakimColorScheme.of(context).primary
+                                  : (HakimColorScheme.of(context).bgInput),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
                                   color: selected
-                                      ? HakimColors.borderFocus
+                                      ? HakimColorScheme.of(context).borderFocus
                                       : Theme.of(context).dividerColor),
                             ),
                             child: Text(d,
@@ -117,7 +116,7 @@ class _Step3HealthState extends State<Step3Health> {
                                     fontSize: 13,
                                     color: selected
                                         ? Colors.white
-                                        : HakimColors.textHint,
+                                        : HakimColorScheme.of(context).textHint,
                                     fontWeight: selected
                                         ? FontWeight.w600
                                         : FontWeight.w400)),
@@ -130,7 +129,7 @@ class _Step3HealthState extends State<Step3Health> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
-                            color: isDark ? HakimColors.bgInput : HakimColors.bgInputLight,
+                            color: HakimColorScheme.of(context).bgInput,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
                                 color: Theme.of(context).dividerColor,
@@ -139,13 +138,13 @@ class _Step3HealthState extends State<Step3Health> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.add,
-                                  size: 14, color: HakimColors.accent),
+                              Icon(Icons.add,
+                                  size: 14, color: HakimColorScheme.of(context).accent),
                               const SizedBox(width: 4),
                               Text(l10n.add,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 13,
-                                      color: HakimColors.accent)),
+                                      color: HakimColorScheme.of(context).accent)),
                             ],
                           ),
                         ),
@@ -159,7 +158,7 @@ class _Step3HealthState extends State<Step3Health> {
                     controller: widget.allergiesCtrl,
                     maxLines: 3,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 13),
                     decoration: signupFieldDec(context,
                         hint: l10n.allergiesHint),
@@ -174,9 +173,9 @@ class _Step3HealthState extends State<Step3Health> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(l10n.height,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 12,
-                                    color: HakimColors.textSecondary)),
+                                    color: HakimColorScheme.of(context).textSecondary)),
                             const SizedBox(height: 4),
                             TextFormField(
                               controller: widget.heightCtrl,
@@ -187,7 +186,7 @@ class _Step3HealthState extends State<Step3Health> {
                                 LengthLimitingTextInputFormatter(3),
                               ],
                               style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                                  color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700),
                               decoration: signupFieldDec(context, hint: '170'),
@@ -201,9 +200,9 @@ class _Step3HealthState extends State<Step3Health> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(l10n.weight,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 12,
-                                    color: HakimColors.textSecondary)),
+                                    color: HakimColorScheme.of(context).textSecondary)),
                             const SizedBox(height: 4),
                             TextFormField(
                               controller: widget.weightCtrl,
@@ -214,7 +213,7 @@ class _Step3HealthState extends State<Step3Health> {
                                 LengthLimitingTextInputFormatter(3),
                               ],
                               style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                                  color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700),
                               decoration: signupFieldDec(context, hint: '70'),
@@ -230,7 +229,7 @@ class _Step3HealthState extends State<Step3Health> {
                   TextFormField(
                     controller: widget.medicationsCtrl,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
                     decoration: signupFieldDec(context,
                         hint: l10n.medicationsHint,

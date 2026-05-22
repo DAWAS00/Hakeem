@@ -36,23 +36,23 @@ final _mockState = HomeState(
   unreadNotifications: 3,
 
   vitals: [
-    const Vital(
+    Vital(
       label: 'نبضات/د',
       value: '72',
       icon: HugeIcons.strokeRoundedActivity01,
-      color: HakimColors.error,
+      color: HakimDark.error,
     ),
-    const Vital(
+    Vital(
       label: 'ضغط الدم',
       value: '120/80',
       icon: HugeIcons.strokeRoundedSettings01,
-      color: HakimColors.primary,
+      color: HakimDark.primary,
     ),
-    const Vital(
+    Vital(
       label: 'خطوة',
       value: '4,280',
       icon: HugeIcons.strokeRoundedUser,
-      color: HakimColors.sanad,
+      color: HakimDark.sanad,
     ),
   ],
 
@@ -61,13 +61,13 @@ final _mockState = HomeState(
       label: 'حجز موعد',
       icon: HugeIcons.strokeRoundedCalendar03,
       bgColor: Color(0x203B82F6),
-      iconColor: HakimColors.primary,
+      iconColor: HakimDark.primary,
     ),
     const QuickAction(
       label: 'نتائجي',
       icon: HugeIcons.strokeRoundedMicroscope,
       bgColor: Color(0x2010B981),
-      iconColor: HakimColors.sanad,
+      iconColor: HakimDark.sanad,
     ),
     const QuickAction(
       label: 'أدويتي',
@@ -79,7 +79,7 @@ final _mockState = HomeState(
       label: 'طوارئ',
       icon: HugeIcons.strokeRoundedAmbulance,
       bgColor: Color(0x20EF4444),
-      iconColor: HakimColors.error,
+      iconColor: HakimDark.error,
     ),
   ],
 
@@ -90,7 +90,7 @@ final _mockState = HomeState(
       specialty: 'طب عام',
       hospital: 'مستشفى الأردن',
       dateLabel: 'غد · 10:30 صباحاً',
-      accentColor: HakimColors.primary,
+      accentColor: HakimDark.primary,
     ),
     Appointment(
       id: 'apt-2',
@@ -98,7 +98,7 @@ final _mockState = HomeState(
       specialty: 'قلب وأوعية',
       hospital: 'المركز الطبي',
       dateLabel: 'الأحد · 2:00 مساءً',
-      accentColor: HakimColors.sanad,
+      accentColor: HakimDark.sanad,
     ),
   ],
 
@@ -108,14 +108,14 @@ final _mockState = HomeState(
       subtitle: 'اسأل عن أعراضك',
       icon: HugeIcons.strokeRoundedAiChat01,
       bgColor: Color(0x203B82F6),
-      iconColor: HakimColors.primary,
+      iconColor: HakimDark.primary,
     ),
     const ServiceCardModel(
       title: 'أقرب مستشفى',
       subtitle: 'ابحث بموقعك الحالي',
       icon: HugeIcons.strokeRoundedHospital01,
       bgColor: Color(0x2010B981),
-      iconColor: HakimColors.sanad,
+      iconColor: HakimDark.sanad,
     ),
     const ServiceCardModel(
       title: 'الفواتير',
@@ -129,7 +129,7 @@ final _mockState = HomeState(
       subtitle: 'زيارات سابقة',
       icon: HugeIcons.strokeRoundedFolder01,
       bgColor: Color(0x1F60A5FA),
-      iconColor: HakimColors.accent,
+      iconColor: HakimDark.accent,
     ),
   ],
 
@@ -138,7 +138,7 @@ final _mockState = HomeState(
       id: 'med-1',
       name: 'Metformin 500mg',
       timeLabel: 'بعد الفطور · ٨:٠٠ ص',
-      dotColor: HakimColors.sanad,
+      dotColor: HakimDark.sanad,
       isTaken: true,
     ),
     Medication(
@@ -151,7 +151,7 @@ final _mockState = HomeState(
       id: 'med-3',
       name: 'Atorvastatin 20mg',
       timeLabel: 'قبل النوم · ١٠:٠٠ م',
-      dotColor: HakimColors.primary,
+      dotColor: HakimDark.primary,
     ),
   ],
 );

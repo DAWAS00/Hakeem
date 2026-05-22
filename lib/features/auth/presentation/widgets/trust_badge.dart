@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 class TrustBadge extends StatelessWidget {
   const TrustBadge({super.key});
@@ -13,19 +12,19 @@ class TrustBadge extends StatelessWidget {
         vertical: HakimSpacing.xs + 2,
       ),
       decoration: BoxDecoration(
-        color: HakimColors.trustBadge,
+        color: HakimColorScheme.of(context).primary,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0x9943474E)),
       ),
-      child: const Row(
+      child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.verified_user_outlined, size: 13, color: HakimColors.sanad),
+          Icon(Icons.verified_user_outlined, size: 13, color: HakimColorScheme.of(context).sanad),
           SizedBox(width: HakimSpacing.xs),
           Text(
             'خدمة حكومية رسمية · وزارة الصحة',
             textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 11, color: HakimColors.textHint),
+            style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
           ),
         ],
       ),

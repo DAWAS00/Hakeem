@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 abstract final class InputDecorationFactory {
   static InputDecoration build({
@@ -14,11 +13,11 @@ abstract final class InputDecorationFactory {
     
     return InputDecoration(
       hintText: hint,
-      hintStyle: const TextStyle(color: HakimColors.textHint, fontSize: 14),
+      hintStyle: TextStyle(color: HakimColorScheme.of(context).textHint, fontSize: 14),
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       filled: true,
-      fillColor: isDark ? HakimColors.bgInput : HakimColors.primary.withValues(alpha: 0.04),
+      fillColor: HakimColorScheme.of(context).bgInput.withValues(alpha: 0.04),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: HakimSpacing.lg,
         vertical: HakimSpacing.md + 2,
@@ -26,28 +25,28 @@ abstract final class InputDecorationFactory {
       border: OutlineInputBorder(
         borderRadius: radius,
         borderSide: BorderSide(
-          color: isDark ? HakimColors.border : HakimColors.primary.withValues(alpha: 0.12),
+          color: HakimColorScheme.of(context).border.withValues(alpha: 0.12),
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: radius,
         borderSide: BorderSide(
-          color: isDark ? HakimColors.border : HakimColors.primary.withValues(alpha: 0.12),
+          color: HakimColorScheme.of(context).border.withValues(alpha: 0.12),
         ),
       ),
-      focusedBorder: const OutlineInputBorder(
+      focusedBorder: OutlineInputBorder(
         borderRadius: radius,
-        borderSide: BorderSide(color: HakimColors.borderFocus, width: 1.5),
+        borderSide: BorderSide(color: HakimColorScheme.of(context).borderFocus, width: 1.5),
       ),
-      errorBorder: const OutlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderRadius: radius,
-        borderSide: BorderSide(color: HakimColors.error),
+        borderSide: BorderSide(color: HakimColorScheme.of(context).error),
       ),
-      focusedErrorBorder: const OutlineInputBorder(
+      focusedErrorBorder: OutlineInputBorder(
         borderRadius: radius,
-        borderSide: BorderSide(color: HakimColors.error, width: 1.5),
+        borderSide: BorderSide(color: HakimColorScheme.of(context).error, width: 1.5),
       ),
-      errorStyle: const TextStyle(color: HakimColors.error, fontSize: 12),
+      errorStyle: TextStyle(color: HakimColorScheme.of(context).error, fontSize: 12),
     );
   }
 }

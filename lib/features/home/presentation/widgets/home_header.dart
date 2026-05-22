@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -47,10 +46,10 @@ class HomeHeader extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: HakimColors.primary,
+                color: HakimColorScheme.of(context).primary,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: HakimColors.accent.withValues(alpha: 0.4),
+                  color: HakimColorScheme.of(context).accent.withValues(alpha: 0.4),
                   width: 2,
                 ),
               ),
@@ -81,11 +80,11 @@ class HomeHeader extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: Theme.of(context).dividerColor),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: HugeIcon(
                       icon: HugeIcons.strokeRoundedNotification03,
                       size: 20,
-                      color: HakimColors.accent,
+                      color: HakimColorScheme.of(context).accent,
                     ),
                   ),
                 ),
@@ -97,7 +96,7 @@ class HomeHeader extends StatelessWidget {
                       width: 10,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: HakimColors.error,
+                        color: HakimColorScheme.of(context).error,
                         shape: BoxShape.circle,
                         border: Border.all(
                           color: Theme.of(context).scaffoldBackgroundColor,
@@ -117,9 +116,9 @@ class HomeHeader extends StatelessWidget {
             children: [
               Text(
                 _greeting,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: HakimColors.textHint,
+                  color: HakimColorScheme.of(context).textHint,
                 ),
               ),
               Text(
@@ -127,7 +126,7 @@ class HomeHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).textTheme.titleLarge?.color ?? HakimColors.textPrimary,
+                  color: Theme.of(context).textTheme.titleLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                 ),
               ),
             ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_locked_step_row.dart';
@@ -65,7 +64,7 @@ class _Step2ContactState extends State<Step2Contact> {
                     textDirection: TextDirection.ltr,
                     textInputAction: TextInputAction.next,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
                     validator: (v) {
                       if (v == null || v.isEmpty) return l10n.requiredField;
@@ -86,10 +85,10 @@ class _Step2ContactState extends State<Step2Contact> {
                         prefixIcon: Icons.map_outlined),
                     dropdownColor: Theme.of(context).cardColor,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
-                    icon: const Icon(Icons.keyboard_arrow_down_rounded,
-                        color: HakimColors.textHint),
+                    icon: Icon(Icons.keyboard_arrow_down_rounded,
+                        color: HakimColorScheme.of(context).textHint),
                     validator: (v) =>
                         v == null ? l10n.requiredField : null,
                     onChanged: (v) {
@@ -109,7 +108,7 @@ class _Step2ContactState extends State<Step2Contact> {
                   TextFormField(
                     textInputAction: TextInputAction.done,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
                     validator: (v) => (v == null || v.isEmpty)
                         ? l10n.requiredField

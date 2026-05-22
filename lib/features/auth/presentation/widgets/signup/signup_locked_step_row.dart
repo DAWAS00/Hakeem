@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class SignupLockedStepRow extends StatelessWidget {
   const SignupLockedStepRow({super.key, required this.number, required this.title});
@@ -14,32 +13,32 @@ class SignupLockedStepRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: HakimSpacing.lg, vertical: HakimSpacing.md),
       decoration: BoxDecoration(
-        color: isDark ? HakimColors.bgLocked : HakimColors.bgLockedLight,
+        color: HakimColorScheme.of(context).bgInput,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Theme.of(context).dividerColor.withValues(alpha: 0.4)),
       ),
       child: Row(
         children: [
-          const Icon(Icons.lock_outline_rounded,
-              size: 14, color: HakimColors.textHint),
+          Icon(Icons.lock_outline_rounded,
+              size: 14, color: HakimColorScheme.of(context).textHint),
           const SizedBox(width: HakimSpacing.sm),
           Text(title,
-              style: const TextStyle(
-                  fontSize: 13, color: HakimColors.textHint)),
+              style: TextStyle(
+                  fontSize: 13, color: HakimColorScheme.of(context).textHint)),
           const Spacer(),
           Container(
             width: 22,
             height: 22,
             decoration: BoxDecoration(
-              color: isDark ? HakimColors.bgInput : HakimColors.bgInputLight,
+              color: HakimColorScheme.of(context).bgInput,
               shape: BoxShape.circle,
               border: Border.all(color: Theme.of(context).dividerColor),
             ),
             child: Center(
               child: Text(number,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 10,
-                      color: HakimColors.textHint,
+                      color: HakimColorScheme.of(context).textHint,
                       fontWeight: FontWeight.w700)),
             ),
           ),

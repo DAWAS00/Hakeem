@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 class HomeSectionHeader extends StatelessWidget {
   const HomeSectionHeader({
@@ -25,9 +24,9 @@ class HomeSectionHeader extends StatelessWidget {
               onTap: onActionTap,
               child: Text(
                 actionLabel!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: HakimColors.primary,
+                  color: HakimColorScheme.of(context).primary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -38,7 +37,7 @@ class HomeSectionHeader extends StatelessWidget {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Theme.of(context).textTheme.titleMedium?.color ?? HakimColors.textPrimary,
+              color: Theme.of(context).textTheme.titleMedium?.color ?? HakimColorScheme.of(context).textPrimary,
             ),
           ),
         ],

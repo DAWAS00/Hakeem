@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 
 class SignupStepperBar extends StatelessWidget {
@@ -18,7 +17,7 @@ class SignupStepperBar extends StatelessWidget {
       children: List.generate(4, (i) {
         final isDone   = i < currentStep;
         final isActive = i == currentStep;
-        final stepLockedColor = isDark ? HakimColors.stepLocked : HakimColors.stepLockedLight;
+        final stepLockedColor = HakimColorScheme.of(context).borderMuted;
 
         return Expanded(
           child: Column(
@@ -33,7 +32,7 @@ class SignupStepperBar extends StatelessWidget {
                         height: 2,
                         decoration: BoxDecoration(
                           color: isDone || isActive
-                              ? HakimColors.stepDone
+                              ? HakimColorScheme.of(context).primary
                               : stepLockedColor,
                           borderRadius: BorderRadius.circular(1),
                         ),
@@ -46,14 +45,14 @@ class SignupStepperBar extends StatelessWidget {
                     height: isActive ? 28 : 24,
                     decoration: BoxDecoration(
                       color: isDone
-                          ? HakimColors.stepDone
+                          ? HakimColorScheme.of(context).primary
                           : isActive
-                              ? HakimColors.primary
+                              ? HakimColorScheme.of(context).primary
                               : stepLockedColor,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: isActive
-                            ? HakimColors.accent.withValues(alpha: 0.4)
+                            ? HakimColorScheme.of(context).accent.withValues(alpha: 0.4)
                             : Colors.transparent,
                         width: 2,
                       ),
@@ -72,7 +71,7 @@ class SignupStepperBar extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                                 color: isActive
                                     ? Colors.white
-                                    : HakimColors.textHint,
+                                    : HakimColorScheme.of(context).textHint,
                               ),
                             ),
                     ),
@@ -85,7 +84,7 @@ class SignupStepperBar extends StatelessWidget {
                         height: 2,
                         decoration: BoxDecoration(
                           color: isDone
-                              ? HakimColors.stepDone
+                              ? HakimColorScheme.of(context).primary
                               : stepLockedColor,
                           borderRadius: BorderRadius.circular(1),
                         ),
@@ -99,10 +98,10 @@ class SignupStepperBar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   color: isActive
-                      ? HakimColors.accent
+                      ? HakimColorScheme.of(context).accent
                       : isDone
-                          ? HakimColors.stepDone
-                          : HakimColors.textHint,
+                          ? HakimColorScheme.of(context).primary
+                          : HakimColorScheme.of(context).textHint,
                   fontWeight:
                       isActive ? FontWeight.w600 : FontWeight.w400,
                 ),

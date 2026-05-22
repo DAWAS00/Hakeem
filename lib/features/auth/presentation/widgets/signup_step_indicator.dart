@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../providers/signup_state.dart';
 
@@ -71,19 +70,19 @@ class _StepDot extends StatelessWidget {
     final Color borderColor;
 
     if (isDone) {
-      bg = HakimColors.stepDone;
+      bg = HakimColorScheme.of(context).primary;
       iconColor = Colors.white;
-      borderColor = HakimColors.stepDone;
+      borderColor = HakimColorScheme.of(context).primary;
     } else if (isActive) {
-      bg = HakimColors.stepActive;
+      bg = HakimColorScheme.of(context).primary;
       iconColor = Colors.white;
-      borderColor = HakimColors.stepActive;
+      borderColor = HakimColorScheme.of(context).primary;
     } else {
       bg = Colors.transparent;
-      iconColor = HakimColors.textHint;
+      iconColor = HakimColorScheme.of(context).textHint;
       borderColor = Theme.of(context).brightness == Brightness.dark
-          ? HakimColors.stepLocked
-          : HakimColors.stepLockedLight;
+          ? HakimColorScheme.of(context).borderMuted
+          : HakimColorScheme.of(context).borderMuted;
     }
 
     return Column(
@@ -111,10 +110,10 @@ class _StepDot extends StatelessWidget {
             fontSize: 10,
             fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
             color: isActive
-                ? HakimColors.stepActive
+                ? HakimColorScheme.of(context).primary
                 : isDone
-                    ? HakimColors.stepDone
-                    : HakimColors.textHint,
+                    ? HakimColorScheme.of(context).primary
+                    : HakimColorScheme.of(context).textHint,
           ),
         ),
       ],
@@ -134,7 +133,7 @@ class _Connector extends StatelessWidget {
       height: 2,
       width: 20,
       margin: const EdgeInsets.only(bottom: HakimSpacing.lg),
-      color: isDone ? HakimColors.stepDone : HakimColors.border,
+      color: isDone ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).border,
     );
   }
 }

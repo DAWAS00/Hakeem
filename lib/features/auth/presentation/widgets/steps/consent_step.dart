@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 import 'step_section_header.dart';
 
@@ -72,25 +71,25 @@ class ConsentStep extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(HakimSpacing.md),
           decoration: BoxDecoration(
-            color: HakimColors.primary.withValues(alpha: 0.08),
+            color: HakimColorScheme.of(context).primary.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: HakimColors.primary.withValues(alpha: 0.3)),
+            border: Border.all(color: HakimColorScheme.of(context).primary.withValues(alpha: 0.3)),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(
+              Icon(
                 Icons.info_outline,
                 size: 18,
-                color: HakimColors.accent,
+                color: HakimColorScheme.of(context).accent,
               ),
               const SizedBox(width: HakimSpacing.sm),
               Expanded(
                 child: Text(
                   l10n.finalStepInfo,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: HakimColors.textSecondary,
+                    color: HakimColorScheme.of(context).textSecondary,
                     height: 1.5,
                   ),
                 ),
@@ -107,34 +106,34 @@ class ConsentStep extends StatelessWidget {
           children: [
             Text(
               l10n.byContinuing,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: HakimColors.textHint,
+                color: HakimColorScheme.of(context).textHint,
               ),
             ),
             GestureDetector(
               child: Text(
                 l10n.termsOfUse,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                   decoration: TextDecoration.underline,
-                  decorationColor: HakimColors.accent,
+                  decorationColor: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
             Text(
               l10n.and,
-              style: const TextStyle(fontSize: 12, color: HakimColors.textHint),
+              style: TextStyle(fontSize: 12, color: HakimColorScheme.of(context).textHint),
             ),
             GestureDetector(
               child: Text(
                 l10n.privacyPolicy,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                   decoration: TextDecoration.underline,
-                  decorationColor: HakimColors.accent,
+                  decorationColor: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
@@ -171,11 +170,11 @@ class _ConsentTile extends StatelessWidget {
         padding: const EdgeInsets.all(HakimSpacing.md),
         decoration: BoxDecoration(
           color: value
-              ? HakimColors.primary.withValues(alpha: 0.08)
+              ? HakimColorScheme.of(context).primary.withValues(alpha: 0.08)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: value ? HakimColors.primary : HakimColors.border,
+            color: value ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).border,
             width: value ? 1.5 : 1,
           ),
         ),
@@ -188,10 +187,10 @@ class _ConsentTile extends StatelessWidget {
               height: 22,
               margin: const EdgeInsets.only(top: 2),
               decoration: BoxDecoration(
-                color: value ? HakimColors.primary : Colors.transparent,
+                color: value ? HakimColorScheme.of(context).primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: value ? HakimColors.primary : HakimColors.border,
+                  color: value ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).border,
                   width: 1.5,
                 ),
               ),
@@ -209,7 +208,7 @@ class _ConsentTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(icon, size: 16, color: HakimColors.accent),
+                      Icon(icon, size: 16, color: HakimColorScheme.of(context).accent),
                       const SizedBox(width: HakimSpacing.xs),
                       Expanded(
                         child: Text(
@@ -218,7 +217,7 @@ class _ConsentTile extends StatelessWidget {
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: value
-                                ? HakimColors.accent
+                                ? HakimColorScheme.of(context).accent
                                 : Theme.of(context).textTheme.bodyLarge?.color,
                           ),
                         ),
@@ -228,14 +227,14 @@ class _ConsentTile extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: HakimColors.error.withValues(alpha: 0.1),
+                            color: HakimColorScheme.of(context).error.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
+                          child: Text(
                             'مطلوب',
                             style: TextStyle(
                               fontSize: 10,
-                              color: HakimColors.error,
+                              color: HakimColorScheme.of(context).error,
                             ),
                           ),
                         ),
@@ -244,9 +243,9 @@ class _ConsentTile extends StatelessWidget {
                   const SizedBox(height: HakimSpacing.xs),
                   Text(
                     subtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: HakimColors.textHint,
+                      color: HakimColorScheme.of(context).textHint,
                       height: 1.4,
                     ),
                   ),

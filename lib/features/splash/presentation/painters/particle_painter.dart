@@ -53,7 +53,7 @@ class ParticlePainter extends CustomPainter {
       final sz = (3.6 * (1.0 - progress * 0.45)).clamp(1.5, 4.0);
 
       final paint = Paint()
-        ..color = (p.isGreen ? HakimColors.sanad : HakimColors.primary)
+        ..color = (p.isGreen ? HakimDark.sanad : HakimDark.primary)
             .withValues(alpha: opacity)
         ..style = PaintingStyle.fill;
 

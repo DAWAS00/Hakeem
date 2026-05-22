@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_gender_button.dart';
@@ -48,13 +47,13 @@ class _Step1PersonalState extends State<Step1Personal> {
       lastDate: DateTime.now().subtract(const Duration(days: 365 * 16)),
       builder: (ctx, child) => Theme(
         data: Theme.of(context).brightness == Brightness.dark ? ThemeData.dark().copyWith(
-          colorScheme: const ColorScheme.dark(
-            primary: HakimColors.primary,
-            surface: HakimColors.bgCard,
+          colorScheme: ColorScheme.dark(
+            primary: HakimColorScheme.of(context).primary,
+            surface: HakimColorScheme.of(context).bgCard,
           ),
         ) : ThemeData.light().copyWith(
-          colorScheme: const ColorScheme.light(
-            primary: HakimColors.primary,
+          colorScheme: ColorScheme.light(
+            primary: HakimColorScheme.of(context).primary,
             surface: Colors.white,
           ),
         ),
@@ -96,7 +95,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                     controller: widget.fullNameCtrl,
                     textInputAction: TextInputAction.next,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
                     validator: (v) => (v == null || v.trim().isEmpty)
                         ? l10n.requiredField
@@ -119,7 +118,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                       LengthLimitingTextInputFormatter(10),
                     ],
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                         fontSize: 14,
                         letterSpacing: 1.5),
                     validator: (v) {
@@ -130,10 +129,10 @@ class _Step1PersonalState extends State<Step1Personal> {
                     decoration: signupFieldDec(context,
                         hint: 'X-XXXX-XXXXX',
                         prefixIcon: Icons.credit_card_outlined,
-                        suffix: const Padding(
+                        suffix: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Icon(Icons.lock_outline,
-                              size: 14, color: HakimColors.sanad),
+                              size: 14, color: HakimColorScheme.of(context).sanad),
                         )),
                   ),
                   const SizedBox(height: HakimSpacing.xs),
@@ -141,7 +140,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
                       '🔒 ${l10n.confirmAccuracy}',
-                      style: const TextStyle(fontSize: 11, color: HakimColors.textHint),
+                      style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
                     ),
                   ),
                   const SizedBox(height: HakimSpacing.md),
@@ -152,7 +151,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                     readOnly: true,
                     onTap: _pickDate,
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary, 
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
                     validator: (v) => (v == null || v.isEmpty)
                         ? l10n.requiredField
@@ -199,7 +198,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                       LengthLimitingTextInputFormatter(10),
                     ],
                     style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                        color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                         fontSize: 14,
                         letterSpacing: 1.2),
                     validator: (v) {
@@ -214,16 +213,16 @@ class _Step1PersonalState extends State<Step1Personal> {
                         width: 54,
                         margin: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
-                          color: isDark ? HakimColors.bgPrefix : HakimColors.bgPrefixLight,
+                          color: HakimColorScheme.of(context).bgInput,
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(color: Theme.of(context).dividerColor),
                         ),
                         alignment: Alignment.center,
-                        child: const Text('+962',
+                        child: Text('+962',
                             style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
-                                color: HakimColors.accent)),
+                                color: HakimColorScheme.of(context).accent)),
                       ),
                     ),
                   ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class SignupCtaButton extends StatelessWidget {
   const SignupCtaButton({super.key, required this.label, required this.onPressed, this.icon});
@@ -15,7 +14,7 @@ class SignupCtaButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: HakimColors.primary,
+            backgroundColor: HakimColorScheme.of(context).primary,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)),

@@ -13,26 +13,18 @@ import '../widgets/home_section_header.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/services_grid.dart';
 import '../widgets/medication_schedule_card.dart';
-import '../widgets/hakim_bottom_nav.dart';
 import '../widgets/speed_dial_overlay.dart';
 import '../widgets/home_loading_view.dart';
 import '../widgets/home_error_view.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
-
-  @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  HomeTab _currentTab = HomeTab.home;
 
   List<SpeedDialItem> _buildSpeedDialItems(BuildContext context, AppLocalizations l10n) => [
     SpeedDialItem(
       label: l10n.bookAppointment,
       icon: HugeIcons.strokeRoundedCalendar03,
-      bgColor: HakimColors.primary,
+      bgColor: HakimColorScheme.of(context).primary,
       iconColor: Colors.white,
       onTap: () => _navigate('/appointments/book'),
     ),
@@ -40,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       label: l10n.labResults,
       icon: HugeIcons.strokeRoundedMicroscope,
       bgColor: Theme.of(context).cardColor,
-      iconColor: HakimColors.accent,
+      iconColor: HakimColorScheme.of(context).accent,
       onTap: () => _navigate('/results'),
     ),
     SpeedDialItem(
@@ -54,35 +46,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       label: l10n.medicalRecord,
       icon: HugeIcons.strokeRoundedFolder01,
       bgColor: Theme.of(context).cardColor,
-      iconColor: HakimColors.accent,
+      iconColor: HakimColorScheme.of(context).accent,
       onTap: () => _navigate('/medical-record'),
     ),
     SpeedDialItem(
       label: l10n.medicalAssistant,
       icon: HugeIcons.strokeRoundedAiChat01,
       bgColor: Theme.of(context).cardColor,
-      iconColor: HakimColors.accent,
+      iconColor: HakimColorScheme.of(context).accent,
       onTap: () => _navigate('/assistant'),
     ),
     SpeedDialItem(
       label: l10n.nearestHospital,
       icon: HugeIcons.strokeRoundedHospital01,
       bgColor: Theme.of(context).cardColor,
-      iconColor: HakimColors.sanad,
+      iconColor: HakimColorScheme.of(context).sanad,
       onTap: () => _navigate('/nearby'),
     ),
     SpeedDialItem(
       label: l10n.emergency,
       icon: HugeIcons.strokeRoundedAmbulance,
-      bgColor: HakimColors.error.withValues(alpha: 0.1),
-      iconColor: HakimColors.error,
+      bgColor: HakimColorScheme.of(context).error.withValues(alpha: 0.1),
+      iconColor: HakimColorScheme.of(context).error,
       onTap: () => _navigate('/emergency'),
     ),
     SpeedDialItem(
       label: l10n.billing,
       icon: HugeIcons.strokeRoundedInvoice01,
       bgColor: Theme.of(context).cardColor,
-      iconColor: HakimColors.accent,
+      iconColor: HakimColorScheme.of(context).accent,
       onTap: () => _navigate('/billing'),
     ),
   ];
@@ -92,7 +84,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final homeAsync = ref.watch(homeProvider);
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -116,10 +108,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 data: (state) => RefreshIndicator(
                   onRefresh: () => ref.read(homeProvider.notifier).refresh(),
-                  color: HakimColors.primary,
+                  color: HakimColorScheme.of(context).primary,
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.only(bottom: 100), // Space for nav bar
+                    padding: const EdgeInsets.only(bottom: 120), // Increased space for floating nav bar
                     child: Column(
                       children: [
                         HomeHeader(
@@ -170,23 +162,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               SpeedDialOverlay(
                 items: _buildSpeedDialItems(context, l10n),
               ),
-
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: HakimBottomNav(
-                  currentTab: _currentTab,
-                  onTabSelected: (tab) {
-                    ref.read(speedDialProvider.notifier).close();
-                    setState(() => _currentTab = tab);
-                  },
-                  homeLabel: l10n.home,
-                  appointmentsLabel: l10n.appointments,
-                  medicationsLabel: l10n.myMedications,
-                  profileLabel: l10n.profile,
-                ),
-              ),
             ],
           ),
         ),
@@ -194,3 +169,4 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
+

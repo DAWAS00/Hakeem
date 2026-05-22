@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class SignupConsentCheckRow extends StatelessWidget {
   const SignupConsentCheckRow({
@@ -27,21 +26,21 @@ class SignupConsentCheckRow extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(icon, size: 15, color: HakimColors.accent),
+                    Icon(icon, size: 15, color: HakimColorScheme.of(context).accent),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(title,
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary)),
+                              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 4),
                 Text(subtitle,
-                    style: const TextStyle(
-                        fontSize: 11, color: HakimColors.textHint)),
+                    style: TextStyle(
+                        fontSize: 11, color: HakimColorScheme.of(context).textHint)),
               ],
             ),
           ),
@@ -49,7 +48,7 @@ class SignupConsentCheckRow extends StatelessWidget {
           Checkbox(
             value: value,
             onChanged: onChanged,
-            activeColor: HakimColors.primary,
+            activeColor: HakimColorScheme.of(context).primary,
             checkColor: Colors.white,
             side: BorderSide(color: Theme.of(context).dividerColor, width: 1.5),
             shape: RoundedRectangleBorder(
@@ -86,21 +85,21 @@ class SignupConsentToggleRow extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(icon, size: 15, color: HakimColors.accent),
+                    Icon(icon, size: 15, color: HakimColorScheme.of(context).accent),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(title,
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary)),
+                              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 4),
                 Text(subtitle,
-                    style: const TextStyle(
-                        fontSize: 11, color: HakimColors.textHint)),
+                    style: TextStyle(
+                        fontSize: 11, color: HakimColorScheme.of(context).textHint)),
               ],
             ),
           ),
@@ -108,10 +107,10 @@ class SignupConsentToggleRow extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeThumbColor: HakimColors.sanad,
-            activeTrackColor: HakimColors.sanad.withValues(alpha: 0.3),
-            inactiveThumbColor: HakimColors.textHint,
-            inactiveTrackColor: isDark ? HakimColors.bgInput : HakimColors.bgInputLight,
+            activeThumbColor: HakimColorScheme.of(context).sanad,
+            activeTrackColor: HakimColorScheme.of(context).sanad.withValues(alpha: 0.3),
+            inactiveThumbColor: HakimColorScheme.of(context).textHint,
+            inactiveTrackColor: HakimColorScheme.of(context).bgInput,
           ),
         ],
       );

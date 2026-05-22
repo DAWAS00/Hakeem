@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../domain/models/home_models.dart';
 
 class MedicationScheduleCard extends StatelessWidget {
@@ -74,13 +73,13 @@ class _MedRow extends StatelessWidget {
               height: 26,
               decoration: BoxDecoration(
                 color: medication.isTaken
-                    ? HakimColors.sanad
+                    ? HakimColorScheme.of(context).sanad
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: medication.isTaken
-                      ? HakimColors.sanad
-                      : HakimColors.border,
+                      ? HakimColorScheme.of(context).sanad
+                      : HakimColorScheme.of(context).border,
                   width: 2,
                 ),
               ),
@@ -102,8 +101,8 @@ class _MedRow extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: medication.isTaken
-                        ? HakimColors.textHint
-                        : (Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary),
+                        ? HakimColorScheme.of(context).textHint
+                        : (Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary),
                     decoration: medication.isTaken
                         ? TextDecoration.lineThrough
                         : null,
@@ -112,9 +111,9 @@ class _MedRow extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   medication.timeLabel,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
-                    color: HakimColors.textHint,
+                    color: HakimColorScheme.of(context).textHint,
                   ),
                 ),
               ],

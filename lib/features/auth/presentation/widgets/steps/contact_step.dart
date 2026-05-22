@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 import '../../../../../core/utils/validators.dart';
 import '../field_label.dart';
@@ -81,27 +80,27 @@ class ContactStep extends StatelessWidget {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: '7X XXX XXXX',
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.phone_outlined, size: 20, color: HakimColors.accent),
+                child: Icon(Icons.phone_outlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
               suffixIcon: Container(
                 width: 56,
                 margin: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? HakimColors.bgPrefix
-                      : HakimColors.bgPrefixLight,
+                      ? HakimColorScheme.of(context).bgInput
+                      : HakimColorScheme.of(context).bgInput,
                   borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: HakimColors.border),
+                  border: Border.all(color: HakimColorScheme.of(context).border),
                 ),
                 alignment: Alignment.center,
-                child: const Text(
+                child: Text(
                   '+962',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: HakimColors.accent,
+                    color: HakimColorScheme.of(context).accent,
                   ),
                 ),
               ),
@@ -123,9 +122,9 @@ class ContactStep extends StatelessWidget {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: 'example@email.com',
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.email_outlined, size: 20, color: HakimColors.accent),
+                child: Icon(Icons.email_outlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),
@@ -138,19 +137,19 @@ class ContactStep extends StatelessWidget {
             initialValue: selectedGovernorate.isEmpty ? null : selectedGovernorate,
             hint: Text(
               l10n.governorateHint,
-              style: const TextStyle(color: HakimColors.textHint, fontSize: 14),
+              style: TextStyle(color: HakimColorScheme.of(context).textHint, fontSize: 14),
             ),
             style: inputStyle,
             dropdownColor: Theme.of(context).brightness == Brightness.dark
-                ? HakimColors.bgCard
-                : HakimColors.bgCardLight,
+                ? HakimColorScheme.of(context).bgCard
+                : HakimColorScheme.of(context).bgCard,
             decoration: InputDecorationFactory.build(
               context: context,
               hint: '',
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                 child: Icon(Icons.location_city_outlined,
-                    size: 20, color: HakimColors.accent),
+                    size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
             items: _governorates
@@ -178,9 +177,9 @@ class ContactStep extends StatelessWidget {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: l10n.cityHint,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.map_outlined, size: 20, color: HakimColors.accent),
+                child: Icon(Icons.map_outlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),

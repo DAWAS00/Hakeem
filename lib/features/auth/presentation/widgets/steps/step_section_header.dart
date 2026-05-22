@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 
 class StepSectionHeader extends StatelessWidget {
   const StepSectionHeader({
@@ -19,10 +18,10 @@ class StepSectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            color: HakimColors.accent,
+            color: HakimColorScheme.of(context).accent,
           ),
         ),
         const SizedBox(height: HakimSpacing.xs),
@@ -31,8 +30,8 @@ class StepSectionHeader extends StatelessWidget {
           style: TextStyle(
             fontSize: 13,
             color: Theme.of(context).brightness == Brightness.dark
-                ? HakimColors.textSecondary
-                : HakimColors.textSecondaryLight,
+                ? HakimColorScheme.of(context).textSecondary
+                : HakimColorScheme.of(context).textSecondary,
           ),
         ),
       ],

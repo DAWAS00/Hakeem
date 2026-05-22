@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import 'field_label.dart';
@@ -40,7 +39,7 @@ class PhoneField extends StatelessWidget {
             LengthLimitingTextInputFormatter(10),
           ],
           style: TextStyle(
-            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
             fontSize: 15,
             letterSpacing: 1.2,
           ),
@@ -49,12 +48,12 @@ class PhoneField extends StatelessWidget {
           decoration: InputDecorationFactory.build(
             context: context,
             hint: '7X XXX XXXX',
-            prefixIcon: const Padding(
+            prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
               child: HugeIcon(
                 icon: HugeIcons.strokeRoundedSmartPhone01, 
                 size: 20, 
-                color: HakimColors.accent,
+                color: HakimColorScheme.of(context).accent,
               ),
             ),
             suffixIcon: Container(
@@ -62,18 +61,18 @@ class PhoneField extends StatelessWidget {
               margin: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? HakimColors.bgPrefix
-                    : HakimColors.primary.withValues(alpha: 0.1),
+                    ? HakimColorScheme.of(context).bgInput
+                    : HakimColorScheme.of(context).primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(6),
                 border: Border.all(color: Theme.of(context).dividerColor),
               ),
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 '+962',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                   letterSpacing: 0.5,
                 ),
               ),

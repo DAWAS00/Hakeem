@@ -24,13 +24,13 @@ class SignupGenderButton extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(
             color: selected
-                ? HakimColors.primary
-                : (isDark ? HakimColors.bgInput : HakimColors.primary.withValues(alpha: 0.05)),
+                ? HakimColorScheme.of(context).primary
+                : (HakimColorScheme.of(context).bgInput.withValues(alpha: 0.05)),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: selected
-                  ? HakimColors.borderFocus
-                  : (isDark ? Theme.of(context).dividerColor : HakimColors.primary.withValues(alpha: 0.1)),
+                  ? HakimColorScheme.of(context).borderFocus
+                  : (isDark ? Theme.of(context).dividerColor : HakimColorScheme.of(context).primary.withValues(alpha: 0.1)),
               width: selected ? 1.5 : 1,
             ),
           ),
@@ -41,7 +41,7 @@ class SignupGenderButton extends StatelessWidget {
                   size: 18,
                   color: selected
                       ? Colors.white
-                      : HakimColors.textHint),
+                      : HakimColorScheme.of(context).textHint),
               const SizedBox(width: 6),
               Text(
                 label,
@@ -50,7 +50,7 @@ class SignupGenderButton extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: selected
                       ? Colors.white
-                      : HakimColors.textHint,
+                      : HakimColorScheme.of(context).textHint,
                 ),
               ),
             ],

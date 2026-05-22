@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import 'field_label.dart';
@@ -39,7 +38,7 @@ class NationalIdField extends StatelessWidget {
             LengthLimitingTextInputFormatter(10),
           ],
           style: TextStyle(
-            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+            color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
             fontSize: 15,
             letterSpacing: 1.5,
           ),
@@ -48,9 +47,9 @@ class NationalIdField extends StatelessWidget {
           decoration: InputDecorationFactory.build(
             context: context,
             hint: '9XXXXXXXXX',
-            prefixIcon: const Padding(
+            prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-              child: Icon(Icons.badge_outlined, size: 20, color: HakimColors.accent),
+              child: Icon(Icons.badge_outlined, size: 20, color: HakimColorScheme.of(context).accent),
             ),
           ),
         ),

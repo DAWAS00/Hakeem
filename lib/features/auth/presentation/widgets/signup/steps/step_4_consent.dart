@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_step_card.dart';
 import '../signup_card_header.dart';
@@ -79,22 +78,22 @@ class Step4Consent extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(HakimSpacing.md),
                   decoration: BoxDecoration(
-                    color: HakimColors.primary.withValues(alpha: 0.12),
+                    color: HakimColorScheme.of(context).primary.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                        color: HakimColors.primary.withValues(alpha: 0.3)),
+                        color: HakimColorScheme.of(context).primary.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(Icons.info_outline_rounded,
-                          size: 16, color: HakimColors.accent),
+                      Icon(Icons.info_outline_rounded,
+                          size: 16, color: HakimColorScheme.of(context).accent),
                       const SizedBox(width: HakimSpacing.sm),
                       Expanded(
                         child: Text(
                           l10n.finalStepInfo,
-                          style: const TextStyle(
-                              fontSize: 12, color: HakimColors.textSecondary),
+                          style: TextStyle(
+                              fontSize: 12, color: HakimColorScheme.of(context).textSecondary),
                         ),
                       ),
                     ],
@@ -111,9 +110,9 @@ class Step4Consent extends StatelessWidget {
             child: ElevatedButton(
               onPressed: canFinish ? onFinish : null,
               style: ElevatedButton.styleFrom(
-                backgroundColor: HakimColors.sanad,
+                backgroundColor: HakimColorScheme.of(context).sanad,
                 disabledBackgroundColor:
-                    HakimColors.sanad.withValues(alpha: 0.35),
+                    HakimColorScheme.of(context).sanad.withValues(alpha: 0.35),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -137,7 +136,7 @@ class Step4Consent extends StatelessWidget {
             Text(
               l10n.finishRegistrationError,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 11, color: HakimColors.textHint),
+              style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
             ),
           ],
 
@@ -147,28 +146,28 @@ class Step4Consent extends StatelessWidget {
             spacing: HakimSpacing.lg,
             children: [
               Text(l10n.privacyPolicy,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12,
-                      color: HakimColors.accent,
+                      color: HakimColorScheme.of(context).accent,
                       decoration: TextDecoration.underline,
-                      decorationColor: HakimColors.accent)),
+                      decorationColor: HakimColorScheme.of(context).accent)),
               Text(l10n.termsOfUse,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12,
-                      color: HakimColors.accent,
+                      color: HakimColorScheme.of(context).accent,
                       decoration: TextDecoration.underline,
-                      decorationColor: HakimColors.accent)),
+                      decorationColor: HakimColorScheme.of(context).accent)),
               Text(l10n.contactUs,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12,
-                      color: HakimColors.accent,
+                      color: HakimColorScheme.of(context).accent,
                       decoration: TextDecoration.underline,
-                      decorationColor: HakimColors.accent)),
+                      decorationColor: HakimColorScheme.of(context).accent)),
             ],
           ),
           const SizedBox(height: HakimSpacing.sm),
           Text(l10n.rightsReserved,
-              style: const TextStyle(fontSize: 11, color: HakimColors.textHint)),
+              style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint)),
           const SizedBox(height: HakimSpacing.xl),
         ],
       ),

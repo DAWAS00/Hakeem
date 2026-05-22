@@ -20,19 +20,19 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: HakimColors.primary,
-          disabledBackgroundColor: HakimColors.primary.withValues(alpha: 0.35),
-          foregroundColor: HakimColors.primaryText,
+          backgroundColor: HakimColorScheme.of(context).primary,
+          disabledBackgroundColor: HakimColorScheme.of(context).primary.withValues(alpha: 0.35),
+          foregroundColor: HakimColorScheme.of(context).primaryText,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           elevation: 0,
         ),
         child: isLoading
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: HakimColors.primaryText,
+                  color: HakimColorScheme.of(context).primaryText,
                 ),
               )
             : Text(

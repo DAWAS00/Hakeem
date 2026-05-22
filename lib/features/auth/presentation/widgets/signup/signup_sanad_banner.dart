@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 
 class SignupSanadBanner extends StatelessWidget {
@@ -11,29 +10,29 @@ class SignupSanadBanner extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-        color: HakimColors.sanadDark.withValues(alpha: 0.18),
+        color: HakimColorScheme.of(context).sanadDark.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: HakimColors.sanad.withValues(alpha: 0.4)),
+        border: Border.all(color: HakimColorScheme.of(context).sanad.withValues(alpha: 0.4)),
       ),
       padding: const EdgeInsets.symmetric(
           horizontal: HakimSpacing.lg, vertical: HakimSpacing.md),
       child: Row(
         children: [
-          const Icon(Icons.account_balance_outlined,
-              size: 20, color: HakimColors.sanad),
+          Icon(Icons.account_balance_outlined,
+              size: 20, color: HakimColorScheme.of(context).sanad),
           const SizedBox(width: HakimSpacing.sm),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(l10n.registerWithSanad,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: HakimColors.sanad)),
+                        color: HakimColorScheme.of(context).sanad)),
                 Text(l10n.sanadFillHint,
                     style:
-                        const TextStyle(fontSize: 11, color: HakimColors.textHint)),
+                        TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint)),
               ],
             ),
           ),
@@ -41,7 +40,7 @@ class SignupSanadBanner extends StatelessWidget {
           ElevatedButton(
             onPressed: () {}, // TODO: Sanad OAuth
             style: ElevatedButton.styleFrom(
-              backgroundColor: HakimColors.sanad,
+              backgroundColor: HakimColorScheme.of(context).sanad,
               foregroundColor: Colors.white,
               minimumSize: const Size(72, 34),
               shape: RoundedRectangleBorder(

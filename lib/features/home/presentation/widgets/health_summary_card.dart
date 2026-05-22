@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../domain/models/home_models.dart';
 
 class HealthSummaryCard extends StatelessWidget {
@@ -47,15 +46,15 @@ class HealthSummaryCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: HakimColors.sanad.withValues(alpha: 0.1),
+                    color: HakimColorScheme.of(context).sanad.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: HakimColors.sanad.withValues(alpha: 0.2)),
+                    border: Border.all(color: HakimColorScheme.of(context).sanad.withValues(alpha: 0.2)),
                   ),
                   child: Text(
                     status,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: HakimColors.sanad,
+                      color: HakimColorScheme.of(context).sanad,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -63,9 +62,9 @@ class HealthSummaryCard extends StatelessWidget {
                 const Spacer(),
                 Text(
                   summaryLabel,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: HakimColors.textHint,
+                    color: HakimColorScheme.of(context).textHint,
                   ),
                 ),
               ],
@@ -95,7 +94,7 @@ class _VitalTile extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: BoxDecoration(
-        color: isDark ? HakimColors.bgBase : HakimColors.bgBaseLight,
+        color: HakimColorScheme.of(context).bgBase,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -107,15 +106,15 @@ class _VitalTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
             ),
           ),
           const SizedBox(height: 2),
           Text(
             vital.label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 10,
-              color: HakimColors.textHint,
+              color: HakimColorScheme.of(context).textHint,
             ),
           ),
         ],

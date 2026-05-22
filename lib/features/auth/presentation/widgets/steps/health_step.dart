@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 import '../field_label.dart';
 import '../input_decoration_factory.dart';
@@ -70,18 +69,18 @@ class HealthStep extends StatelessWidget {
             initialValue: selectedBloodType.isEmpty ? null : selectedBloodType,
             hint: Text(
               l10n.bloodTypeHint,
-              style: const TextStyle(color: HakimColors.textHint, fontSize: 14),
+              style: TextStyle(color: HakimColorScheme.of(context).textHint, fontSize: 14),
             ),
             style: inputStyle,
             dropdownColor:
-                isDark ? HakimColors.bgCard : HakimColors.bgCardLight,
+                HakimColorScheme.of(context).bgCard,
             decoration: InputDecorationFactory.build(
               context: context,
               hint: '',
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                 child: Icon(Icons.water_drop_outlined,
-                    size: 20, color: HakimColors.accent),
+                    size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
             items: _bloodTypes
@@ -103,14 +102,14 @@ class HealthStep extends StatelessWidget {
                 label: Text(d),
                 selected: selected,
                 onSelected: (_) => onDiseaseToggled(d),
-                selectedColor: HakimColors.primary.withValues(alpha: 0.2),
-                checkmarkColor: HakimColors.accent,
+                selectedColor: HakimColorScheme.of(context).primary.withValues(alpha: 0.2),
+                checkmarkColor: HakimColorScheme.of(context).accent,
                 labelStyle: TextStyle(
                   fontSize: 12,
-                  color: selected ? HakimColors.accent : HakimColors.textHint,
+                  color: selected ? HakimColorScheme.of(context).accent : HakimColorScheme.of(context).textHint,
                 ),
                 side: BorderSide(
-                  color: selected ? HakimColors.primary : HakimColors.border,
+                  color: selected ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).border,
                 ),
                 backgroundColor: Colors.transparent,
               );
@@ -129,11 +128,11 @@ class HealthStep extends StatelessWidget {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: l10n.allergiesHint,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: HakimSpacing.md, vertical: HakimSpacing.lg),
                 child: Icon(Icons.warning_amber_outlined,
-                    size: 20, color: HakimColors.accent),
+                    size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),
@@ -158,9 +157,9 @@ class HealthStep extends StatelessWidget {
                   decoration: InputDecorationFactory.build(
               context: context,
                     hint: l10n.height,
-                    prefixIcon: const Padding(
+                    prefixIcon: Padding(
                       padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                      child: Icon(Icons.height, size: 20, color: HakimColors.accent),
+                      child: Icon(Icons.height, size: 20, color: HakimColorScheme.of(context).accent),
                     ),
                   ),
                 ),
@@ -180,10 +179,10 @@ class HealthStep extends StatelessWidget {
                   decoration: InputDecorationFactory.build(
               context: context,
                     hint: l10n.weight,
-                    prefixIcon: const Padding(
+                    prefixIcon: Padding(
                       padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                       child: Icon(Icons.monitor_weight_outlined,
-                          size: 20, color: HakimColors.accent),
+                          size: 20, color: HakimColorScheme.of(context).accent),
                     ),
                   ),
                 ),
@@ -203,11 +202,11 @@ class HealthStep extends StatelessWidget {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: l10n.medicationsHint,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: HakimSpacing.md, vertical: HakimSpacing.lg),
                 child: Icon(Icons.medication_outlined,
-                    size: 20, color: HakimColors.accent),
+                    size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../domain/models/home_models.dart';
 
 class AppointmentCard extends StatelessWidget {
@@ -42,14 +41,14 @@ class AppointmentCard extends StatelessWidget {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: isDark ? HakimColors.bgBase : HakimColors.bgBaseLight,
+                color: HakimColorScheme.of(context).bgBase,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Center(
+              child: Center(
                 child: HugeIcon(
                   icon: HugeIcons.strokeRoundedArrowLeft01,
                   size: 18,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
@@ -65,15 +64,15 @@ class AppointmentCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                      color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     '${appointment.specialty} · ${appointment.hospital}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: HakimColors.textHint,
+                      color: HakimColorScheme.of(context).textHint,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -82,17 +81,17 @@ class AppointmentCard extends StatelessWidget {
                     children: [
                       Text(
                         appointment.dateLabel,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
-                          color: HakimColors.accent,
+                          color: HakimColorScheme.of(context).accent,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(width: 4),
-                      const HugeIcon(
+                      HugeIcon(
                         icon: HugeIcons.strokeRoundedCalendar03,
                         size: 11,
-                        color: HakimColors.accent,
+                        color: HakimColorScheme.of(context).accent,
                       ),
                     ],
                   ),

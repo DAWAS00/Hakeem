@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../domain/models/home_models.dart';
 
 class QuickActionsRow extends StatelessWidget {
@@ -71,7 +70,7 @@ class _QuickActionButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
-                color: Theme.of(context).textTheme.bodySmall?.color ?? HakimColors.textSecondary,
+                color: Theme.of(context).textTheme.bodySmall?.color ?? HakimColorScheme.of(context).textSecondary,
                 height: 1.2,
               ),
             ),

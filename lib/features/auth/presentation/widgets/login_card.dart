@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../domain/enums/login_method.dart';
 import 'biometric_button.dart';
@@ -109,11 +108,11 @@ class LoginCard extends StatelessWidget {
               onTap: onForgotPassword,
               child: Text(
                 l10n.forgotPassword,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                   decoration: TextDecoration.underline,
-                  decorationColor: HakimColors.accent,
+                  decorationColor: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),

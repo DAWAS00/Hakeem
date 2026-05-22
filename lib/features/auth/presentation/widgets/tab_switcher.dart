@@ -23,7 +23,7 @@ class TabSwitcher extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? const Color(0xFF0E1A26)
-            : HakimColors.primary.withValues(alpha: 0.08),
+            : HakimColorScheme.of(context).primary.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -64,7 +64,7 @@ class _TabItem extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
           decoration: BoxDecoration(
-            color: isActive ? HakimColors.primary : Colors.transparent,
+            color: isActive ? HakimColorScheme.of(context).primary : Colors.transparent,
             borderRadius: BorderRadius.circular(7),
           ),
           alignment: Alignment.center,
@@ -75,9 +75,9 @@ class _TabItem extends StatelessWidget {
               fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
               color: isActive
                   ? (Theme.of(context).brightness == Brightness.dark
-                      ? HakimColors.primaryText
+                      ? HakimColorScheme.of(context).primaryText
                       : Colors.white)
-                  : HakimColors.textHint,
+                  : HakimColorScheme.of(context).textHint,
             ),
           ),
         ),

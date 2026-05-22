@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 class HomeErrorView extends StatelessWidget {
   const HomeErrorView({
@@ -22,10 +21,10 @@ class HomeErrorView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.error_outline_rounded,
               size: 64,
-              color: HakimColors.error,
+              color: HakimColorScheme.of(context).error,
             ),
             const SizedBox(height: HakimSpacing.lg),
             Text(
@@ -33,7 +32,7 @@ class HomeErrorView extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -41,7 +40,7 @@ class HomeErrorView extends StatelessWidget {
             ElevatedButton(
               onPressed: onRetry,
               style: ElevatedButton.styleFrom(
-                backgroundColor: HakimColors.primary,
+                backgroundColor: HakimColorScheme.of(context).primary,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

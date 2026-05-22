@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart' as intl;
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 import '../../../../../core/utils/validators.dart';
 import '../field_label.dart';
@@ -91,23 +90,23 @@ class _IdentityStepState extends State<IdentityStep> {
             icon: HugeIcon(
               icon: HugeIcons.strokeRoundedUser,
               size: 18,
-              color: HakimColors.sanad,
+              color: HakimColorScheme.of(context).sanad,
             ),
             label: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   l10n.registerWithSanad,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: HakimColors.sanad,
+                    color: HakimColorScheme.of(context).sanad,
                   ),
                 ),
                 Text(
                   l10n.sanadFillHint,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
-                    color: HakimColors.textHint,
+                    color: HakimColorScheme.of(context).textHint,
                   ),
                 ),
               ],
@@ -117,7 +116,7 @@ class _IdentityStepState extends State<IdentityStep> {
                 horizontal: HakimSpacing.lg,
                 vertical: HakimSpacing.sm,
               ),
-              side: const BorderSide(color: HakimColors.sanad),
+              side: BorderSide(color: HakimColorScheme.of(context).sanad),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -137,12 +136,12 @@ class _IdentityStepState extends State<IdentityStep> {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: l10n.fullNameHint,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                 child: HugeIcon(
                   icon: HugeIcons.strokeRoundedUser, 
                   size: 20, 
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
@@ -167,12 +166,12 @@ class _IdentityStepState extends State<IdentityStep> {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: '9XXXXXXXXX',
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                 child: HugeIcon(
                   icon: HugeIcons.strokeRoundedIdentityCard, 
                   size: 20, 
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
@@ -192,12 +191,12 @@ class _IdentityStepState extends State<IdentityStep> {
             decoration: InputDecorationFactory.build(
               context: context,
               hint: l10n.dobHint,
-              prefixIcon: const Padding(
+              prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
                 child: HugeIcon(
                   icon: HugeIcons.strokeRoundedCalendar03,
                   size: 20, 
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                 ),
               ),
             ),
@@ -285,17 +284,17 @@ class _GenderChip extends StatelessWidget {
         height: 48,
         decoration: BoxDecoration(
           color: isSelected
-              ? HakimColors.primary.withValues(alpha: 0.15)
+              ? HakimColorScheme.of(context).primary.withValues(alpha: 0.15)
               : (Theme.of(context).brightness == Brightness.dark 
                   ? Colors.transparent 
-                  : HakimColors.primary.withValues(alpha: 0.04)),
+                  : HakimColorScheme.of(context).primary.withValues(alpha: 0.04)),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected 
-                ? HakimColors.primary 
+                ? HakimColorScheme.of(context).primary 
                 : (Theme.of(context).brightness == Brightness.dark 
-                    ? HakimColors.border 
-                    : HakimColors.primary.withValues(alpha: 0.12)),
+                    ? HakimColorScheme.of(context).border 
+                    : HakimColorScheme.of(context).primary.withValues(alpha: 0.12)),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -305,7 +304,7 @@ class _GenderChip extends StatelessWidget {
             HugeIcon(
               icon: icon,
               size: 20,
-              color: isSelected ? HakimColors.primary : HakimColors.textHint,
+              color: isSelected ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).textHint,
             ),
             const SizedBox(width: HakimSpacing.xs),
             Text(
@@ -313,7 +312,7 @@ class _GenderChip extends StatelessWidget {
               style: TextStyle(
                 fontWeight:
                     isSelected ? FontWeight.w600 : FontWeight.w400,
-                color: isSelected ? HakimColors.primary : HakimColors.textHint,
+                color: isSelected ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).textHint,
               ),
             ),
           ],

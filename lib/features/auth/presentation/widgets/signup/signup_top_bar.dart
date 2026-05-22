@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 
 class SignupTopBar extends StatelessWidget {
@@ -21,10 +20,10 @@ class SignupTopBar extends StatelessWidget {
           // Back button
           GestureDetector(
             onTap: onBack,
-            child: const HugeIcon(
+            child: HugeIcon(
               icon: HugeIcons.strokeRoundedArrowLeft01,
               size: 20, 
-              color: HakimColors.accent,
+              color: HakimColorScheme.of(context).accent,
             ),
           ),
 
@@ -36,7 +35,7 @@ class SignupTopBar extends StatelessWidget {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
-              color: Theme.of(context).textTheme.titleMedium?.color ?? HakimColors.textPrimary,
+              color: Theme.of(context).textTheme.titleMedium?.color ?? HakimColorScheme.of(context).textPrimary,
             ),
           ),
 
@@ -53,9 +52,9 @@ class SignupTopBar extends StatelessWidget {
             ),
             child: Text(
               '${step + 1} / 4',
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 12,
-                  color: HakimColors.accent,
+                  color: HakimColorScheme.of(context).accent,
                   fontWeight: FontWeight.w600),
             ),
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 
 class FieldLabel extends StatelessWidget {
   const FieldLabel(this.text, {super.key});
@@ -19,8 +18,8 @@ class FieldLabel extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).brightness == Brightness.dark 
-                ? HakimColors.textPrimary 
-                : HakimColors.textPrimaryLight,
+                ? HakimColorScheme.of(context).textPrimary 
+                : HakimColorScheme.of(context).textPrimary,
           ),
         ),
       ),

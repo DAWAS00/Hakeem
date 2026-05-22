@@ -253,7 +253,7 @@ class _SplashScreenState extends State<SplashScreen>
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: HakimColors.bgBase,
+      backgroundColor: HakimColorScheme.of(context).bgBase,
       body: FadeTransition(
         opacity: _exitOpacity,
         child: Stack(
@@ -269,7 +269,7 @@ class _SplashScreenState extends State<SplashScreen>
                   painter: BackgroundCrossPainter(
                     opacity: _crossFadeAnim.value * 0.07,
                     rotation: _crossRotAnim.value,
-                    color: HakimColors.primary,
+                    color: HakimColorScheme.of(context).primary,
                   ),
                 ),
               ),
@@ -286,7 +286,7 @@ class _SplashScreenState extends State<SplashScreen>
                   size: Size(size.width, 48),
                   painter: EcgPainter(
                     progress: _ecgProgress.value,
-                    color: HakimColors.primary,
+                    color: HakimColorScheme.of(context).primary,
                     opacity: 0.38,
                   ),
                 ),
@@ -328,10 +328,10 @@ class _SplashScreenState extends State<SplashScreen>
                         width: 84,
                         height: 84,
                         decoration: BoxDecoration(
-                          color: HakimColors.bgCard,
+                          color: HakimColorScheme.of(context).bgCard,
                           shape: BoxShape.circle,
                           border: Border.all(
-                              color: HakimColors.border, width: 1.5),
+                              color: HakimColorScheme.of(context).border, width: 1.5),
                           boxShadow: const [
                             BoxShadow(
                               color: Color(0x384C6A8D),
@@ -340,10 +340,10 @@ class _SplashScreenState extends State<SplashScreen>
                             ),
                           ],
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.monitor_heart_outlined,
                           size: 36,
-                          color: HakimColors.accent,
+                          color: HakimColorScheme.of(context).accent,
                         ),
                       ),
                     ),
@@ -358,10 +358,10 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Text(
                           l10n.appTitle,
                           textDirection: TextDirection.rtl,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w600,
-                            color: HakimColors.accent,
+                            color: HakimColorScheme.of(context).accent,
                             letterSpacing: -0.5,
                           ),
                         ),
@@ -378,9 +378,9 @@ class _SplashScreenState extends State<SplashScreen>
                         child: Text(
                           l10n.appSlogan,
                           textDirection: TextDirection.rtl,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 13,
-                            color: HakimColors.textSecondary,
+                            color: HakimColorScheme.of(context).textSecondary,
                           ),
                         ),
                       ),
@@ -421,9 +421,9 @@ class _SplashScreenState extends State<SplashScreen>
                             builder: (context, _) => LinearProgressIndicator(
                               value: _pbProgress.value,
                               backgroundColor:
-                                  HakimColors.primary.withValues(alpha: 0.15),
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                  HakimColors.primary),
+                                  HakimColorScheme.of(context).primary.withValues(alpha: 0.15),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  HakimColorScheme.of(context).primary),
                               minHeight: 2,
                             ),
                           ),
@@ -432,11 +432,11 @@ class _SplashScreenState extends State<SplashScreen>
                       const SizedBox(height: 10),
                       FadeTransition(
                         opacity: _badgeOpacity,
-                        child: const Text(
+                        child: Text(
                           'v1.0.0',
                           style: TextStyle(
                             fontSize: 11,
-                            color: HakimColors.textHint,
+                            color: HakimColorScheme.of(context).textHint,
                             fontFamily: 'monospace',
                           ),
                         ),
@@ -473,8 +473,8 @@ class _BackgroundGlow extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(colors: [
-                HakimColors.primary.withValues(alpha: 0.13),
-                HakimColors.primary.withValues(alpha: 0.0),
+                HakimColorScheme.of(context).primary.withValues(alpha: 0.13),
+                HakimColorScheme.of(context).primary.withValues(alpha: 0.0),
               ]),
             ),
           ),
@@ -488,8 +488,8 @@ class _BackgroundGlow extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(colors: [
-                HakimColors.sanad.withValues(alpha: 0.06),
-                HakimColors.sanad.withValues(alpha: 0.0),
+                HakimColorScheme.of(context).sanad.withValues(alpha: 0.06),
+                HakimColorScheme.of(context).sanad.withValues(alpha: 0.0),
               ]),
             ),
           ),
@@ -509,20 +509,20 @@ class _TrustBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
-        color: HakimColors.trustBadge,
+        color: HakimColorScheme.of(context).primary,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-            color: HakimColors.border.withValues(alpha: 0.6)),
+            color: HakimColorScheme.of(context).border.withValues(alpha: 0.6)),
       ),
-      child: const Row(
+      child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.verified_user_outlined, size: 12, color: HakimColors.sanad),
+          Icon(Icons.verified_user_outlined, size: 12, color: HakimColorScheme.of(context).sanad),
           SizedBox(width: 5),
           Text(
             'خدمة حكومية رسمية · وزارة الصحة',
             textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 11, color: HakimColors.textHint),
+            style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
           ),
         ],
       ),

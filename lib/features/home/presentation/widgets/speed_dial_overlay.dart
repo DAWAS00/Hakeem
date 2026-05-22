@@ -113,7 +113,7 @@ class _SpeedDialOverlayState extends ConsumerState<SpeedDialOverlay>
             child: GestureDetector(
               onTap: _close,
               child: Container(
-                color: (isDark ? HakimColors.bgBase : Colors.black)
+                color: (isDark ? HakimColorScheme.of(context).bgBase : Colors.black)
                     .withValues(alpha: _scrimOpacity.value * 0.7),
               ),
             ),
@@ -205,7 +205,7 @@ class _DialItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
             ),
           ),
         ),
@@ -262,11 +262,11 @@ class _SpeedDialFab extends StatelessWidget {
         width: 54,
         height: 54,
         decoration: BoxDecoration(
-          color: isOpen ? HakimColors.error : HakimColors.primary,
+          color: isOpen ? HakimColorScheme.of(context).error : HakimColorScheme.of(context).primary,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: (isOpen ? HakimColors.error : HakimColors.primary)
+              color: (isOpen ? HakimColorScheme.of(context).error : HakimColorScheme.of(context).primary)
                   .withValues(alpha: 0.4),
               blurRadius: 16,
               offset: const Offset(0, 6),

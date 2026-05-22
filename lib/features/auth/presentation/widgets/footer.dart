@@ -16,19 +16,19 @@ class Footer extends StatelessWidget {
       children: [
         Text(
           l10n.dontHaveAccount,
-          style: const TextStyle(fontSize: 13, color: HakimColors.textSecondary),
+          style: TextStyle(fontSize: 13, color: HakimColorScheme.of(context).textSecondary),
         ),
         const SizedBox(width: 4),
         GestureDetector(
           onTap: onRegisterTap,
           child: Text(
             l10n.registerNow,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w600,
-              color: HakimColors.accent,
+              color: HakimColorScheme.of(context).accent,
               decoration: TextDecoration.underline,
-              decorationColor: HakimColors.accent,
+              decorationColor: HakimColorScheme.of(context).accent,
             ),
           ),
         ),

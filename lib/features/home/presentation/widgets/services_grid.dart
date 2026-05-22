@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/constants/hakim_spacing.dart';
 import '../../domain/models/home_models.dart';
 
 class ServicesGrid extends StatelessWidget {
@@ -76,15 +75,15 @@ class _ServiceTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColors.textPrimary,
+                color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               service.subtitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10,
-                color: HakimColors.textHint,
+                color: HakimColorScheme.of(context).textHint,
                 height: 1.2,
               ),
             ),
