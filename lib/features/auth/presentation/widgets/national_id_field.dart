@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import 'field_label.dart';
@@ -49,7 +52,7 @@ class NationalIdField extends StatelessWidget {
             hint: '9XXXXXXXXX',
             prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-              child: Icon(Icons.badge_outlined, size: 20, color: HakimColorScheme.of(context).accent),
+              child: HakimIcon(HakimIcons.badgeOutlined, size: 20, color: HakimColorScheme.of(context).accent),
             ),
           ),
         ),
@@ -57,3 +60,4 @@ class NationalIdField extends StatelessWidget {
     );
   }
 }
+

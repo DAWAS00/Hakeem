@@ -9,17 +9,16 @@ class FieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: HakimSpacing.xs + 2),
+      padding: const EdgeInsets.only(bottom: 6),
       child: Align(
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          text,
+          text.toUpperCase(),
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 11,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).brightness == Brightness.dark 
-                ? HakimColorScheme.of(context).textPrimary 
-                : HakimColorScheme.of(context).textPrimary,
+            letterSpacing: 0.5,
+            color: HakimColorScheme.of(context).textHint,
           ),
         ),
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
-import 'package:hakeem/core/l10n/app_localizations.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../core/constants/hakim_icons.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
+import '../../../../../core/l10n/app_localizations.dart';
 
 class SignupSanadBanner extends StatelessWidget {
   const SignupSanadBanner({super.key});
@@ -18,7 +21,7 @@ class SignupSanadBanner extends StatelessWidget {
           horizontal: HakimSpacing.lg, vertical: HakimSpacing.md),
       child: Row(
         children: [
-          Icon(Icons.account_balance_outlined,
+          HakimIcon(HakimIcons.accountBalanceOutlined,
               size: 20, color: HakimColorScheme.of(context).sanad),
           const SizedBox(width: HakimSpacing.sm),
           Expanded(
@@ -57,3 +60,4 @@ class SignupSanadBanner extends StatelessWidget {
     );
   }
 }
+

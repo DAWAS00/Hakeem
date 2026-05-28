@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_step_card.dart';
 import '../signup_card_header.dart';
@@ -38,7 +41,7 @@ class Step4Consent extends StatelessWidget {
             child: Column(
               children: [
                 SignupCardHeader(
-                  icon: Icons.verified_user_outlined,
+                  icon: HakimIcons.verifiedUserOutlined,
                   title: l10n.consentAndTerms,
                   subtitle: l10n.consentSubtitle,
                 ),
@@ -49,7 +52,7 @@ class Step4Consent extends StatelessWidget {
                   subtitle: l10n.acceptTermsSubtitle,
                   value: acceptedTerms,
                   onChanged: onTermsChanged,
-                  icon: Icons.article_outlined,
+                  icon: HakimIcons.articleOutlined,
                 ),
                 const SizedBox(height: HakimSpacing.sm),
                 Divider(color: Theme.of(context).dividerColor),
@@ -60,7 +63,7 @@ class Step4Consent extends StatelessWidget {
                   subtitle: l10n.notificationsSubtitle,
                   value: notificationsOn,
                   onChanged: onNotifChanged,
-                  icon: Icons.notifications_outlined,
+                  icon: HakimIcons.notificationsOutlined,
                 ),
                 const SizedBox(height: HakimSpacing.sm),
                 Divider(color: Theme.of(context).dividerColor),
@@ -71,7 +74,7 @@ class Step4Consent extends StatelessWidget {
                   subtitle: l10n.accuracySubtitle,
                   value: dataAccuracy,
                   onChanged: onDataChanged,
-                  icon: Icons.fact_check_outlined,
+                  icon: HakimIcons.factCheckOutlined,
                 ),
                 const SizedBox(height: HakimSpacing.md),
 
@@ -86,7 +89,7 @@ class Step4Consent extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(Icons.info_outline_rounded,
+                      HakimIcon(HakimIcons.infoOutlineRounded,
                           size: 16, color: HakimColorScheme.of(context).accent),
                       const SizedBox(width: HakimSpacing.sm),
                       Expanded(
@@ -121,7 +124,7 @@ class Step4Consent extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.check_circle_outline_rounded, size: 20),
+                  HakimIcon(HakimIcons.checkCircleOutlineRounded, size: 20, color: Colors.white),
                   const SizedBox(width: HakimSpacing.sm),
                   Text(l10n.finishRegistration,
                       style: const TextStyle(
@@ -174,3 +177,4 @@ class Step4Consent extends StatelessWidget {
     );
   }
 }
+

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../domain/models/home_models.dart';
 
 class MedicationScheduleCard extends StatelessWidget {
@@ -84,7 +87,7 @@ class _MedRow extends StatelessWidget {
                 ),
               ),
               child: medication.isTaken
-                  ? const Icon(Icons.check_rounded, size: 16, color: Colors.white)
+                  ? const HakimIcon(HakimIcons.checkRounded, size: 16, color: Colors.white)
                   : null,
             ),
           ),
@@ -141,3 +144,4 @@ class _MedRow extends StatelessWidget {
     );
   }
 }
+

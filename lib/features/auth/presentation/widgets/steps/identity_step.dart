@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart' as intl;
-import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/l10n/app_localizations.dart';
-import '../../../../../core/utils/validators.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
+import 'package:hakeem/core/l10n/app_localizations.dart';
+import 'package:hakeem/core/utils/validators.dart';
 import '../field_label.dart';
 import '../input_decoration_factory.dart';
 import 'step_section_header.dart';
@@ -87,10 +89,10 @@ class _IdentityStepState extends State<IdentityStep> {
           // Sanad quick-fill
           OutlinedButton.icon(
             onPressed: widget.onSanadTap,
-            icon: HugeIcon(
-              icon: HugeIcons.strokeRoundedUser,
-              size: 18,
-              color: HakimColorScheme.of(context).sanad,
+            icon: HakimIcon(
+              HakimIcons.user,
+              size: 20,
+              color: HakimColorScheme.of(context).accent,
             ),
             label: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,9 +140,9 @@ class _IdentityStepState extends State<IdentityStep> {
               hint: l10n.fullNameHint,
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedUser, 
-                  size: 20, 
+                child: HakimIcon(
+                  HakimIcons.user,
+                  size: 20,
                   color: HakimColorScheme.of(context).accent,
                 ),
               ),
@@ -168,9 +170,9 @@ class _IdentityStepState extends State<IdentityStep> {
               hint: '9XXXXXXXXX',
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedIdentityCard, 
-                  size: 20, 
+                child: HakimIcon(
+                  HakimIcons.user,
+                  size: 20,
                   color: HakimColorScheme.of(context).accent,
                 ),
               ),
@@ -193,9 +195,9 @@ class _IdentityStepState extends State<IdentityStep> {
               hint: l10n.dobHint,
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedCalendar03,
-                  size: 20, 
+                child: HakimIcon(
+                  HakimIcons.user,
+                  size: 20,
                   color: HakimColorScheme.of(context).accent,
                 ),
               ),
@@ -243,7 +245,7 @@ class _GenderSelector extends StatelessWidget {
         Expanded(
           child: _GenderChip(
             label: maleLabel,
-            icon: HugeIcons.strokeRoundedUser,
+            icon: HakimIcons.maleRounded,
             isSelected: selected == 'male',
             onTap: () => onChanged('male'),
           ),
@@ -252,7 +254,7 @@ class _GenderSelector extends StatelessWidget {
         Expanded(
           child: _GenderChip(
             label: femaleLabel,
-            icon: HugeIcons.strokeRoundedUser,
+            icon: HakimIcons.femaleRounded,
             isSelected: selected == 'female',
             onTap: () => onChanged('female'),
           ),
@@ -271,7 +273,7 @@ class _GenderChip extends StatelessWidget {
   });
 
   final String label;
-  final dynamic icon;
+  final String icon;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -301,11 +303,7 @@ class _GenderChip extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HugeIcon(
-              icon: icon,
-              size: 20,
-              color: isSelected ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).textHint,
-            ),
+            HakimIcon(icon, size: 20, color: isSelected ? HakimColorScheme.of(context).primary : HakimColorScheme.of(context).textHint),
             const SizedBox(width: HakimSpacing.xs),
             Text(
               label,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/l10n/app_localizations.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/l10n/app_localizations.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'step_section_header.dart';
 
 class ConsentStep extends StatelessWidget {
@@ -36,7 +39,7 @@ class ConsentStep extends StatelessWidget {
         const SizedBox(height: HakimSpacing.xl),
 
         _ConsentTile(
-          icon: Icons.gavel_outlined,
+          icon: HakimIcons.gavelOutlined,
           title: l10n.acceptTerms,
           subtitle: l10n.acceptTermsSubtitle,
           value: acceptTerms,
@@ -47,7 +50,7 @@ class ConsentStep extends StatelessWidget {
         const SizedBox(height: HakimSpacing.md),
 
         _ConsentTile(
-          icon: Icons.notifications_outlined,
+          icon: HakimIcons.notificationsOutlined,
           title: l10n.enableNotifications,
           subtitle: l10n.notificationsSubtitle,
           value: enableNotifications,
@@ -57,7 +60,7 @@ class ConsentStep extends StatelessWidget {
         const SizedBox(height: HakimSpacing.md),
 
         _ConsentTile(
-          icon: Icons.fact_check_outlined,
+          icon: HakimIcons.factCheckOutlined,
           title: l10n.confirmAccuracy,
           subtitle: l10n.accuracySubtitle,
           value: confirmAccuracy,
@@ -78,11 +81,7 @@ class ConsentStep extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Icons.info_outline,
-                size: 18,
-                color: HakimColorScheme.of(context).accent,
-              ),
+              HakimIcon(HakimIcons.infoOutline, size: 18, color: HakimColorScheme.of(context).accent),
               const SizedBox(width: HakimSpacing.sm),
               Expanded(
                 child: Text(
@@ -154,7 +153,7 @@ class _ConsentTile extends StatelessWidget {
     this.required = false,
   });
 
-  final IconData icon;
+  final String icon;
   final String title;
   final String subtitle;
   final bool value;
@@ -195,7 +194,7 @@ class _ConsentTile extends StatelessWidget {
                 ),
               ),
               child: value
-                  ? const Icon(Icons.check, size: 14, color: Colors.white)
+                  ? const HakimIcon(HakimIcons.check, size: 14, color: Colors.white)
                   : null,
             ),
 
@@ -208,7 +207,7 @@ class _ConsentTile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(icon, size: 16, color: HakimColorScheme.of(context).accent),
+                      HakimIcon(icon, size: 16, color: HakimColorScheme.of(context).accent),
                       const SizedBox(width: HakimSpacing.xs),
                       Expanded(
                         child: Text(
@@ -258,3 +257,4 @@ class _ConsentTile extends StatelessWidget {
     );
   }
 }
+

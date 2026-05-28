@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/hakim_colors.dart';
+import '../constants/hakim_spacing.dart';
 import 'hakim_text_styles.dart';
 
 // ─────────────────────────────────────────────────────────────
@@ -131,7 +132,7 @@ abstract final class AppTheme {
       // ── Navigation Bar (Material3) ─────────────────────────
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor:     colors.bgDeep,
-        indicatorColor:      colors.primary.withOpacity(0.2),
+        indicatorColor:      colors.primary.withValues(alpha: 0.2),
         iconTheme:           WidgetStateProperty.resolveWith((states) {
           final active = states.contains(WidgetState.selected);
           return IconThemeData(
@@ -171,8 +172,8 @@ abstract final class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor:         colors.primary,
           foregroundColor:         colors.primaryText,
-          disabledBackgroundColor: colors.primary.withOpacity(0.4),
-          disabledForegroundColor: colors.primaryText.withOpacity(0.5),
+          disabledBackgroundColor: colors.primary.withValues(alpha: 0.4),
+          disabledForegroundColor: colors.primaryText.withValues(alpha: 0.5),
           minimumSize:  const Size.fromHeight(52),
           padding:      const EdgeInsets.symmetric(horizontal: 24),
           elevation:    0,
@@ -393,7 +394,7 @@ abstract final class AppTheme {
         activeTrackColor:   colors.primary,
         inactiveTrackColor: colors.border,
         thumbColor:         colors.primary,
-        overlayColor:       colors.primary.withOpacity(0.15),
+        overlayColor:       colors.primary.withValues(alpha: 0.15),
         valueIndicatorColor: colors.primary,
         trackHeight:        2,
       ),
@@ -478,8 +479,8 @@ abstract final class AppTheme {
 
       // ── Splash / Ripple ───────────────────────────────────
       splashFactory:  InkRipple.splashFactory,
-      splashColor:    colors.primary.withOpacity(0.08),
-      highlightColor: colors.primary.withOpacity(0.05),
+      splashColor:    colors.primary.withValues(alpha: 0.08),
+      highlightColor: colors.primary.withValues(alpha: 0.05),
 
       // ── Page transitions ──────────────────────────────────
       pageTransitionsTheme: const PageTransitionsTheme(

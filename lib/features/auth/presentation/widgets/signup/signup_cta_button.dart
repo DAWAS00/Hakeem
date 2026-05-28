@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 class SignupCtaButton extends StatelessWidget {
-  const SignupCtaButton({super.key, required this.label, required this.onPressed, this.icon});
+  const SignupCtaButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon,
+    this.isLoading = false,
+  });
   final String label;
-  final VoidCallback onPressed;
-  final IconData? icon;
+  final VoidCallback? onPressed;
+  final String? icon;
+  final bool isLoading;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: double.infinity,
-        height: 52,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: HakimColorScheme.of(context).primary,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)),
-            elevation: 0,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(label,
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w700)),
-              if (icon != null) ...[
-                const SizedBox(width: HakimSpacing.sm),
-                Icon(icon, size: 18),
-              ],
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: isLoading ? null : onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (isLoading)
+            const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Colors.white,
+              ),
+            )
+          else ...[
+            Text(label),
+            if (icon != null) ...[
+              const SizedBox(width: HakimSpacing.sm),
+              HakimIcon(icon!, size: 18),
             ],
-          ),
-        ),
-      );
+          ],
+        ],
+      ),
+    );
+  }
 }

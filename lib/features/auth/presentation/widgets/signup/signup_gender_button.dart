@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 class SignupGenderButton extends StatelessWidget {
   const SignupGenderButton({
@@ -10,7 +11,7 @@ class SignupGenderButton extends StatelessWidget {
     required this.onTap,
   });
   final String label;
-  final IconData icon;
+  final String icon;
   final bool selected;
   final VoidCallback onTap;
 
@@ -37,7 +38,7 @@ class SignupGenderButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon,
+              HakimIcon(icon,
                   size: 18,
                   color: selected
                       ? Colors.white

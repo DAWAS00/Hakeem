@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/hakim_colors.dart';
-import '../../../../core/l10n/app_localizations.dart';
-import '../providers/signup_state.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
+import 'package:hakeem/core/l10n/app_localizations.dart';
+import 'package:hakeem/features/auth/presentation/providers/signup_state.dart';
 
 class SignupStepIndicator extends StatelessWidget {
   const SignupStepIndicator({
@@ -14,10 +17,10 @@ class SignupStepIndicator extends StatelessWidget {
   final ValueChanged<SignupStep> onStepTap;
 
   static const _steps = [
-    (step: SignupStep.identity, icon: Icons.badge_outlined),
-    (step: SignupStep.contact, icon: Icons.phone_outlined),
-    (step: SignupStep.health, icon: Icons.favorite_outline),
-    (step: SignupStep.consent, icon: Icons.verified_outlined),
+    (step: SignupStep.identity, icon: HakimIcons.badgeOutlined),
+    (step: SignupStep.contact, icon: HakimIcons.phoneOutlined),
+    (step: SignupStep.health, icon: HakimIcons.favoriteOutline),
+    (step: SignupStep.consent, icon: HakimIcons.verifiedOutlined),
   ];
 
   @override
@@ -58,7 +61,7 @@ class _StepDot extends StatelessWidget {
     required this.isActive,
   });
 
-  final IconData icon;
+  final String icon;
   final String label;
   final bool isDone;
   final bool isActive;
@@ -97,10 +100,12 @@ class _StepDot extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: borderColor, width: 2),
           ),
-          child: Icon(
-            isDone ? Icons.check : icon,
-            size: 16,
-            color: iconColor,
+          child: Center(
+            child: HakimIcon(
+              isDone ? HakimIcons.check : icon,
+              size: 16,
+              color: iconColor,
+            ),
           ),
         ),
         const SizedBox(height: HakimSpacing.xs),
@@ -137,3 +142,4 @@ class _Connector extends StatelessWidget {
     );
   }
 }
+

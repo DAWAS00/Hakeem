@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'package:hakeem/features/main_layout/presentation/widgets/custom_bottom_nav_bar.dart';
 
 void main() {
@@ -33,8 +33,8 @@ void main() {
     expect(find.text('Medical'), findsOneWidget);
     expect(find.text('Settings'), findsOneWidget);
     
-    // Check for HugeIcons
-    expect(find.byType(HugeIcon), findsNWidgets(5));
+    // Check for HakimIcons
+    expect(find.byType(HakimIcon), findsNWidgets(5));
   });
 
   testWidgets('Tapping an item calls onTap with correct index', (WidgetTester tester) async {

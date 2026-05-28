@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../../core/constants/hakim_icons.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
 
 class SignupStepperBar extends StatelessWidget {
@@ -11,8 +13,6 @@ class SignupStepperBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final labels = [l10n.identity, l10n.contact, l10n.health, l10n.consent];
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Row(
       children: List.generate(4, (i) {
         final isDone   = i < currentStep;
@@ -59,8 +59,8 @@ class SignupStepperBar extends StatelessWidget {
                     ),
                     child: Center(
                       child: isDone
-                          ? const HugeIcon(
-                              icon: HugeIcons.strokeRoundedTick01,
+                          ? const HakimIcon(
+                              HakimIcons.tick01,
                               size: 14, 
                               color: Colors.white,
                             )
@@ -113,3 +113,4 @@ class SignupStepperBar extends StatelessWidget {
     );
   }
 }
+

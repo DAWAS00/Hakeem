@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 import '../../domain/models/nav_item.dart';
 
@@ -17,34 +18,33 @@ class CustomBottomNavBar extends StatelessWidget {
   static final List<NavItem> _items = [
     const NavItem(
       label: 'Dashboard',
-      icon: HugeIcons.strokeRoundedUser, // Placeholder
+      icon: HakimIcons.user,
       routePath: '/dashboard',
     ),
     const NavItem(
       label: 'Schedule',
-      icon: HugeIcons.strokeRoundedCalendar03,
+      icon: HakimIcons.calendar03,
       routePath: '/appointments',
     ),
     const NavItem(
       label: 'Home',
-      icon: HugeIcons.strokeRoundedHome01,
+      icon: HakimIcons.home01,
       routePath: '/home',
     ),
     const NavItem(
       label: 'Medical',
-      icon: HugeIcons.strokeRoundedMedicine01,
+      icon: HakimIcons.medicine01,
       routePath: '/records',
     ),
     const NavItem(
       label: 'Settings',
-      icon: HugeIcons.strokeRoundedSettings01,
+      icon: HakimIcons.settings01,
       routePath: '/settings',
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final bgColor = HakimColorScheme.of(context).bgCard;
     final primaryColor = HakimColorScheme.of(context).primary;
     final unselectedColor = HakimColorScheme.of(context).textSecondary;
@@ -100,8 +100,8 @@ class CustomBottomNavBar extends StatelessWidget {
                             .fadeIn(),
                       
                       // Icon with elevation/offset animation
-                      HugeIcon(
-                        icon: item.icon,
+                      HakimIcon(
+                        item.icon,
                         color: isSelected ? primaryColor : unselectedColor,
                         size: 28,
                       )

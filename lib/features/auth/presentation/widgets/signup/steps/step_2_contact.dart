@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_locked_step_row.dart';
@@ -51,7 +54,7 @@ class _Step2ContactState extends State<Step2Contact> {
               child: Column(
                 children: [
                   SignupCardHeader(
-                    icon: Icons.location_on_outlined,
+                    icon: HakimIcons.locationOnOutlined,
                     title: l10n.contactInfo,
                     subtitle: l10n.contactSubtitle,
                   ),
@@ -73,7 +76,7 @@ class _Step2ContactState extends State<Step2Contact> {
                     },
                     decoration: signupFieldDec(context,
                         hint: 'example@domain.com',
-                        prefixIcon: Icons.email_outlined),
+                        prefixIcon: HakimIcons.emailOutlined),
                   ),
                   const SizedBox(height: HakimSpacing.md),
 
@@ -82,12 +85,12 @@ class _Step2ContactState extends State<Step2Contact> {
                     initialValue: widget.governorate,
                     decoration: signupFieldDec(context,
                         hint: l10n.governorateHint,
-                        prefixIcon: Icons.map_outlined),
+                        prefixIcon: HakimIcons.mapOutlined),
                     dropdownColor: Theme.of(context).cardColor,
                     style: TextStyle(
                         color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
-                    icon: Icon(Icons.keyboard_arrow_down_rounded,
+                    icon: HakimIcon(HakimIcons.keyboardArrowDownRounded,
                         color: HakimColorScheme.of(context).textHint),
                     validator: (v) =>
                         v == null ? l10n.requiredField : null,
@@ -115,7 +118,7 @@ class _Step2ContactState extends State<Step2Contact> {
                         : null,
                     decoration: signupFieldDec(context,
                         hint: l10n.cityHint,
-                        prefixIcon: Icons.home_outlined),
+                        prefixIcon: HakimIcons.homeOutlined),
                   ),
                 ],
               ),
@@ -124,7 +127,7 @@ class _Step2ContactState extends State<Step2Contact> {
 
             SignupCtaButton(
                 label: l10n.next,
-                icon: Icons.arrow_forward_rounded,
+                icon: HakimIcons.arrowForwardRounded,
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
                     widget.onNext();
@@ -144,3 +147,4 @@ class _Step2ContactState extends State<Step2Contact> {
     );
   }
 }
+

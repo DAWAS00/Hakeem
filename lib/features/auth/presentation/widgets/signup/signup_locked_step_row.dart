@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../core/constants/hakim_icons.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 class SignupLockedStepRow extends StatelessWidget {
   const SignupLockedStepRow({super.key, required this.number, required this.title});
@@ -8,7 +11,6 @@ class SignupLockedStepRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.symmetric(
           horizontal: HakimSpacing.lg, vertical: HakimSpacing.md),
@@ -19,8 +21,8 @@ class SignupLockedStepRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.lock_outline_rounded,
-              size: 14, color: HakimColorScheme.of(context).textHint),
+          HakimIcon(HakimIcons.lockOutlineRounded,
+              size: 18, color: HakimColorScheme.of(context).textHint),
           const SizedBox(width: HakimSpacing.sm),
           Text(title,
               style: TextStyle(
@@ -47,3 +49,4 @@ class SignupLockedStepRow extends StatelessWidget {
     );
   }
 }
+

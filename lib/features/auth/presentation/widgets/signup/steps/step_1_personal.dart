@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_gender_button.dart';
@@ -69,8 +72,6 @@ class _Step1PersonalState extends State<Step1Personal> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(HakimSpacing.xl),
       child: Form(
@@ -84,7 +85,7 @@ class _Step1PersonalState extends State<Step1Personal> {
               child: Column(
                 children: [
                   SignupCardHeader(
-                    icon: Icons.person_outline_rounded,
+                    icon: HakimIcons.user,
                     title: l10n.personalInfo,
                     subtitle: l10n.personalInfoSubtitle,
                   ),
@@ -102,7 +103,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                         : null,
                     decoration: signupFieldDec(context,
                         hint: l10n.fullNameHint,
-                        prefixIcon: Icons.badge_outlined),
+                        prefixIcon: HakimIcons.badgeOutlined),
                   ),
                   const SizedBox(height: HakimSpacing.md),
 
@@ -128,10 +129,10 @@ class _Step1PersonalState extends State<Step1Personal> {
                     },
                     decoration: signupFieldDec(context,
                         hint: 'X-XXXX-XXXXX',
-                        prefixIcon: Icons.credit_card_outlined,
+                        prefixIcon: HakimIcons.creditCardOutlined,
                         suffix: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Icon(Icons.lock_outline,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: HakimIcon(HakimIcons.lockOutline,
                               size: 14, color: HakimColorScheme.of(context).sanad),
                         )),
                   ),
@@ -158,7 +159,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                         : null,
                     decoration: signupFieldDec(context,
                         hint: l10n.dobHint,
-                        prefixIcon: Icons.calendar_month_outlined),
+                        prefixIcon: HakimIcons.calendarMonthOutlined),
                   ),
                   const SizedBox(height: HakimSpacing.md),
 
@@ -168,7 +169,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                       Expanded(
                         child: SignupGenderButton(
                           label: l10n.female,
-                          icon: Icons.female_rounded,
+                          icon: HakimIcons.femaleRounded,
                           selected: widget.gender == 'female',
                           onTap: () => widget.onGenderChanged('female'),
                         ),
@@ -177,7 +178,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                       Expanded(
                         child: SignupGenderButton(
                           label: l10n.male,
-                          icon: Icons.male_rounded,
+                          icon: HakimIcons.maleRounded,
                           selected: widget.gender == 'male',
                           onTap: () => widget.onGenderChanged('male'),
                         ),
@@ -208,7 +209,7 @@ class _Step1PersonalState extends State<Step1Personal> {
                     },
                     decoration: signupFieldDec(context,
                       hint: '7X XXX XXXX',
-                      prefixIcon: Icons.phone_outlined,
+                      prefixIcon: HakimIcons.phoneOutlined,
                       suffix: Container(
                         width: 54,
                         margin: const EdgeInsets.all(6),
@@ -234,7 +235,7 @@ class _Step1PersonalState extends State<Step1Personal> {
 
             SignupCtaButton(
                 label: l10n.next,
-                icon: Icons.arrow_forward_rounded,
+                icon: HakimIcons.arrowForwardRounded,
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
                     widget.onNext();
@@ -261,3 +262,4 @@ class _Step1PersonalState extends State<Step1Personal> {
     );
   }
 }
+

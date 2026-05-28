@@ -2,6 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/home_repository.dart';
 import '../../domain/models/home_models.dart';
 
+class MascotStateNotifier extends Notifier<MascotState> {
+  @override
+  MascotState build() => MascotState.idle;
+
+  void set(MascotState s) => state = s;
+}
+
+final mascotStateProvider = NotifierProvider<MascotStateNotifier, MascotState>(
+  MascotStateNotifier.new,
+);
+
 final homeRepositoryProvider = Provider<HomeRepository>(
   (_) => const HomeRepositoryImpl(),
 );

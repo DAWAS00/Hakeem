@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 import '../../../../core/l10n/app_localizations.dart';
 
@@ -10,27 +12,34 @@ class SanadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final c = HakimColorScheme.of(context);
 
     return SizedBox(
-      height: 52,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: HakimColorScheme.of(context).sanad,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 0,
+      width: double.infinity,
+      height: 48,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [c.sanadDark, c.sanad],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.account_balance_outlined, size: 18, color: Colors.white),
-            const SizedBox(width: HakimSpacing.sm),
-            Text(
-              l10n.loginWithSanad,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ],
+        child: ElevatedButton.icon(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          icon: const HakimIcon(HakimIcons.badgeOutlined, size: 18),
+          label: Text(
+            l10n.loginWithSanad,
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
     );

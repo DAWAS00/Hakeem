@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../domain/enums/login_method.dart';
 import 'biometric_button.dart';
@@ -54,20 +55,26 @@ class LoginCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
+    final c = HakimColorScheme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Theme.of(context).dividerColor),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? const Color(0x33000000)
-                : const Color(0x11000000),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
-          ),
-        ],
+        color: c.bgCard,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isDark ? c.border : c.borderCard,
+          width: 0.5,
+        ),
+        boxShadow: isDark
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
       ),
       padding: const EdgeInsets.all(HakimSpacing.xl),
       child: Column(
@@ -110,9 +117,9 @@ class LoginCard extends StatelessWidget {
                 l10n.forgotPassword,
                 style: TextStyle(
                   fontSize: 13,
-                  color: HakimColorScheme.of(context).accent,
+                  color: c.info,
                   decoration: TextDecoration.underline,
-                  decorationColor: HakimColorScheme.of(context).accent,
+                  decorationColor: c.info,
                 ),
               ),
             ),
@@ -120,15 +127,15 @@ class LoginCard extends StatelessWidget {
 
           const SizedBox(height: HakimSpacing.lg),
 
+          const OtpHint(),
+
+          const SizedBox(height: HakimSpacing.md),
+
           PrimaryButton(
             label: l10n.login,
             isLoading: isLoading,
             onPressed: onLoginPressed,
           ),
-
-          const SizedBox(height: HakimSpacing.sm),
-
-          const OtpHint(),
 
           if (errorMessage != null) ...[
             const SizedBox(height: HakimSpacing.md),
@@ -152,3 +159,4 @@ class LoginCard extends StatelessWidget {
         .slideY(begin: 0.08, end: 0, duration: 400.ms, curve: Curves.easeOut);
   }
 }
+

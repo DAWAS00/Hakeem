@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import 'field_label.dart';
@@ -47,18 +49,16 @@ class PasswordField extends StatelessWidget {
             hint: '••••••••',
             prefixIcon: Padding(
               padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-              child: HugeIcon(
-                icon: HugeIcons.strokeRoundedLockPassword, 
+              child: HakimIcon(
+                HakimIcons.lockPassword, 
                 size: 20, 
                 color: HakimColorScheme.of(context).accent,
               ),
             ),
             suffixIcon: IconButton(
               onPressed: onToggle,
-              icon: HugeIcon(
-                icon: obscureText
-                    ? HugeIcons.strokeRoundedView
-                    : HugeIcons.strokeRoundedViewOffSlash,
+              icon: HakimIcon(
+                obscureText ? HakimIcons.view : HakimIcons.viewOffSlash,
                 size: 20,
                 color: HakimColorScheme.of(context).textHint,
               ),
@@ -69,3 +69,4 @@ class PasswordField extends StatelessWidget {
     );
   }
 }
+

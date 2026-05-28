@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 // ─────────────────────────────────────────────────────────────
 
 // ── Raw dark-mode values ───────────────────────────────────
+/// Raw color constants for Dark Mode.
 abstract final class HakimDark {
   // Backgrounds
   static const bgBase    = Color(0xFF081424);
@@ -71,6 +72,7 @@ abstract final class HakimDark {
 }
 
 // ── Raw light-mode values ──────────────────────────────────
+/// Raw color constants for Light Mode.
 abstract final class HakimLight {
   // Backgrounds
   static const bgBase    = Color(0xFFF5F7FA);
@@ -413,20 +415,8 @@ class HakimColorScheme extends ThemeExtension<HakimColorScheme> {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  SPACING + RADIUS  (mode-independent)
+//  RADIUS  (mode-independent)
 // ─────────────────────────────────────────────────────────────
-abstract final class HakimSpacing {
-  static const xs      = 4.0;
-  static const sm      = 8.0;
-  static const md      = 12.0;
-  static const lg      = 16.0;
-  static const xl      = 20.0;
-  static const xxl     = 24.0;
-  static const xxxl    = 32.0;
-  static const screenH = 20.0; // horizontal page padding
-  static const screenV = 16.0; // vertical section gap
-}
-
 abstract final class HakimRadius {
   static const xs     = Radius.circular(6);
   static const sm     = Radius.circular(8);

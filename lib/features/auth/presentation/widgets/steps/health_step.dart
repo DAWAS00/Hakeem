@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/l10n/app_localizations.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
+import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../field_label.dart';
 import '../input_decoration_factory.dart';
 import 'step_section_header.dart';
@@ -49,7 +52,6 @@ class HealthStep extends StatelessWidget {
       color: Theme.of(context).textTheme.bodyLarge?.color,
       fontSize: 15,
     );
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Form(
       key: formKey,
@@ -79,8 +81,7 @@ class HealthStep extends StatelessWidget {
               hint: '',
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.water_drop_outlined,
-                    size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.waterDropOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
             items: _bloodTypes
@@ -131,8 +132,7 @@ class HealthStep extends StatelessWidget {
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: HakimSpacing.md, vertical: HakimSpacing.lg),
-                child: Icon(Icons.warning_amber_outlined,
-                    size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.warningAmberOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),
@@ -159,7 +159,7 @@ class HealthStep extends StatelessWidget {
                     hint: l10n.height,
                     prefixIcon: Padding(
                       padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                      child: Icon(Icons.height, size: 20, color: HakimColorScheme.of(context).accent),
+                      child: HakimIcon(HakimIcons.height, size: 20, color: HakimColorScheme.of(context).accent),
                     ),
                   ),
                 ),
@@ -181,8 +181,7 @@ class HealthStep extends StatelessWidget {
                     hint: l10n.weight,
                     prefixIcon: Padding(
                       padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                      child: Icon(Icons.monitor_weight_outlined,
-                          size: 20, color: HakimColorScheme.of(context).accent),
+                      child: HakimIcon(HakimIcons.monitorWeightOutlined, size: 20, color: HakimColorScheme.of(context).accent),
                     ),
                   ),
                 ),
@@ -205,8 +204,7 @@ class HealthStep extends StatelessWidget {
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: HakimSpacing.md, vertical: HakimSpacing.lg),
-                child: Icon(Icons.medication_outlined,
-                    size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.medicationOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),

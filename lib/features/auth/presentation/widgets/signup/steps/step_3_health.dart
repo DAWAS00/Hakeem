@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../signup_cta_button.dart';
 import '../signup_locked_step_row.dart';
@@ -46,8 +49,6 @@ class _Step3HealthState extends State<Step3Health> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(HakimSpacing.xl),
       child: Form(
@@ -59,7 +60,7 @@ class _Step3HealthState extends State<Step3Health> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SignupCardHeader(
-                    icon: Icons.favorite_border_rounded,
+                    icon: HakimIcons.favoriteBorderRounded,
                     title: l10n.healthProfile,
                     subtitle: l10n.healthSubtitle,
                   ),
@@ -70,12 +71,12 @@ class _Step3HealthState extends State<Step3Health> {
                     initialValue: widget.bloodType,
                     decoration: signupFieldDec(context,
                         hint: l10n.bloodTypeHint,
-                        prefixIcon: Icons.water_drop_outlined),
+                        prefixIcon: HakimIcons.waterDropOutlined),
                     dropdownColor: Theme.of(context).cardColor,
                     style: TextStyle(
                         color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary, 
                         fontSize: 14),
-                    icon: Icon(Icons.keyboard_arrow_down_rounded,
+                    icon: HakimIcon(HakimIcons.keyboardArrowDownRounded,
                         color: HakimColorScheme.of(context).textHint),
                     onChanged: widget.onBloodTypeChanged,
                     items: _bloodTypes
@@ -138,7 +139,7 @@ class _Step3HealthState extends State<Step3Health> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.add,
+                              HakimIcon(HakimIcons.add,
                                   size: 14, color: HakimColorScheme.of(context).accent),
                               const SizedBox(width: 4),
                               Text(l10n.add,
@@ -233,7 +234,7 @@ class _Step3HealthState extends State<Step3Health> {
                         fontSize: 14),
                     decoration: signupFieldDec(context,
                         hint: l10n.medicationsHint,
-                        prefixIcon: Icons.medication_outlined),
+                        prefixIcon: HakimIcons.medicationOutlined),
                   ),
                 ],
               ),
@@ -242,7 +243,7 @@ class _Step3HealthState extends State<Step3Health> {
 
             SignupCtaButton(
                 label: l10n.next,
-                icon: Icons.arrow_forward_rounded,
+                icon: HakimIcons.arrowForwardRounded,
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
                     widget.onNext();
@@ -260,3 +261,4 @@ class _Step3HealthState extends State<Step3Health> {
     );
   }
 }
+

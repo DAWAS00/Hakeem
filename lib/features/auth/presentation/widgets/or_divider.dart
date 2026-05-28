@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class OrDivider extends StatelessWidget {
   const OrDivider({super.key});
@@ -21,3 +22,4 @@ class OrDivider extends StatelessWidget {
     );
   }
 }
+

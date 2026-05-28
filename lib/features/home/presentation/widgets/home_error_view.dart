@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 
 class HomeErrorView extends StatelessWidget {
   const HomeErrorView({
@@ -21,8 +24,8 @@ class HomeErrorView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error_outline_rounded,
+            HakimIcon(
+              HakimIcons.errorOutlineRounded,
               size: 64,
               color: HakimColorScheme.of(context).error,
             ),
@@ -53,3 +56,4 @@ class HomeErrorView extends StatelessWidget {
     );
   }
 }
+

@@ -6,4 +6,6 @@ abstract final class HakimSpacing {
   static const xl = 20.0;
   static const xxl = 24.0;
   static const xxxl = 32.0;
+  static const screenH = 20.0; // horizontal page padding
+  static const screenV = 16.0; // vertical section gap
 }

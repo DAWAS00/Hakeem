@@ -1,17 +1,46 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/hakim_icons.dart';
+
+enum MascotState {
+  idle,
+  happy,
+  curious,
+  celebrating,
+  listening,
+  thinking,
+  scanning,
+  surprised,
+  sleepy,
+  sad;
+
+  String get assetPath => switch (this) {
+    MascotState.idle        => HakimIcons.mascotIdle,
+    MascotState.happy       => HakimIcons.mascotHappy,
+    MascotState.curious     => HakimIcons.mascotCurious,
+    MascotState.celebrating => HakimIcons.mascotCelebrating,
+    MascotState.listening   => HakimIcons.mascotListening,
+    MascotState.thinking    => HakimIcons.mascotThinking,
+    MascotState.scanning    => HakimIcons.mascotScanning,
+    MascotState.surprised   => HakimIcons.mascotSurprised,
+    MascotState.sleepy      => HakimIcons.mascotSleepy,
+    MascotState.sad         => HakimIcons.mascotSad,
+  };
+}
 
 class Vital {
   const Vital({
     required this.label,
     required this.value,
     required this.icon,
-    required this.color,
+    required this.iconColor,
+    required this.iconBg,
   });
 
   final String label;
   final String value;
-  final dynamic icon;
-  final Color color;
+  final String icon;
+  final Color iconColor;
+  final Color iconBg;
 }
 
 class Appointment {
@@ -21,6 +50,7 @@ class Appointment {
     required this.specialty,
     required this.hospital,
     required this.dateLabel,
+    required this.timeLabel,
     required this.accentColor,
   });
 
@@ -29,6 +59,7 @@ class Appointment {
   final String specialty;
   final String hospital;
   final String dateLabel;
+  final String timeLabel;
   final Color accentColor;
 }
 
@@ -62,15 +93,21 @@ class QuickAction {
     required this.icon,
     required this.bgColor,
     required this.iconColor,
+    this.route,
     this.onTap,
   });
 
   final String label;
-  final dynamic icon;
+  final String icon;
   final Color bgColor;
   final Color iconColor;
+  final String? route;
   final VoidCallback? onTap;
 }
+
+enum ServiceBadge { none, isNew, popular }
+
+enum ServiceLayout { grid, wide }
 
 class ServiceCardModel {
   const ServiceCardModel({
@@ -79,6 +116,9 @@ class ServiceCardModel {
     required this.icon,
     required this.bgColor,
     required this.iconColor,
+    this.badge = ServiceBadge.none,
+    this.layout = ServiceLayout.grid,
+    this.route,
     this.onTap,
   });
 
@@ -87,6 +127,9 @@ class ServiceCardModel {
   final dynamic icon;
   final Color bgColor;
   final Color iconColor;
+  final ServiceBadge badge;
+  final ServiceLayout layout;
+  final String? route;
   final VoidCallback? onTap;
 }
 
@@ -96,6 +139,7 @@ class SpeedDialItem {
     required this.icon,
     required this.bgColor,
     required this.iconColor,
+    this.mascotState = MascotState.happy,
     this.onTap,
   });
 
@@ -103,6 +147,7 @@ class SpeedDialItem {
   final dynamic icon;
   final Color bgColor;
   final Color iconColor;
+  final MascotState mascotState;
   final VoidCallback? onTap;
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 
 class TrustBadge extends StatelessWidget {
@@ -6,25 +8,30 @@ class TrustBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HakimSpacing.md,
-        vertical: HakimSpacing.xs + 2,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
-        color: HakimColorScheme.of(context).primary,
+        color: c.sanadBg,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x9943474E)),
+        border: Border.all(
+          color: c.sanad.withValues(alpha: 0.3),
+          width: 0.5,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.verified_user_outlined, size: 13, color: HakimColorScheme.of(context).sanad),
-          SizedBox(width: HakimSpacing.xs),
+          HakimIcon(HakimIcons.shieldOutlined, size: 12, color: c.sanad),
+          const SizedBox(width: 5),
           Text(
             'خدمة حكومية رسمية · وزارة الصحة',
             textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+              color: c.sanadText,
+            ),
           ),
         ],
       ),

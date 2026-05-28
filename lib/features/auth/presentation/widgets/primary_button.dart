@@ -15,30 +15,28 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return SizedBox(
-      height: 52,
+      height: 48,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: HakimColorScheme.of(context).primary,
-          disabledBackgroundColor: HakimColorScheme.of(context).primary.withValues(alpha: 0.35),
-          foregroundColor: HakimColorScheme.of(context).primaryText,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: c.info,
+          disabledBackgroundColor: c.info.withValues(alpha: 0.35),
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           elevation: 0,
         ),
         child: isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 20,
                 height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: HakimColorScheme.of(context).primaryText,
-                ),
+                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
               )
             : Text(
                 label,
                 textDirection: TextDirection.rtl,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
       ),
     );

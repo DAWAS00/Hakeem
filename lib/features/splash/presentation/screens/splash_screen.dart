@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/animations/spring_curve.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../painters/background_cross_painter.dart';
 import '../painters/ecg_painter.dart';
@@ -340,8 +342,8 @@ class _SplashScreenState extends State<SplashScreen>
                             ),
                           ],
                         ),
-                        child: Icon(
-                          Icons.monitor_heart_outlined,
+                        child: HakimIcon(
+                          HakimIcons.monitorHeartOutlined,
                           size: 36,
                           color: HakimColorScheme.of(context).accent,
                         ),
@@ -517,8 +519,8 @@ class _TrustBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.verified_user_outlined, size: 12, color: HakimColorScheme.of(context).sanad),
-          SizedBox(width: 5),
+          HakimIcon(HakimIcons.verifiedUserOutlined, size: 12, color: HakimColorScheme.of(context).sanad),
+          const SizedBox(width: 5),
           Text(
             'خدمة حكومية رسمية · وزارة الصحة',
             textDirection: TextDirection.rtl,

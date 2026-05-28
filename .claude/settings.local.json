@@ -5,7 +5,9 @@
       "Bash(flutter test *)",
       "Bash(flutter pub *)",
       "Bash(grep -v \"^$\")",
-      "Bash(grep \"lib\\\\\\\\\")"
+      "Bash(grep \"lib\\\\\\\\\")",
+      "Bash(dir \"E:\\\\Hakeem\" /b)",
+      "Bash(dir \"E:\\\\Hakeem\\\\assets\" /b)"
     ]
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../domain/models/home_models.dart';
 
 class HealthSummaryCard extends StatelessWidget {
@@ -19,60 +19,65 @@ class HealthSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: HakimSpacing.xl),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: c.bgCard,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Theme.of(context).dividerColor),
-          boxShadow: [
-            if (!isDark)
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.04),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-          ],
+          border: Border.all(color: isDark ? c.border : c.borderCard, width: 0.5),
+          boxShadow: isDark
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(14),
         child: Column(
           children: [
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
                   decoration: BoxDecoration(
-                    color: HakimColorScheme.of(context).sanad.withValues(alpha: 0.1),
+                    color: isDark
+                        ? c.sanad.withValues(alpha: 0.12)
+                        : c.sanadBg,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: HakimColorScheme.of(context).sanad.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: isDark
+                          ? c.sanad.withValues(alpha: 0.3)
+                          : c.sanad.withValues(alpha: 0.3),
+                      width: 0.5,
+                    ),
                   ),
                   child: Text(
                     status,
                     style: TextStyle(
                       fontSize: 11,
-                      color: HakimColorScheme.of(context).sanad,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
+                      color: isDark ? c.sanad : c.sanadText,
                     ),
                   ),
                 ),
                 const Spacer(),
                 Text(
                   summaryLabel,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: HakimColorScheme.of(context).textHint,
-                  ),
+                  style: TextStyle(fontSize: 12, color: c.textHint),
                 ),
               ],
             ),
-            const SizedBox(height: HakimSpacing.md),
+            const SizedBox(height: 12),
             Row(
               children: vitals
-                  .map((v) => Expanded(child: _VitalTile(vital: v)))
+                  .map((v) => Expanded(child: _VitalTile(vital: v, isDark: isDark)))
                   .toList(),
             ),
           ],
@@ -83,39 +88,49 @@ class HealthSummaryCard extends StatelessWidget {
 }
 
 class _VitalTile extends StatelessWidget {
-  const _VitalTile({required this.vital});
+  const _VitalTile({required this.vital, required this.isDark});
+
   final Vital vital;
+  final bool isDark;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final c = HakimColorScheme.of(context);
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 3),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
       decoration: BoxDecoration(
-        color: HakimColorScheme.of(context).bgBase,
+        color: c.bgBase,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
-          HugeIcon(icon: vital.icon, size: 18, color: vital.color),
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: isDark
+                  ? vital.iconColor.withValues(alpha: 0.15)
+                  : vital.iconBg,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: HakimIcon(vital.icon, size: 18, color: vital.iconColor),
+          ),
           const SizedBox(height: 6),
           Text(
             vital.value,
             style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: isDark ? Colors.white : const Color(0xFF0F172A),
             ),
           ),
           const SizedBox(height: 2),
           Text(
             vital.label,
-            style: TextStyle(
-              fontSize: 10,
-              color: HakimColorScheme.of(context).textHint,
-            ),
+            textDirection: TextDirection.rtl,
+            style: TextStyle(fontSize: 10, color: c.textHint),
           ),
         ],
       ),

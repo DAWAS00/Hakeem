@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 abstract final class InputDecorationFactory {
   static InputDecoration build({
@@ -8,7 +9,6 @@ abstract final class InputDecorationFactory {
     required Widget prefixIcon,
     Widget? suffixIcon,
   }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     const radius = BorderRadius.all(Radius.circular(10));
     
     return InputDecoration(

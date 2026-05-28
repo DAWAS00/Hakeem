@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
-import '../../../../core/constants/hakim_colors.dart';
+import '../../../../core/constants/hakim_icons.dart';
 import '../../domain/models/home_models.dart';
 
 abstract interface class HomeRepository {
@@ -35,51 +34,58 @@ final _mockState = HomeState(
   healthStatus: 'جيد',
   unreadNotifications: 3,
 
-  vitals: [
+  vitals: const [
     Vital(
       label: 'نبضات/د',
       value: '72',
-      icon: HugeIcons.strokeRoundedActivity01,
-      color: HakimDark.error,
+      icon: HakimIcons.favoriteBorderRounded,
+      iconColor: Color(0xFFEF4444),
+      iconBg: Color(0xFFFEF2F2),
     ),
     Vital(
       label: 'ضغط الدم',
       value: '120/80',
-      icon: HugeIcons.strokeRoundedSettings01,
-      color: HakimDark.primary,
+      icon: HakimIcons.monitorHeartOutlined,
+      iconColor: Color(0xFF3B82F6),
+      iconBg: Color(0xFFEFF6FF),
     ),
     Vital(
       label: 'خطوة',
       value: '4,280',
-      icon: HugeIcons.strokeRoundedUser,
-      color: HakimDark.sanad,
+      icon: HakimIcons.activity01,
+      iconColor: Color(0xFF10B981),
+      iconBg: Color(0xFFF0FDF4),
     ),
   ],
 
-  quickActions: [
-    const QuickAction(
+  quickActions: const [
+    QuickAction(
       label: 'حجز موعد',
-      icon: HugeIcons.strokeRoundedCalendar03,
-      bgColor: Color(0x203B82F6),
-      iconColor: HakimDark.primary,
+      icon: HakimIcons.calendar03,
+      bgColor: Color(0xFFEFF6FF),
+      iconColor: Color(0xFF3B82F6),
+      route: '/appointments/book',
     ),
-    const QuickAction(
+    QuickAction(
       label: 'نتائجي',
-      icon: HugeIcons.strokeRoundedMicroscope,
-      bgColor: Color(0x2010B981),
-      iconColor: HakimDark.sanad,
+      icon: HakimIcons.microscope,
+      bgColor: Color(0xFFF0FDF4),
+      iconColor: Color(0xFF059669),
+      route: '/results',
     ),
-    const QuickAction(
+    QuickAction(
       label: 'أدويتي',
-      icon: HugeIcons.strokeRoundedMedicine01,
-      bgColor: Color(0x20F59E0B),
-      iconColor: Colors.orange,
+      icon: HakimIcons.medicine01,
+      bgColor: Color(0xFFF3E8FF),
+      iconColor: Color(0xFF9333EA),
+      route: '/medications',
     ),
-    const QuickAction(
+    QuickAction(
       label: 'طوارئ',
-      icon: HugeIcons.strokeRoundedAmbulance,
-      bgColor: Color(0x20EF4444),
-      iconColor: HakimDark.error,
+      icon: HakimIcons.ambulance,
+      bgColor: Color(0xFFFFF7ED),
+      iconColor: Color(0xFFEA580C),
+      route: '/emergency',
     ),
   ],
 
@@ -89,16 +95,18 @@ final _mockState = HomeState(
       doctorName: 'د. سارة العمري',
       specialty: 'طب عام',
       hospital: 'مستشفى الأردن',
-      dateLabel: 'غد · 10:30 صباحاً',
-      accentColor: HakimDark.primary,
+      dateLabel: 'غد',
+      timeLabel: '10:30 صباحاً',
+      accentColor: Color(0xFF3B82F6),
     ),
     Appointment(
       id: 'apt-2',
       doctorName: 'د. خالد الزيود',
       specialty: 'قلب وأوعية',
       hospital: 'المركز الطبي',
-      dateLabel: 'الأحد · 2:00 مساءً',
-      accentColor: HakimDark.sanad,
+      dateLabel: 'الأحد',
+      timeLabel: '2:00 مساءً',
+      accentColor: Color(0xFF10B981),
     ),
   ],
 
@@ -106,30 +114,58 @@ final _mockState = HomeState(
     const ServiceCardModel(
       title: 'المساعد الطبي',
       subtitle: 'اسأل عن أعراضك',
-      icon: HugeIcons.strokeRoundedAiChat01,
-      bgColor: Color(0x203B82F6),
-      iconColor: HakimDark.primary,
+      icon: HakimIcons.aiChat01,
+      bgColor: Color(0xFFEDE9FE),
+      iconColor: Color(0xFF7C3AED),
+      badge: ServiceBadge.isNew,
+      layout: ServiceLayout.grid,
+      route: '/assistant',
     ),
     const ServiceCardModel(
-      title: 'أقرب مستشفى',
-      subtitle: 'ابحث بموقعك الحالي',
-      icon: HugeIcons.strokeRoundedHospital01,
-      bgColor: Color(0x2010B981),
-      iconColor: HakimDark.sanad,
+      title: 'تحاليل مخبرية',
+      subtitle: 'طلب وتتبع التحاليل',
+      icon: HakimIcons.microscope,
+      bgColor: Color(0xFFFFE4E6),
+      iconColor: Color(0xFFE11D48),
+      layout: ServiceLayout.grid,
+      route: '/results',
     ),
     const ServiceCardModel(
-      title: 'الفواتير',
-      subtitle: 'اطلع على مستحقاتك',
-      icon: HugeIcons.strokeRoundedInvoice01,
-      bgColor: Color(0x20F59E0B),
-      iconColor: Colors.orange,
+      title: 'أدويتي',
+      subtitle: 'جدول الوصفات والأدوية',
+      icon: HakimIcons.medicine01,
+      bgColor: Color(0xFFFEF3C7),
+      iconColor: Color(0xFFD97706),
+      badge: ServiceBadge.popular,
+      layout: ServiceLayout.grid,
+      route: '/medications',
     ),
     const ServiceCardModel(
       title: 'سجل طبي',
-      subtitle: 'زيارات سابقة',
-      icon: HugeIcons.strokeRoundedFolder01,
-      bgColor: Color(0x1F60A5FA),
-      iconColor: HakimDark.accent,
+      subtitle: 'زياراتك السابقة',
+      icon: HakimIcons.folder01,
+      bgColor: Color(0xFFE0E7FF),
+      iconColor: Color(0xFF4F46E5),
+      layout: ServiceLayout.grid,
+      route: '/medical-record',
+    ),
+    const ServiceCardModel(
+      title: 'أقرب مستشفى إليك',
+      subtitle: 'ابحث بناءً على موقعك الحالي',
+      icon: HakimIcons.hospital01,
+      bgColor: Color(0xFFE0F2FE),
+      iconColor: Color(0xFF0284C7),
+      layout: ServiceLayout.wide,
+      route: '/nearby',
+    ),
+    const ServiceCardModel(
+      title: 'الفواتير والمدفوعات',
+      subtitle: 'اطّلع على مستحقاتك وسجل الدفع',
+      icon: HakimIcons.invoice01,
+      bgColor: Color(0xFFFFF7ED),
+      iconColor: Color(0xFFEA580C),
+      layout: ServiceLayout.wide,
+      route: '/billing',
     ),
   ],
 
@@ -138,20 +174,20 @@ final _mockState = HomeState(
       id: 'med-1',
       name: 'Metformin 500mg',
       timeLabel: 'بعد الفطور · ٨:٠٠ ص',
-      dotColor: HakimDark.sanad,
+      dotColor: Color(0xFF10B981),
       isTaken: true,
     ),
     Medication(
       id: 'med-2',
       name: 'Lisinopril 10mg',
       timeLabel: 'الغداء · ١٢:٠٠ م',
-      dotColor: Colors.orange,
+      dotColor: Color(0xFFF59E0B),
     ),
     Medication(
       id: 'med-3',
       name: 'Atorvastatin 20mg',
       timeLabel: 'قبل النوم · ١٠:٠٠ م',
-      dotColor: HakimDark.primary,
+      dotColor: Color(0xFF3B82F6),
     ),
   ],
 );

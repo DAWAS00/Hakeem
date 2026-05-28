@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
+import '../../../../core/constants/hakim_colors.dart' hide HakimRadius;
 import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/providers/app_settings_provider.dart';
@@ -12,6 +14,11 @@ import '../widgets/brand_header.dart';
 import '../widgets/footer.dart';
 import '../widgets/login_card.dart';
 
+/// The primary login entry point for the Hakim application.
+/// 
+/// This screen provides a multi-input login form (phone, national ID, password)
+/// and handles navigation to the home screen or signup flow.
+/// It uses Riverpod for state management.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -63,14 +70,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
     });
 
+    final c = HakimColorScheme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      backgroundColor: c.bgBase,
       resizeToAvoidBottomInset: true,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
+          statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         ),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -85,15 +94,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        onPressed: () =>
+                      GestureDetector(
+                        onTap: () =>
                             ref.read(appSettingsProvider.notifier).toggleTheme(),
-                        icon: HugeIcon(
-                          icon: Theme.of(context).brightness == Brightness.dark
-                              ? HugeIcons.strokeRoundedSun01
-                              : HugeIcons.strokeRoundedMoon01,
-                          size: 24,
-                          color: Theme.of(context).iconTheme.color ?? (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: c.bgCard,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: c.border, width: 0.5),
+                          ),
+                          child: HakimIcon(
+                            isDark ? HakimIcons.sun01 : HakimIcons.moon01,
+                            size: 14,
+                            color: c.textSecondary,
+                          ),
                         ),
                       ),
                       TextButton(

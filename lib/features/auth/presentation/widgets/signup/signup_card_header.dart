@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 class SignupCardHeader extends StatelessWidget {
   const SignupCardHeader({
@@ -8,7 +10,7 @@ class SignupCardHeader extends StatelessWidget {
     required this.title,
     required this.subtitle,
   });
-  final IconData icon;
+  final String icon;
   final String title;
   final String subtitle;
 
@@ -18,7 +20,7 @@ class SignupCardHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, size: 18, color: HakimColorScheme.of(context).accent),
+              HakimIcon(icon, size: 18, color: HakimColorScheme.of(context).accent),
               const SizedBox(width: HakimSpacing.sm),
               Text(title,
                   style: TextStyle(
@@ -37,3 +39,4 @@ class SignupCardHeader extends StatelessWidget {
         ],
       );
 }
+

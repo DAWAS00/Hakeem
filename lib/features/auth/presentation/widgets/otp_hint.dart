@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 
 class OtpHint extends StatelessWidget {
@@ -6,25 +8,29 @@ class OtpHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: HakimSpacing.md,
-        vertical: HakimSpacing.sm,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF0E1A26),
-        borderRadius: BorderRadius.circular(8),
+        color: c.infoBg,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: c.info.withValues(alpha: 0.2),
+          width: 0.5,
+        ),
       ),
       child: Row(
         textDirection: TextDirection.rtl,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.sms_outlined, size: 14, color: HakimColorScheme.of(context).accent),
-          SizedBox(width: HakimSpacing.sm),
+          HakimIcon(HakimIcons.smsOutlined, size: 15, color: c.info),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               'سيتم إرسال رمز التحقق إلى رقم جوالك المسجل',
               textDirection: TextDirection.rtl,
-              style: TextStyle(fontSize: 11, color: HakimColorScheme.of(context).textHint),
+              textAlign: TextAlign.right,
+              style: TextStyle(fontSize: 12, height: 1.5, color: c.textSecondary),
             ),
           ),
         ],

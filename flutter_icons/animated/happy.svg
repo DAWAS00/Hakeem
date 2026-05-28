@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 220 260" aria-label="AI doctor mascot - happy">
+  
+    
+  <g class="stethoscope">
+    <path d="M 98 76 Q 35 74 39 102 Q 41 120 47 126" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    <path d="M 102 76 Q 165 74 161 102 Q 159 120 153 126" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    <ellipse cx="100" cy="68" rx="18" ry="14" fill="#d94d3f" stroke="#1f1a14" stroke-width="4"></ellipse>
+    <ellipse cx="100" cy="68" rx="9" ry="6.5" fill="#f4ecd8" stroke="#1f1a14" stroke-width="2"></ellipse>
+    <rect x="97" y="49" width="6" height="6" fill="#1f1a14" rx="1"></rect>
+  </g>
+    <rect x="20" y="80" width="160" height="130" rx="34" ry="34" fill="#cfe5f7" stroke="#1f1a14" stroke-width="4"></rect>
+    
+    <path d="M 57 107 Q 75 100 93 107" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    <path d="M 107 107 Q 125 100 143 107" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    
+    <path d="M 54.1 147 Q 75 116.2 95.9 147" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    <path d="M 104.1 147 Q 125 116.2 145.9 147" stroke="#1f1a14" stroke-width="4" fill="none" stroke-linecap="round"></path>
+    
+  
+</svg>

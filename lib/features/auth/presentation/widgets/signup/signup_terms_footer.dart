@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 
 class SignupTermsFooter extends StatelessWidget {
@@ -37,3 +38,4 @@ class SignupTermsFooter extends StatelessWidget {
       );
   }
 }
+

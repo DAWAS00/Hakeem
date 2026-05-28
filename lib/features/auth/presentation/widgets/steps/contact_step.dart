@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../../core/constants/hakim_colors.dart';
-import '../../../../../core/l10n/app_localizations.dart';
+import 'package:hakeem/core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_icons.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/shared/widgets/hakim_icon.dart';
+import 'package:hakeem/core/l10n/app_localizations.dart';
 import '../../../../../core/utils/validators.dart';
 import '../field_label.dart';
 import '../input_decoration_factory.dart';
@@ -82,7 +85,7 @@ class ContactStep extends StatelessWidget {
               hint: '7X XXX XXXX',
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.phone_outlined, size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.phoneOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
               suffixIcon: Container(
                 width: 56,
@@ -124,7 +127,7 @@ class ContactStep extends StatelessWidget {
               hint: 'example@email.com',
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.email_outlined, size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.emailOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),
@@ -148,8 +151,7 @@ class ContactStep extends StatelessWidget {
               hint: '',
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.location_city_outlined,
-                    size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.locationCityOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
             items: _governorates
@@ -179,7 +181,7 @@ class ContactStep extends StatelessWidget {
               hint: l10n.cityHint,
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: HakimSpacing.md),
-                child: Icon(Icons.map_outlined, size: 20, color: HakimColorScheme.of(context).accent),
+                child: HakimIcon(HakimIcons.mapOutlined, size: 20, color: HakimColorScheme.of(context).accent),
               ),
             ),
           ),
@@ -188,3 +190,4 @@ class ContactStep extends StatelessWidget {
     );
   }
 }
+

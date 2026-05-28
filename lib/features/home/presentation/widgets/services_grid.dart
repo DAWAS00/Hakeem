@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 import '../../domain/models/home_models.dart';
 
@@ -9,85 +10,225 @@ class ServicesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: HakimSpacing.xl),
-      child: GridView.count(
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-        children: services
-            .map((s) => _ServiceTile(service: s))
-            .toList(),
-      ),
+    final gridItems =
+        services.where((s) => s.layout == ServiceLayout.grid).toList();
+    final wideItems =
+        services.where((s) => s.layout == ServiceLayout.wide).toList();
+
+    return Column(
+      children: [
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 1.15,
+          ),
+          itemCount: gridItems.length,
+          itemBuilder: (context, i) => _ServiceGridCard(service: gridItems[i]),
+        ),
+        if (wideItems.isNotEmpty) const SizedBox(height: 8),
+        ...wideItems.map(
+          (s) => Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: _ServiceWideCard(service: s),
+          ),
+        ),
+      ],
     );
   }
 }
 
-class _ServiceTile extends StatelessWidget {
-  const _ServiceTile({required this.service});
+class _ServiceGridCard extends StatelessWidget {
+  const _ServiceGridCard({required this.service});
   final ServiceCardModel service;
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryText = isDark ? Colors.white : const Color(0xFF0F172A);
 
     return GestureDetector(
       onTap: service.onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Theme.of(context).dividerColor),
-          boxShadow: [
-            if (!isDark)
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.02),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
-              ),
-          ],
+          color: c.bgCard,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isDark ? c.border : c.borderCard,
+            width: 0.5,
+          ),
+          boxShadow: isDark
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.03),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
         ),
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: service.bgColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Center(
-                child: HugeIcon(
-                  icon: service.icon,
-                  size: 16,
-                  color: service.iconColor,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (service.badge != ServiceBadge.none)
+                  _BadgeChip(badge: service.badge)
+                else
+                  const SizedBox.shrink(),
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: service.bgColor,
+                    borderRadius: BorderRadius.circular(11),
+                  ),
+                  child: Center(
+                    child: HakimIcon(
+                      service.icon,
+                      size: 20,
+                      color: service.iconColor,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             const Spacer(),
             Text(
               service.title,
+              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary,
+                fontWeight: FontWeight.w600,
+                color: primaryText,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               service.subtitle,
+              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 10,
-                color: HakimColorScheme.of(context).textHint,
-                height: 1.2,
+                color: c.textHint,
+                height: 1.4,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ServiceWideCard extends StatelessWidget {
+  const _ServiceWideCard({required this.service});
+  final ServiceCardModel service;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primaryText = isDark ? Colors.white : const Color(0xFF0F172A);
+
+    return GestureDetector(
+      onTap: service.onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: c.bgCard,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isDark ? c.border : c.borderCard,
+            width: 0.5,
+          ),
+          boxShadow: isDark
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.03),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+        ),
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            HakimIcon(
+              HakimIcons.arrowLeft01,
+              size: 18,
+              color: isDark ? c.border : c.borderCard,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    service.title,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: primaryText,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    service.subtitle,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontSize: 11, color: c.textHint),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: service.bgColor,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Center(
+                child: HakimIcon(
+                  service.icon,
+                  size: 24,
+                  color: service.iconColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BadgeChip extends StatelessWidget {
+  const _BadgeChip({required this.badge});
+  final ServiceBadge badge;
+
+  @override
+  Widget build(BuildContext context) {
+    final isNew = badge == ServiceBadge.isNew;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: isNew ? const Color(0xFF3B82F6) : const Color(0xFFEF4444),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        isNew ? 'جديد' : 'شائع',
+        style: const TextStyle(
+          fontSize: 9,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
         ),
       ),
     );

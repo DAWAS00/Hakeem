@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -81,8 +83,8 @@ class HomeHeader extends StatelessWidget {
                     border: Border.all(color: Theme.of(context).dividerColor),
                   ),
                   child: Center(
-                    child: HugeIcon(
-                      icon: HugeIcons.strokeRoundedNotification03,
+                    child: HakimIcon(
+                      HakimIcons.notification03,
                       size: 20,
                       color: HakimColorScheme.of(context).accent,
                     ),
@@ -136,3 +138,4 @@ class HomeHeader extends StatelessWidget {
     );
   }
 }
+

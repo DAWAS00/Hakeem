@@ -16,26 +16,29 @@ class TabSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final c = HakimColorScheme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       height: 42,
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? const Color(0xFF0E1A26)
-            : HakimColorScheme.of(context).primary.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(10),
+        color: c.bgBase,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: c.border, width: 0.5),
       ),
       child: Row(
         children: [
           _TabItem(
             label: l10n.phone,
             isActive: active == LoginMethod.phone,
+            isDark: isDark,
             onTap: () => onSwitch(LoginMethod.phone),
           ),
           _TabItem(
             label: l10n.nationalId,
             isActive: active == LoginMethod.nationalId,
+            isDark: isDark,
             onTap: () => onSwitch(LoginMethod.nationalId),
           ),
         ],
@@ -48,36 +51,43 @@ class _TabItem extends StatelessWidget {
   const _TabItem({
     required this.label,
     required this.isActive,
+    required this.isDark,
     required this.onTap,
   });
 
   final String label;
   final bool isActive;
+  final bool isDark;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
+          padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
-            color: isActive ? HakimColorScheme.of(context).primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(7),
+            color: isActive
+                ? (isDark ? c.info : Colors.white)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: isActive && !isDark
+                ? [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 4)]
+                : [],
           ),
-          alignment: Alignment.center,
           child: Text(
             label,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+              fontWeight: FontWeight.w500,
               color: isActive
-                  ? (Theme.of(context).brightness == Brightness.dark
-                      ? HakimColorScheme.of(context).primaryText
-                      : Colors.white)
-                  : HakimColorScheme.of(context).textHint,
+                  ? (isDark ? Colors.white : c.info)
+                  : c.textHint,
             ),
           ),
         ),

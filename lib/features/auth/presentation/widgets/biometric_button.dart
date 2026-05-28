@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import '../../../../core/constants/hakim_spacing.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../providers/login_notifier.dart';
 
 class BiometricButton extends ConsumerWidget {
@@ -19,7 +22,7 @@ class BiometricButton extends ConsumerWidget {
       child: OutlinedButton.icon(
         onPressed: () =>
             ref.read(loginNotifierProvider.notifier).loginWithBiometric(),
-        icon: Icon(Icons.fingerprint, size: 22, color: HakimColorScheme.of(context).accent),
+        icon: HakimIcon(HakimIcons.fingerprint, size: 22, color: HakimColorScheme.of(context).accent),
         label: Text(
           'تسجيل الدخول بالبصمة',
           textDirection: TextDirection.rtl,

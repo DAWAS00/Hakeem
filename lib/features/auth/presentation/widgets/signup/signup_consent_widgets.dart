@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 class SignupConsentCheckRow extends StatelessWidget {
   const SignupConsentCheckRow({
@@ -14,7 +16,7 @@ class SignupConsentCheckRow extends StatelessWidget {
   final String subtitle;
   final bool value;
   final ValueChanged<bool?> onChanged;
-  final IconData icon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -26,7 +28,7 @@ class SignupConsentCheckRow extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(icon, size: 15, color: HakimColorScheme.of(context).accent),
+                    HakimIcon(icon, size: 15, color: HakimColorScheme.of(context).accent),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(title,
@@ -71,11 +73,10 @@ class SignupConsentToggleRow extends StatelessWidget {
   final String subtitle;
   final bool value;
   final ValueChanged<bool> onChanged;
-  final IconData icon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,7 +86,7 @@ class SignupConsentToggleRow extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(icon, size: 15, color: HakimColorScheme.of(context).accent),
+                    HakimIcon(icon, size: 15, color: HakimColorScheme.of(context).accent),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(title,
@@ -116,3 +117,4 @@ class SignupConsentToggleRow extends StatelessWidget {
       );
   }
 }
+

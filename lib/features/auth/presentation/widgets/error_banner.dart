@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import '../../../../core/constants/hakim_icons.dart';
+import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
 
 class ErrorBanner extends StatelessWidget {
   const ErrorBanner({super.key, required this.message});
@@ -22,7 +25,7 @@ class ErrorBanner extends StatelessWidget {
       child: Row(
         textDirection: TextDirection.rtl,
         children: [
-          Icon(Icons.error_outline, size: 16, color: HakimColorScheme.of(context).error),
+          HakimIcon(HakimIcons.errorOutline, size: 16, color: HakimColorScheme.of(context).error),
           const SizedBox(width: HakimSpacing.sm),
           Expanded(
             child: Text(
@@ -42,3 +45,4 @@ class ErrorBanner extends StatelessWidget {
         .fadeIn(duration: 200.ms);
   }
 }
+

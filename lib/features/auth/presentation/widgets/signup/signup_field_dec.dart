@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hakeem/core/constants/hakim_colors.dart';
+import '../../../../../core/constants/hakim_colors.dart';
+import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../../../../../shared/widgets/hakim_icon.dart';
 
 InputDecoration signupFieldDec(BuildContext context, {
   required String hint,
-  IconData? prefixIcon,
+  String? prefixIcon,
   Widget? suffix,
   Widget? prefix,
 }) {
@@ -12,7 +14,10 @@ InputDecoration signupFieldDec(BuildContext context, {
     hintText: hint,
     hintStyle: TextStyle(color: HakimColorScheme.of(context).textHint, fontSize: 14),
     prefixIcon: prefixIcon != null
-        ? Icon(prefixIcon, size: 18, color: HakimColorScheme.of(context).accent)
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: HakimSpacing.md),
+            child: HakimIcon(prefixIcon, size: 18, color: HakimColorScheme.of(context).accent),
+          )
         : prefix,
     suffixIcon: suffix,
     filled: true,
