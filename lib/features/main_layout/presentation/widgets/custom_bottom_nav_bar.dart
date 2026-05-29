@@ -15,28 +15,28 @@ class CustomBottomNavBar extends StatelessWidget {
     required this.onTap,
   });
 
-  static final List<NavItem> _items = [
-    const NavItem(
+  static const List<NavItem> items = [
+    NavItem(
       label: 'Dashboard',
       icon: HakimIcons.user,
       routePath: '/dashboard',
     ),
-    const NavItem(
+    NavItem(
       label: 'Schedule',
       icon: HakimIcons.calendar03,
       routePath: '/appointments',
     ),
-    const NavItem(
+    NavItem(
       label: 'Home',
       icon: HakimIcons.home01,
       routePath: '/home',
     ),
-    const NavItem(
+    NavItem(
       label: 'Medical',
       icon: HakimIcons.medicine01,
       routePath: '/records',
     ),
-    const NavItem(
+    NavItem(
       label: 'Settings',
       icon: HakimIcons.settings01,
       routePath: '/settings',
@@ -65,9 +65,9 @@ class CustomBottomNavBar extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(_items.length, (index) {
+        children: List.generate(items.length, (index) {
           final isSelected = currentIndex == index;
-          final item = _items[index];
+          final item = items[index];
 
           return GestureDetector(
             onTap: () => onTap(index),

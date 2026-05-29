@@ -35,7 +35,7 @@ class SanadButton extends StatelessWidget {
             elevation: 0,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          icon: const HakimIcon(HakimIcons.badgeOutlined, size: 18),
+          icon: const HakimIcon(HakimIcons.sanadLogo, size: 18),
           label: Text(
             l10n.loginWithSanad,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),

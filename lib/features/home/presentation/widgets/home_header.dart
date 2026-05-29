@@ -38,30 +38,32 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: HakimSpacing.xl, vertical: 14),
       child: Row(
         children: [
+          // Avatar — rightmost in RTL
           GestureDetector(
             onTap: onAvatarTap,
             child: Container(
-              width: 40,
-              height: 40,
+              width: 44,
+              height: 44,
               decoration: BoxDecoration(
-                color: HakimColorScheme.of(context).primary,
+                color: c.primary,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: HakimColorScheme.of(context).accent.withValues(alpha: 0.4),
+                  color: c.accent.withValues(alpha: 0.4),
                   width: 2,
                 ),
               ),
               child: Center(
                 child: Text(
                   _initials,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: c.primaryText,
                   ),
                 ),
               ),
@@ -70,57 +72,15 @@ class HomeHeader extends StatelessWidget {
 
           const SizedBox(width: HakimSpacing.md),
 
-          GestureDetector(
-            onTap: onNotificationTap,
-            child: Stack(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Theme.of(context).dividerColor),
-                  ),
-                  child: Center(
-                    child: HakimIcon(
-                      HakimIcons.notification03,
-                      size: 20,
-                      color: HakimColorScheme.of(context).accent,
-                    ),
-                  ),
-                ),
-                if (unreadCount > 0)
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: HakimColorScheme.of(context).error,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          width: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-
-          const Spacer(),
-
+          // Greeting + name — next to avatar on the right
           Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 _greeting,
                 style: TextStyle(
                   fontSize: 12,
-                  color: HakimColorScheme.of(context).textHint,
+                  color: c.textHint,
                 ),
               ),
               Text(
@@ -128,10 +88,55 @@ class HomeHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.w700,
-                  color: Theme.of(context).textTheme.titleLarge?.color ?? HakimColorScheme.of(context).textPrimary,
+                  color: c.textPrimary,
                 ),
               ),
             ],
+          ),
+
+          const Spacer(),
+
+          // Notification bell — leftmost in RTL
+          GestureDetector(
+            onTap: onNotificationTap,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    color: c.bgCard,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: c.borderCard),
+                  ),
+                  child: Center(
+                    child: HakimIcon(
+                      HakimIcons.notification03,
+                      size: 20,
+                      color: c.accent,
+                    ),
+                  ),
+                ),
+                if (unreadCount > 0)
+                  Positioned(
+                    top: 6,
+                    left: 6,
+                    child: Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: c.error,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: c.bgBase,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ],
       ),

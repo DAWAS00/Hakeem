@@ -21,8 +21,7 @@ class SignupSanadBanner extends StatelessWidget {
           horizontal: HakimSpacing.lg, vertical: HakimSpacing.md),
       child: Row(
         children: [
-          HakimIcon(HakimIcons.accountBalanceOutlined,
-              size: 20, color: HakimColorScheme.of(context).sanad),
+          const HakimIcon(HakimIcons.sanadLogo, size: 20),
           const SizedBox(width: HakimSpacing.sm),
           Expanded(
             child: Column(

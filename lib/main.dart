@@ -8,8 +8,7 @@ import 'core/l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  
+  final prefs = await SharedPreferences.getInstance() ; 
   runApp(
     ProviderScope(
       overrides: [
@@ -37,6 +36,12 @@ class HakeemApp extends ConsumerWidget {
       locale: settings.locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
+      builder: (context, child) => Directionality(
+        textDirection: settings.locale.languageCode == 'en'
+            ? TextDirection.ltr
+            : TextDirection.rtl,
+        child: child!,
+      ),
     );
   }
 }

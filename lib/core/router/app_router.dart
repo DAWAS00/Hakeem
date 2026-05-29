@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/signup_screen.dart';
-import '../../features/home/presentation/screens/home_screen.dart';
-import '../../features/splash/presentation/screens/splash_screen.dart';
-import '../../features/main_layout/presentation/screens/main_layout_screen.dart';
-import '../../features/patient_dashboard/presentation/screens/dashboard_screen.dart';
-import '../../features/settings/presentation/screens/settings_screen.dart';
-import '../../features/appointments/presentation/screens/appointments_screen.dart';
-import '../../features/medical_records/presentation/screens/records_screen.dart';
+import 'package:hakeem/features/auth/presentation/screens/login_screen.dart';
+import 'package:hakeem/features/auth/presentation/screens/signup_screen.dart';
+import 'package:hakeem/features/home/presentation/screens/home_screen.dart';
+import 'package:hakeem/features/splash/presentation/screens/splash_screen.dart';
+import 'package:hakeem/features/main_layout/presentation/screens/main_layout_screen.dart';
+import 'package:hakeem/features/patient_dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:hakeem/features/settings/presentation/screens/settings_screen.dart';
+import 'package:hakeem/features/appointments/presentation/screens/appointments_screen.dart';
+import 'package:hakeem/features/medical_records/presentation/screens/records_screen.dart';
+import 'package:hakeem/features/assistant/presentation/screens/ai_chat_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
@@ -29,57 +30,41 @@ final appRouter = GoRouter(
       path: '/signup',
       builder: (context, state) => const SignupScreen(),
     ),
+    GoRoute(
+      path: '/assistant',
+      builder: (context, state) => const AiChatScreen(),
+    ),
     
-    // Main Layout with Bottom Navigation Bar
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) {
-        return MainLayoutScreen(navigationShell: navigationShell);
+    // Main Layout with Bottom Navigation Bar & Swipeable PageView
+    ShellRoute(
+      builder: (context, state, child) {
+        return MainLayoutScreen(state: state, child: child);
       },
-      branches: [
+      routes: [
         // Tab 0: Dashboard
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/dashboard',
-              builder: (context, state) => const DashboardScreen(),
-            ),
-          ],
+        GoRoute(
+          path: '/dashboard',
+          builder: (context, state) => const DashboardScreen(),
         ),
         // Tab 1: Appointments
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/appointments',
-              builder: (context, state) => const AppointmentsScreen(),
-            ),
-          ],
+        GoRoute(
+          path: '/appointments',
+          builder: (context, state) => const AppointmentsScreen(),
         ),
         // Tab 2: Home (Center)
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/home',
-              builder: (context, state) => const HomeScreen(),
-            ),
-          ],
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => const HomeScreen(),
         ),
         // Tab 3: Medical Records
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/records',
-              builder: (context, state) => const RecordsScreen(),
-            ),
-          ],
+        GoRoute(
+          path: '/records',
+          builder: (context, state) => const RecordsScreen(),
         ),
         // Tab 4: Settings
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/settings',
-              builder: (context, state) => const SettingsScreen(),
-            ),
-          ],
+        GoRoute(
+          path: '/settings',
+          builder: (context, state) => const SettingsScreen(),
         ),
       ],
     ),

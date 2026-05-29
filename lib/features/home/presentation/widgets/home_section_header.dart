@@ -16,10 +16,22 @@ class HomeSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = HakimColorScheme.of(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(HakimSpacing.xl, 4, HakimSpacing.xl, 8),
       child: Row(
         children: [
+          // Title — rightmost in RTL
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              color: c.textPrimary,
+            ),
+          ),
+          const Spacer(),
+          // Action link — leftmost in RTL
           if (actionLabel != null)
             GestureDetector(
               onTap: onActionTap,
@@ -27,20 +39,11 @@ class HomeSectionHeader extends StatelessWidget {
                 actionLabel!,
                 style: TextStyle(
                   fontSize: 12,
-                  color: HakimColorScheme.of(context).info,
+                  color: c.info,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          const Spacer(),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).textTheme.titleMedium?.color ?? HakimColorScheme.of(context).textPrimary,
-            ),
-          ),
         ],
       ),
     );

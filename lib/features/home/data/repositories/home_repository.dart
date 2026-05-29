@@ -41,6 +41,9 @@ final _mockState = HomeState(
       icon: HakimIcons.favoriteBorderRounded,
       iconColor: Color(0xFFEF4444),
       iconBg: Color(0xFFFEF2F2),
+      explanation: 'يقيس معدل ضربات القلب في الدقيقة أثناء الراحة. المعدل المنخفض عادة ما يشير إلى كفاءة أفضل لعضلة القلب.',
+      normalRange: '60 - 100 نبضة/دقيقة',
+      isGood: true,
     ),
     Vital(
       label: 'ضغط الدم',
@@ -48,6 +51,9 @@ final _mockState = HomeState(
       icon: HakimIcons.monitorHeartOutlined,
       iconColor: Color(0xFF3B82F6),
       iconBg: Color(0xFFEFF6FF),
+      explanation: 'يقيس قوة دفع الدم ضد جدران الشرايين. يتكون من الضغط الانقباضي (الرقم العلوي) والانبساطي (الرقم السفلي).',
+      normalRange: 'أقل من 120/80 ملم زئبق',
+      isGood: true,
     ),
     Vital(
       label: 'خطوة',
@@ -55,6 +61,9 @@ final _mockState = HomeState(
       icon: HakimIcons.activity01,
       iconColor: Color(0xFF10B981),
       iconBg: Color(0xFFF0FDF4),
+      explanation: 'عدد الخطوات التي تم مشيها اليوم. المشي المنتظم يحسن صحة القلب ويساعد في التحكم بالوزن.',
+      normalRange: '8,000 - 10,000 خطوة يومياً',
+      isGood: false, // Target is higher
     ),
   ],
 
@@ -131,14 +140,14 @@ final _mockState = HomeState(
       route: '/results',
     ),
     const ServiceCardModel(
-      title: 'أدويتي',
-      subtitle: 'جدول الوصفات والأدوية',
-      icon: HakimIcons.medicine01,
-      bgColor: Color(0xFFFEF3C7),
-      iconColor: Color(0xFFD97706),
-      badge: ServiceBadge.popular,
+      title: 'أهدافي الصحية',
+      subtitle: 'تتبع لياقتك ونشاطك',
+      icon: HakimIcons.activity01,
+      bgColor: Color(0xFFDCFCE7),
+      iconColor: Color(0xFF10B981),
+      badge: ServiceBadge.isNew,
       layout: ServiceLayout.grid,
-      route: '/medications',
+      route: '/health-goals',
     ),
     const ServiceCardModel(
       title: 'سجل طبي',

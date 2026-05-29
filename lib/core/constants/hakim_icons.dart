@@ -90,4 +90,7 @@ class HakimIcons {
   static const String verifiedUserOutlined = 'svg/material/verified_user_outlined.svg';
   static const String warningAmberOutlined = 'svg/material/warning_amber_outlined.svg';
   static const String waterDropOutlined = 'svg/material/water_drop_outlined.svg';
+
+  // --- Brand/Custom Icons ---
+  static const String sanadLogo = 'svg/sanad_logo.svg';
 }

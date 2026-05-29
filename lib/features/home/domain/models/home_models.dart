@@ -34,6 +34,9 @@ class Vital {
     required this.icon,
     required this.iconColor,
     required this.iconBg,
+    this.explanation = '',
+    this.normalRange = '',
+    this.isGood = true,
   });
 
   final String label;
@@ -41,6 +44,9 @@ class Vital {
   final String icon;
   final Color iconColor;
   final Color iconBg;
+  final String explanation;
+  final String normalRange;
+  final bool isGood;
 }
 
 class Appointment {

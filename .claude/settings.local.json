@@ -7,7 +7,10 @@
       "Bash(grep -v \"^$\")",
       "Bash(grep \"lib\\\\\\\\\")",
       "Bash(dir \"E:\\\\Hakeem\" /b)",
-      "Bash(dir \"E:\\\\Hakeem\\\\assets\" /b)"
+      "Bash(dir \"E:\\\\Hakeem\\\\assets\" /b)",
+      "Bash(npx skills *)",
+      "Bash(Get-ChildItem -Path \"E:\\\\Hakeem\\\\lib\\\\features\" -Directory)",
+      "Bash(Select-Object Name)"
     ]
   }
 }

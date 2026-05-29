@@ -17,17 +17,20 @@ class ServicesGrid extends StatelessWidget {
 
     return Column(
       children: [
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 1.15,
-          ),
-          itemCount: gridItems.length,
-          itemBuilder: (context, i) => _ServiceGridCard(service: gridItems[i]),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final cardWidth = (constraints.maxWidth - 8) / 2;
+            return Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: gridItems
+                  .map((s) => SizedBox(
+                        width: cardWidth,
+                        child: _ServiceGridCard(service: s),
+                      ))
+                  .toList(),
+            );
+          },
         ),
         if (wideItems.isNotEmpty) const SizedBox(height: 8),
         ...wideItems.map(
@@ -73,15 +76,13 @@ class _ServiceGridCard extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (service.badge != ServiceBadge.none)
-                  _BadgeChip(badge: service.badge)
-                else
-                  const SizedBox.shrink(),
+                // Icon — rightmost in RTL row
                 Container(
                   width: 38,
                   height: 38,
@@ -97,12 +98,16 @@ class _ServiceGridCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Badge — leftmost
+                if (service.badge != ServiceBadge.none)
+                  _BadgeChip(badge: service.badge)
+                else
+                  const SizedBox.shrink(),
               ],
             ),
-            const Spacer(),
+            const SizedBox(height: 12),
             Text(
               service.title,
-              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -112,7 +117,6 @@ class _ServiceGridCard extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               service.subtitle,
-              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 10,
                 color: c.textHint,
@@ -159,35 +163,7 @@ class _ServiceWideCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         child: Row(
           children: [
-            HakimIcon(
-              HakimIcons.arrowLeft01,
-              size: 18,
-              color: isDark ? c.border : c.borderCard,
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    service.title,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: primaryText,
-                    ),
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    service.subtitle,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: 11, color: c.textHint),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 12),
+            // Icon container — rightmost in RTL
             Container(
               width: 46,
               height: 46,
@@ -202,6 +178,35 @@ class _ServiceWideCard extends StatelessWidget {
                   color: service.iconColor,
                 ),
               ),
+            ),
+            const SizedBox(width: 12),
+            // Title + subtitle — aligned to start (right in RTL)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    service.title,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: primaryText,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    service.subtitle,
+                    style: TextStyle(fontSize: 11, color: c.textHint),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            // Arrow — leftmost in RTL
+            HakimIcon(
+              HakimIcons.arrowLeft01,
+              size: 18,
+              color: isDark ? c.border : c.borderCard,
             ),
           ],
         ),
@@ -225,6 +230,7 @@ class _BadgeChip extends StatelessWidget {
       ),
       child: Text(
         isNew ? 'جديد' : 'شائع',
+
         style: const TextStyle(
           fontSize: 9,
           fontWeight: FontWeight.w600,

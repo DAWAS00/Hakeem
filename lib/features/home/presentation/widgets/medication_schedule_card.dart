@@ -68,6 +68,55 @@ class _MedRow extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // Color dot — rightmost in RTL
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: medication.dotColor,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: medication.dotColor.withValues(alpha: 0.4),
+                  blurRadius: 6,
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(width: HakimSpacing.md),
+
+          // Name + time — center, aligned to start (right in RTL)
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  medication.name,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: medication.isTaken
+                        ? HakimColorScheme.of(context).textHint
+                        : HakimColorScheme.of(context).textPrimary,
+                    decoration: medication.isTaken ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  medication.timeLabel,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: HakimColorScheme.of(context).textHint,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(width: HakimSpacing.md),
+
+          // Checkbox — leftmost in RTL
           GestureDetector(
             onTap: onToggle,
             child: AnimatedContainer(
@@ -89,54 +138,6 @@ class _MedRow extends StatelessWidget {
               child: medication.isTaken
                   ? const HakimIcon(HakimIcons.checkRounded, size: 16, color: Colors.white)
                   : null,
-            ),
-          ),
-
-          const SizedBox(width: HakimSpacing.md),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  medication.name,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: medication.isTaken
-                        ? HakimColorScheme.of(context).textHint
-                        : (Theme.of(context).textTheme.bodyLarge?.color ?? HakimColorScheme.of(context).textPrimary),
-                    decoration: medication.isTaken
-                        ? TextDecoration.lineThrough
-                        : null,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  medication.timeLabel,
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: HakimColorScheme.of(context).textHint,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(width: HakimSpacing.md),
-
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: medication.dotColor,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: medication.dotColor.withValues(alpha: 0.4),
-                  blurRadius: 6,
-                ),
-              ],
             ),
           ),
         ],

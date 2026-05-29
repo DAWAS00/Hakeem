@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/constants/hakim_icons.dart';
 import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
@@ -16,6 +17,7 @@ import '../widgets/medication_schedule_card.dart';
 import '../widgets/quick_actions_row.dart';
 import '../widgets/services_grid.dart';
 import '../widgets/speed_dial_overlay.dart';
+import '../widgets/notification_bottom_sheet.dart';
 
 /// The main landing screen for authenticated users.
 /// 
@@ -33,10 +35,13 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAliveClientMixin {
   late final ScrollController _scroll;
   Timer? _scrollStopTimer;
   double _lastOffset = 0;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -74,6 +79,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // Required for AutomaticKeepAliveClientMixin
     final l10n = AppLocalizations.of(context)!;
     final homeAsync = ref.watch(homeProvider);
 
@@ -102,6 +108,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           morningGreeting: l10n.goodMorning,
                           afternoonGreeting: l10n.goodAfternoon,
                           eveningGreeting: l10n.goodEvening,
+                          onNotificationTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => const NotificationBottomSheet(),
+                            );
+                          },
                         ),
 
                         Padding(
@@ -183,6 +197,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   bgColor: const Color(0xFFEDE9FE),
                   iconColor: const Color(0xFF7C3AED),
                   mascotState: MascotState.thinking,
+                  onTap: () => context.push('/assistant'),
                 ),
                 SpeedDialItem(
                   label: l10n.emergency,

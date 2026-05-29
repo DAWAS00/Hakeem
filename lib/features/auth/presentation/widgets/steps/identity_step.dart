@@ -89,10 +89,9 @@ class _IdentityStepState extends State<IdentityStep> {
           // Sanad quick-fill
           OutlinedButton.icon(
             onPressed: widget.onSanadTap,
-            icon: HakimIcon(
-              HakimIcons.user,
+            icon: const HakimIcon(
+              HakimIcons.sanadLogo,
               size: 20,
-              color: HakimColorScheme.of(context).accent,
             ),
             label: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
