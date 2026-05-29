@@ -93,5 +93,6 @@
   "appointments": "المواعيد",
   "profile": "الملف الشخصي",
   "retry": "إعادة المحاولة",
-  "errorLoadingData": "حدث خطأ أثناء تحميل البيانات"
+  "errorLoadingData": "حدث خطأ أثناء تحميل البيانات",
+  "switchProfile": "تبديل الملف الشخصي"
 }

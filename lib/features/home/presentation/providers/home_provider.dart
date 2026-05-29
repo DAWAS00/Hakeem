@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/home_repository.dart';
 import '../../domain/models/home_models.dart';
+import 'family_provider.dart';
 
 class MascotStateNotifier extends Notifier<MascotState> {
   @override
@@ -33,6 +34,9 @@ final speedDialProvider = NotifierProvider<SpeedDialNotifier, bool>(
 class HomeNotifier extends AsyncNotifier<HomeState> {
   @override
   Future<HomeState> build() async {
+    // Watch the selected profile to trigger a re-fetch when it changes
+    ref.watch(familyProfileProvider);
+    
     return ref.read(homeRepositoryProvider).fetchHomeState();
   }
 

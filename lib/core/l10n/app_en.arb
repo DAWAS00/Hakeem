@@ -93,5 +93,6 @@
   "appointments": "Appointments",
   "profile": "Profile",
   "retry": "Retry",
-  "errorLoadingData": "An error occurred while loading data"
+  "errorLoadingData": "An error occurred while loading data",
+  "switchProfile": "Switch Profile"
 }

@@ -11,7 +11,8 @@ enum MascotState {
   scanning,
   surprised,
   sleepy,
-  sad;
+  sad,
+  concerned;
 
   String get assetPath => switch (this) {
     MascotState.idle        => HakimIcons.mascotIdle,
@@ -24,6 +25,7 @@ enum MascotState {
     MascotState.surprised   => HakimIcons.mascotSurprised,
     MascotState.sleepy      => HakimIcons.mascotSleepy,
     MascotState.sad         => HakimIcons.mascotSad,
+    MascotState.concerned   => HakimIcons.mascotSad, // Use sad as fallback for concerned
   };
 }
 
@@ -188,4 +190,23 @@ class HomeState {
         medications: medications ?? this.medications,
         unreadNotifications: unreadNotifications,
       );
+}
+
+class FamilyMember {
+  const FamilyMember({
+    required this.id,
+    required this.name,
+    required this.relationship,
+    this.isMe = false,
+  });
+
+  final String id;
+  final String name;
+  final String relationship;
+  final bool isMe;
+
+  String get initials {
+    final parts = name.trim().split(' ');
+    return parts.isNotEmpty ? parts.first[0] : 'م';
+  }
 }

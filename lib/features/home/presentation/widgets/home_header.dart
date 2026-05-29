@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/hakim_icons.dart';
 import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/constants/hakim_colors.dart';
 import 'package:hakeem/core/constants/hakim_spacing.dart';
+import '../providers/family_provider.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends ConsumerWidget {
   const HomeHeader({
     super.key,
     required this.userName,
@@ -31,21 +33,80 @@ class HomeHeader extends StatelessWidget {
     return eveningGreeting;
   }
 
-  String get _initials {
-    final parts = userName.trim().split(' ');
-    return parts.isNotEmpty ? parts.first[0] : 'م';
+  void _showProfilePicker(BuildContext context, WidgetRef ref) {
+    final c = HakimColorScheme.of(context);
+    final profiles = ref.read(availableProfilesProvider);
+    final current = ref.read(familyProfileProvider);
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: c.bgCard,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(HakimSpacing.lg),
+              child: Text(
+                'تبديل الملف الشخصي',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: c.textPrimary,
+                ),
+              ),
+            ),
+            ...profiles.map((profile) => ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: profile.isMe ? c.primary : c.bgInput,
+                    child: Text(
+                      profile.initials,
+                      style: TextStyle(
+                        color: profile.isMe ? c.primaryText : c.textSecondary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  title: Text(
+                    profile.name,
+                    style: TextStyle(
+                      color: c.textPrimary,
+                      fontWeight: current.id == profile.id
+                          ? FontWeight.w700
+                          : FontWeight.w400,
+                    ),
+                  ),
+                  subtitle: Text(profile.relationship),
+                  trailing: current.id == profile.id
+                      ? Icon(Icons.check_circle, color: c.primary)
+                      : null,
+                  onTap: () {
+                    ref.read(familyProfileProvider.notifier).selectProfile(profile);
+                    Navigator.pop(context);
+                  },
+                )),
+            const SizedBox(height: HakimSpacing.lg),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = HakimColorScheme.of(context);
+    final currentProfile = ref.watch(familyProfileProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: HakimSpacing.xl, vertical: 14),
       child: Row(
         children: [
-          // Avatar — rightmost in RTL
+          // Avatar
           GestureDetector(
-            onTap: onAvatarTap,
+            onTap: onAvatarTap ?? () => _showProfilePicker(context, ref),
             child: Container(
               width: 44,
               height: 44,
@@ -59,7 +120,7 @@ class HomeHeader extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  _initials,
+                  currentProfile.initials,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
@@ -72,31 +133,46 @@ class HomeHeader extends StatelessWidget {
 
           const SizedBox(width: HakimSpacing.md),
 
-          // Greeting + name — next to avatar on the right
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _greeting,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: c.textHint,
+          // Greeting + name
+          GestureDetector(
+            onTap: () => _showProfilePicker(context, ref),
+            behavior: HitTestBehavior.opaque,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _greeting,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: c.textHint,
+                  ),
                 ),
-              ),
-              Text(
-                userName,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                  color: c.textPrimary,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      currentProfile.isMe ? userName : currentProfile.name,
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        color: c.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 18,
+                      color: c.textHint,
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           const Spacer(),
 
-          // Notification bell — leftmost in RTL
+          // Notification bell
           GestureDetector(
             onTap: onNotificationTap,
             child: Stack(

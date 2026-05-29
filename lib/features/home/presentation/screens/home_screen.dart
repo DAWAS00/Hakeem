@@ -14,7 +14,6 @@ import '../widgets/home_header.dart';
 import '../widgets/home_loading_view.dart';
 import '../widgets/home_section_header.dart';
 import '../widgets/medication_schedule_card.dart';
-import '../widgets/quick_actions_row.dart';
 import '../widgets/services_grid.dart';
 import '../widgets/speed_dial_overlay.dart';
 import '../widgets/notification_bottom_sheet.dart';
@@ -131,11 +130,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAlive
 
                         const SizedBox(height: HakimSpacing.lg),
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: HakimSpacing.xl,
-                          ),
-                          child: QuickActionsRow(actions: state.quickActions),
+                        HomeSectionHeader(title: l10n.medicationSchedule),
+                        MedicationScheduleCard(
+                          medications: state.medications,
+                          onToggle: (id) =>
+                              ref.read(homeProvider.notifier).toggleMedication(id),
                         ),
 
                         const SizedBox(height: HakimSpacing.lg),
@@ -163,15 +162,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAlive
                             horizontal: HakimSpacing.xl,
                           ),
                           child: ServicesGrid(services: state.services),
-                        ),
-
-                        const SizedBox(height: HakimSpacing.lg),
-
-                        HomeSectionHeader(title: l10n.medicationSchedule),
-                        MedicationScheduleCard(
-                          medications: state.medications,
-                          onToggle: (id) =>
-                              ref.read(homeProvider.notifier).toggleMedication(id),
                         ),
 
                         const SizedBox(height: 200),
