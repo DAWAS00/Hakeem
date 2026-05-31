@@ -1,11 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../core/constants/hakim_icons.dart';
+import '../../../../core/constants/hakim_colors.dart';
 import '../../../../core/constants/hakim_spacing.dart';
 import '../../../../core/l10n/app_localizations.dart';
-import '../../domain/models/home_models.dart' show MascotState, SpeedDialItem;
 import '../providers/home_provider.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/health_summary_card.dart';
@@ -15,8 +12,12 @@ import '../widgets/home_loading_view.dart';
 import '../widgets/home_section_header.dart';
 import '../widgets/medication_schedule_card.dart';
 import '../widgets/services_grid.dart';
-import '../widgets/speed_dial_overlay.dart';
 import '../widgets/notification_bottom_sheet.dart';
+import '../../../family_hub/presentation/providers/family_hub_notifier.dart';
+import '../../../family_hub/presentation/widgets/emergency_card_home.dart';
+import '../../../family_hub/presentation/widgets/family_member_home_card.dart';
+import '../../../family_hub/presentation/widgets/genetic_risk_strip.dart';
+import '../../../family_hub/presentation/widgets/family_card_shimmer.dart';
 
 /// The main landing screen for authenticated users.
 /// 
@@ -36,8 +37,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAliveClientMixin {
   late final ScrollController _scroll;
-  Timer? _scrollStopTimer;
-  double _lastOffset = 0;
 
   @override
   bool get wantKeepAlive => true;
@@ -45,35 +44,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAlive
   @override
   void initState() {
     super.initState();
-    _scroll = ScrollController()..addListener(_onScroll);
+    _scroll = ScrollController();
   }
 
   @override
   void dispose() {
     _scroll.dispose();
-    _scrollStopTimer?.cancel();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (ref.read(speedDialProvider)) return;
-
-    final delta = _scroll.offset - _lastOffset;
-    _lastOffset = _scroll.offset;
-
-    if (delta.abs() < 1) return;
-
-    final next = delta > 0 ? MascotState.scanning : MascotState.curious;
-    if (ref.read(mascotStateProvider) != next) {
-      ref.read(mascotStateProvider.notifier).set(next);
-    }
-
-    _scrollStopTimer?.cancel();
-    _scrollStopTimer = Timer(const Duration(milliseconds: 700), () {
-      if (mounted && !ref.read(speedDialProvider)) {
-        ref.read(mascotStateProvider.notifier).set(MascotState.idle);
-      }
-    });
   }
 
   @override
@@ -83,6 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAlive
     final homeAsync = ref.watch(homeProvider);
 
     return Scaffold(
+      backgroundColor: HakimColorScheme.of(context).bgBase,
       body: homeAsync.when(
         loading: () => const HomeLoadingView(),
         error: (e, _) => HomeErrorView(
@@ -90,116 +68,137 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with AutomaticKeepAlive
           errorMessage: l10n.errorLoadingData,
           retryLabel: l10n.retry,
         ),
-        data: (state) => Stack(
-          children: [
-            CustomScrollView(
-              controller: _scroll,
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SafeArea(
-                    bottom: false,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        HomeHeader(
-                          userName: state.userName,
-                          unreadCount: state.unreadNotifications,
-                          morningGreeting: l10n.goodMorning,
-                          afternoonGreeting: l10n.goodAfternoon,
-                          eveningGreeting: l10n.goodEvening,
-                          onNotificationTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              builder: (context) => const NotificationBottomSheet(),
-                            );
-                          },
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: HakimSpacing.xl,
-                          ),
-                          child: HealthSummaryCard(
-                            vitals: state.vitals,
-                            status: state.healthStatus,
-                            summaryLabel: l10n.healthSummary,
-                          ),
-                        ),
-
-                        const SizedBox(height: HakimSpacing.lg),
-
-                        HomeSectionHeader(title: l10n.medicationSchedule),
-                        MedicationScheduleCard(
-                          medications: state.medications,
-                          onToggle: (id) =>
-                              ref.read(homeProvider.notifier).toggleMedication(id),
-                        ),
-
-                        const SizedBox(height: HakimSpacing.lg),
-
-                        HomeSectionHeader(
-                          title: l10n.upcomingAppointments,
-                          actionLabel: l10n.viewAll,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: HakimSpacing.xl,
-                          ),
-                          child: Column(
-                            children: state.appointments
-                                .map((a) => AppointmentCard(appointment: a))
-                                .toList(),
-                          ),
-                        ),
-
-                        const SizedBox(height: HakimSpacing.lg),
-
-                        HomeSectionHeader(title: l10n.services),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: HakimSpacing.xl,
-                          ),
-                          child: ServicesGrid(services: state.services),
-                        ),
-
-                        const SizedBox(height: 200),
-                      ],
+        data: (state) => CustomScrollView(
+          controller: _scroll,
+          slivers: [
+            SliverToBoxAdapter(
+              child: SafeArea(
+                bottom: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    HomeHeader(
+                      userName: state.userName,
+                      unreadCount: state.unreadNotifications,
+                      morningGreeting: l10n.goodMorning,
+                      afternoonGreeting: l10n.goodAfternoon,
+                      eveningGreeting: l10n.goodEvening,
+                      onNotificationTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => const NotificationBottomSheet(),
+                        );
+                      },
                     ),
-                  ),
-                ),
-              ],
-            ),
 
-            SpeedDialOverlay(
-              items: [
-                SpeedDialItem(
-                  label: l10n.bookAppointment,
-                  icon: HakimIcons.calendar03,
-                  bgColor: const Color(0xFFEFF6FF),
-                  iconColor: const Color(0xFF3B82F6),
-                  mascotState: MascotState.listening,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: HakimSpacing.xl,
+                      ),
+                      child: HealthSummaryCard(
+                        vitals: state.vitals,
+                        status: state.healthStatus,
+                        summaryLabel: l10n.healthSummary,
+                      ),
+                    ),
+
+                    const SizedBox(height: HakimSpacing.lg),
+
+                    HomeSectionHeader(title: l10n.medicationSchedule),
+                    MedicationScheduleCard(
+                      medications: state.medications,
+                      onToggle: (id) =>
+                          ref.read(homeProvider.notifier).toggleMedication(id),
+                    ),
+
+                    const SizedBox(height: HakimSpacing.lg),
+
+                    HomeSectionHeader(
+                      title: l10n.upcomingAppointments,
+                      actionLabel: l10n.viewAll,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: HakimSpacing.xl,
+                      ),
+                      child: Column(
+                        children: state.appointments
+                            .map((a) => AppointmentCard(appointment: a))
+                            .toList(),
+                      ),
+                    ),
+
+                    const SizedBox(height: HakimSpacing.lg),
+
+                    HomeSectionHeader(title: l10n.services),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: HakimSpacing.xl,
+                      ),
+                      child: ServicesGrid(services: state.services),
+                    ),
+
+                    const SizedBox(height: HakimSpacing.lg),
+
+                    // ── Family Hub Feature Cards ──────────────────────────
+                    const _FamilyHubSection(),
+
+                    const SizedBox(height: 100),
+                  ],
                 ),
-                SpeedDialItem(
-                  label: l10n.medicalAssistant,
-                  icon: HakimIcons.aiChat01,
-                  bgColor: const Color(0xFFEDE9FE),
-                  iconColor: const Color(0xFF7C3AED),
-                  mascotState: MascotState.thinking,
-                  onTap: () => context.push('/assistant'),
-                ),
-                SpeedDialItem(
-                  label: l10n.emergency,
-                  icon: HakimIcons.ambulance,
-                  bgColor: const Color(0xFFFFF1F2),
-                  iconColor: const Color(0xFF3B82F6),
-                  mascotState: MascotState.surprised,
-                ),
-              ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Family Hub section — watches its own provider independently ──────────────
+
+class _FamilyHubSection extends ConsumerWidget {
+  const _FamilyHubSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final familyAsync = ref.watch(familyHubProvider);
+
+    return familyAsync.when(
+      loading: () => const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FamilyCardShimmer(height: 110),
+          SizedBox(height: HakimSpacing.lg),
+          FamilyCardShimmer(height: 148),
+          SizedBox(height: HakimSpacing.lg),
+          FamilyCardShimmer(height: 60),
+        ],
+      ),
+      // Fail silently — home still works without family data
+      error: (e, s) => const SizedBox.shrink(),
+      data: (data) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HomeSectionHeader(title: 'بطاقة الطوارئ'),
+          EmergencyCardHome(card: data.emergencyCard),
+
+          const SizedBox(height: HakimSpacing.lg),
+
+          HomeSectionHeader(
+            title: 'صحة العائلة',
+            actionLabel: 'إضافة فرد',
+          ),
+          FamilyMemberHomeCard(members: data.members),
+
+          if (data.geneticFlags.isNotEmpty) ...[
+            const SizedBox(height: HakimSpacing.lg),
+            HomeSectionHeader(title: 'تنبيهات وراثية'),
+            GeneticRiskStrip(flags: data.geneticFlags),
+          ],
+        ],
       ),
     );
   }

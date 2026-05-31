@@ -28,12 +28,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Dashboard'), findsOneWidget);
-    expect(find.text('Schedule'), findsOneWidget);
+    expect(find.text('حكيم'), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
-    expect(find.text('Medical'), findsOneWidget);
+    expect(find.text('صحتي'), findsOneWidget);
     expect(find.text('Settings'), findsOneWidget);
     
-    // Check for HakimIcons
+    // Check for HakimIcons (there should be 5 now)
     expect(find.byType(HakimIcon), findsNWidgets(5));
   });
 
@@ -53,10 +53,16 @@ void main() {
 
     expect(tappedIndex, 0);
 
-    // Tap Settings (index 4)
-    await tester.tap(find.text('Settings'));
+    // Tap حكيم (index 1)
+    await tester.tap(find.text('حكيم'));
     await tester.pumpAndSettle();
 
-    expect(tappedIndex, 4);
+    expect(tappedIndex, 1);
+
+    // Tap صحتي (index 3)
+    await tester.tap(find.text('صحتي'));
+    await tester.pumpAndSettle();
+
+    expect(tappedIndex, 3);
   });
 }

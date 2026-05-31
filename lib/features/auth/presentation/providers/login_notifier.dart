@@ -20,9 +20,8 @@ class LoginNotifier extends Notifier<LoginState> {
 
   Future<void> _checkBiometricSupport() async {
     try {
-      final canCheck = await _localAuth.canCheckBiometrics;
       final isSupported = await _localAuth.isDeviceSupported();
-      if (canCheck && isSupported) {
+      if (isSupported) {
         state = state.copyWith(canUseBiometric: true);
       }
     } catch (_) {}
@@ -84,9 +83,26 @@ class LoginNotifier extends Notifier<LoginState> {
     try {
       final authenticated = await _localAuth.authenticate(
         localizedReason: 'تسجيل الدخول ببصمتك',
+        persistAcrossBackgrounding: true,
       );
       if (authenticated) {
         state = state.copyWith(status: LoginStatus.success);
+      }
+    } on LocalAuthException catch (e) {
+      final msg = switch (e.code) {
+        LocalAuthExceptionCode.noBiometricsEnrolled ||
+        LocalAuthExceptionCode.noCredentialsSet =>
+          'لا توجد بصمة مسجّلة على هذا الجهاز',
+        LocalAuthExceptionCode.temporaryLockout ||
+        LocalAuthExceptionCode.biometricLockout =>
+          'الجهاز مقفل مؤقتاً بسبب محاولات كثيرة',
+        LocalAuthExceptionCode.userCanceled ||
+        LocalAuthExceptionCode.systemCanceled =>
+          '',
+        _ => 'فشل التحقق البيومتري',
+      };
+      if (msg.isNotEmpty) {
+        state = state.copyWith(status: LoginStatus.failure, errorMessage: msg);
       }
     } catch (_) {
       state = state.copyWith(

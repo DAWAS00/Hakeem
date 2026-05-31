@@ -9,6 +9,7 @@ import '../../../../core/constants/hakim_colors.dart';
 import '../../../../core/constants/hakim_icons.dart';
 import '../../../../shared/widgets/hakim_icon.dart';
 import '../../../../core/l10n/app_localizations.dart';
+import '../../../../shared/widgets/animated_hakeem_heritage_logo.dart';
 import '../painters/background_cross_painter.dart';
 import '../painters/ecg_painter.dart';
 import '../painters/particle_painter.dart';
@@ -38,8 +39,6 @@ class _SplashScreenState extends State<SplashScreen>
   late final Animation<double> _logoOpacity;
 
   late final AnimationController _textCtrl;
-  late final Animation<Offset> _nameSlide;
-  late final Animation<double> _nameOpacity;
   late final Animation<Offset> _taglineSlide;
   late final Animation<double> _taglineOpacity;
 
@@ -117,31 +116,24 @@ class _SplashScreenState extends State<SplashScreen>
 
     _logoCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 2600),
     );
-    _logoScale = Tween<double>(begin: 0.2, end: 1.0).animate(
+    _logoScale = Tween<double>(begin: 0.9, end: 1.0).animate(
       CurvedAnimation(
         parent: _logoCtrl,
-        curve: const SpringCurve(damping: 10.0, stiffness: 180.0),
+        curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
       ),
     );
     _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _logoCtrl,
-        curve: const Interval(0.0, 0.45, curve: Curves.easeOut),
+        curve: const Interval(0.0, 0.2, curve: Curves.easeOut),
       ),
     );
 
     _textCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
-    );
-    _nameSlide = Tween<Offset>(
-      begin: const Offset(0, 0.6),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _textCtrl, curve: Curves.easeOut));
-    _nameOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _textCtrl, curve: Curves.easeOut),
     );
     _taglineSlide = Tween<Offset>(
       begin: const Offset(0, 0.8),
@@ -208,7 +200,8 @@ class _SplashScreenState extends State<SplashScreen>
     _particleCtrl.forward();
     _logoCtrl.forward();
 
-    await Future.delayed(const Duration(milliseconds: 350));
+    // Wait for the stethoscope drawing to progress before showing tagline (approx 1.8s)
+    await Future.delayed(const Duration(milliseconds: 1800));
     if (!mounted) return;
     _textCtrl.forward();
 
@@ -316,61 +309,22 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Logo circle
+                    // Animated Logo Heritage
                     AnimatedBuilder(
                       animation: _logoCtrl,
-                      builder: (_, child) => Opacity(
+                      builder: (context, _) => Opacity(
                         opacity: _logoOpacity.value,
                         child: Transform.scale(
                           scale: _logoScale.value,
-                          child: child,
-                        ),
-                      ),
-                      child: Container(
-                        width: 84,
-                        height: 84,
-                        decoration: BoxDecoration(
-                          color: HakimColorScheme.of(context).bgCard,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: HakimColorScheme.of(context).border, width: 1.5),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x384C6A8D),
-                              blurRadius: 24,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: HakimIcon(
-                          HakimIcons.monitorHeartOutlined,
-                          size: 36,
-                          color: HakimColorScheme.of(context).accent,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 18),
-
-                    // App name
-                    SlideTransition(
-                      position: _nameSlide,
-                      child: FadeTransition(
-                        opacity: _nameOpacity,
-                        child: Text(
-                          l10n.appTitle,
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
-                            color: HakimColorScheme.of(context).accent,
-                            letterSpacing: -0.5,
+                          child: AnimatedHakeemHeritageLogo(
+                            progress: _logoCtrl,
+                            width: 280,
                           ),
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 12),
 
                     // Tagline
                     SlideTransition(

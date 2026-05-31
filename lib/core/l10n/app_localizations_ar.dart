@@ -296,4 +296,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errorLoadingData => 'حدث خطأ أثناء تحميل البيانات';
+
+  @override
+  String get switchProfile => 'تبديل الملف الشخصي';
 }

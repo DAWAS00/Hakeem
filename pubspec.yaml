@@ -18,6 +18,7 @@ dependencies:
   google_fonts: any
   flutter_animate: any
   flutter_svg: ^2.3.0
+  path_drawing: ^1.0.1
   gap: any
 
   # State & Navigation
@@ -69,12 +70,32 @@ dev_dependencies:
   json_serializable: any
   riverpod_lint: any
   custom_lint: any
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  image_path: "assets/hakeem/hakeem_app_icon/icon_1024.png"
+  android: "ic_launcher"
+  ios: true
+  remove_alpha_ios: true
+
+  # Android adaptive icon (API 26+ — gradient bg + wordmark fg + monochrome)
+  adaptive_icon_background: "assets/hakeem/hakeem_app_icon/android/adaptive_background.png"
+  adaptive_icon_foreground: "assets/hakeem/hakeem_app_icon/android/adaptive_foreground.png"
+  adaptive_icon_monochrome: "assets/hakeem/hakeem_app_icon/android/monochrome_foreground.png"
+
+  # Web favicons
+  web:
+    generate: true
+    image_path: "assets/hakeem/hakeem_app_icon/icon_1024.png"
+    background_color: "#013F73"
+    theme_color: "#00538F"
 
 flutter:
   generate: true
   uses-material-design: true
 
   assets:
+    - assets/hakeem/heritage/
     - svg/huge/
     - svg/material/
     - flutter_icons/

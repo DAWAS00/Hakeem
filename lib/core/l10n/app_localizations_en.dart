@@ -299,4 +299,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorLoadingData => 'An error occurred while loading data';
+
+  @override
+  String get switchProfile => 'Switch Profile';
 }

@@ -661,6 +661,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'حدث خطأ أثناء تحميل البيانات'**
   String get errorLoadingData;
+
+  /// No description provided for @switchProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبديل الملف الشخصي'**
+  String get switchProfile;
 }
 
 class _AppLocalizationsDelegate

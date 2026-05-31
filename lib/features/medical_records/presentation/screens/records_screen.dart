@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
 import 'package:hakeem/core/constants/hakim_spacing.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
-import 'package:hakeem/shared/widgets/hakim_icon.dart';
-import 'package:hakeem/core/constants/hakim_icons.dart';
 
 class RecordsScreen extends ConsumerStatefulWidget {
   const RecordsScreen({super.key});
@@ -148,7 +146,16 @@ class _RecordsScreenState extends ConsumerState<RecordsScreen> with AutomaticKee
       padding: const EdgeInsets.only(bottom: HakimSpacing.md),
       child: Row(
         children: [
-          Icon(icon, color: c.primary, size: 20),
+          // Icon — rightmost in RTL
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: c.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(icon, color: c.primary, size: 18),
+          ),
           const SizedBox(width: HakimSpacing.sm),
           Text(
             title,
@@ -182,18 +189,21 @@ class _RecordsScreenState extends ConsumerState<RecordsScreen> with AutomaticKee
       ),
       child: Row(
         children: [
+          // Content — rightmost in RTL
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                        color: c.textPrimary,
+                    Flexible(
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: c.textPrimary,
+                        ),
                       ),
                     ),
                     if (isAbnormal) ...[
@@ -201,15 +211,15 @@ class _RecordsScreenState extends ConsumerState<RecordsScreen> with AutomaticKee
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: c.error.withValues(alpha: 0.1),
+                          color: c.errorBg,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
-                          '!',
+                          'غير طبيعي',
                           style: TextStyle(
                             color: c.error,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 11,
                           ),
                         ),
                       ),
@@ -222,33 +232,32 @@ class _RecordsScreenState extends ConsumerState<RecordsScreen> with AutomaticKee
                   style: TextStyle(fontSize: 12, color: c.textHint),
                 ),
                 const SizedBox(height: HakimSpacing.sm),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: isAbnormal ? c.error.withValues(alpha: 0.1) : c.primary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        status,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: isAbnormal ? c.error : c.primary,
-                        ),
-                      ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: isAbnormal
+                        ? c.error.withValues(alpha: 0.1)
+                        : c.primary.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    status,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: isAbnormal ? c.error : c.primary,
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
+          // Actions — leftmost in RTL
           IconButton(
             onPressed: () => _showSecureShare(context, title),
             icon: Icon(Icons.share_outlined, color: c.primary, size: 20),
           ),
-          Icon(Icons.chevron_right_rounded, color: c.textHint),
+          Icon(Icons.chevron_left_rounded, color: c.textHint),
         ],
       ),
     );

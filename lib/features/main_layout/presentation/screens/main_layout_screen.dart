@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hakeem/features/patient_dashboard/presentation/screens/dashboard_screen.dart';
-import 'package:hakeem/features/appointments/presentation/screens/appointments_screen.dart';
+import 'package:hakeem/features/ai_assistant/presentation/screens/ai_assistant_screen.dart';
 import 'package:hakeem/features/home/presentation/screens/home_screen.dart';
-import 'package:hakeem/features/medical_records/presentation/screens/records_screen.dart';
+import 'package:hakeem/features/smart_health/presentation/screens/smart_health_screen.dart';
 import 'package:hakeem/features/settings/presentation/screens/settings_screen.dart';
 import 'package:hakeem/features/main_layout/presentation/widgets/custom_bottom_nav_bar.dart';
 
@@ -79,9 +79,9 @@ class _MainLayoutScreenState extends ConsumerState<MainLayoutScreen> {
         physics: const BouncingScrollPhysics(),
         children: const [
           DashboardScreen(),
-          AppointmentsScreen(),
+          AiAssistantScreen(),
           HomeScreen(),
-          RecordsScreen(),
+          SmartHealthScreen(),
           SettingsScreen(),
         ],
       ),

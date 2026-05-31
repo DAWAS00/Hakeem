@@ -8,8 +8,8 @@ import 'package:hakeem/features/splash/presentation/screens/splash_screen.dart';
 import 'package:hakeem/features/main_layout/presentation/screens/main_layout_screen.dart';
 import 'package:hakeem/features/patient_dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:hakeem/features/settings/presentation/screens/settings_screen.dart';
-import 'package:hakeem/features/appointments/presentation/screens/appointments_screen.dart';
-import 'package:hakeem/features/medical_records/presentation/screens/records_screen.dart';
+import 'package:hakeem/features/ai_assistant/presentation/screens/ai_assistant_screen.dart';
+import 'package:hakeem/features/smart_health/presentation/screens/smart_health_screen.dart';
 import 'package:hakeem/features/assistant/presentation/screens/ai_chat_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -46,20 +46,20 @@ final appRouter = GoRouter(
           path: '/dashboard',
           builder: (context, state) => const DashboardScreen(),
         ),
-        // Tab 1: Appointments
+        // Tab 1: AI Assistant (Hakeem)
         GoRoute(
           path: '/appointments',
-          builder: (context, state) => const AppointmentsScreen(),
+          builder: (context, state) => const AiAssistantScreen(),
         ),
         // Tab 2: Home (Center)
         GoRoute(
           path: '/home',
           builder: (context, state) => const HomeScreen(),
         ),
-        // Tab 3: Medical Records
+        // Tab 3: Smart Health Hub
         GoRoute(
           path: '/records',
-          builder: (context, state) => const RecordsScreen(),
+          builder: (context, state) => const SmartHealthScreen(),
         ),
         // Tab 4: Settings
         GoRoute(

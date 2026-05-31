@@ -10,7 +10,11 @@
       "Bash(dir \"E:\\\\Hakeem\\\\assets\" /b)",
       "Bash(npx skills *)",
       "Bash(Get-ChildItem -Path \"E:\\\\Hakeem\\\\lib\\\\features\" -Directory)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "mcp__ide__getDiagnostics",
+      "Bash(dart run *)",
+      "Bash(dart pub *)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(p['name'],p['version']\\) for p in d['packages'] if 'local_auth' in p['name']]\")"
     ]
   }
 }

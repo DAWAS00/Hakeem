@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 300 150">
+  <defs><linearGradient id="wg" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#0A6FB0"></stop><stop offset="1" stop-color="#013F73"></stop></linearGradient></defs>
+  <text x="152" y="112" text-anchor="middle" direction="rtl" font-family="Cairo, sans-serif" font-weight="800" font-size="80" fill="url(#wg)">حكيم</text>
+
+  <g fill="none" stroke="#00ABD9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M208 32 C 208 41 222 41 222 49 M238 32 C 238 41 222 41 222 49 M222 49 C 203 17 104 12 64 41 C 50 51 52 74 60 86"></path>
+    <circle cx="208" cy="31" r="4.7" fill="#00ABD9" stroke="none"></circle>
+    <circle cx="238" cy="31" r="4.7" fill="#00ABD9" stroke="none"></circle>
+    <circle cx="62" cy="95" r="12.5"></circle>
+    <circle cx="62" cy="95" r="3.1" fill="#00538F" stroke="none"></circle>
+  </g>
+</svg>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hakeem/core/constants/hakim_colors.dart';
 import 'package:hakeem/core/constants/hakim_spacing.dart';
+import 'package:hakeem/core/utils/nested_scroll_physics.dart';
 import 'package:hakeem/core/l10n/app_localizations.dart';
 import 'package:hakeem/features/home/presentation/providers/home_provider.dart';
 import 'package:hakeem/features/home/presentation/widgets/appointment_card.dart';
@@ -51,11 +51,11 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen>
       ),
       builder: (context) => StatefulBuilder(
         builder: (context, setModalState) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: HakimSpacing.xl,
-            right: HakimSpacing.xl,
-            top: HakimSpacing.xl,
+          padding: EdgeInsets.fromLTRB(
+            HakimSpacing.xl,
+            HakimSpacing.xl,
+            HakimSpacing.xl,
+            MediaQuery.of(context).viewInsets.bottom + HakimSpacing.xl,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -172,6 +172,7 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen>
       ),
       body: TabBarView(
         controller: _tabController,
+        physics: const NestedScrollPhysics(),
         children: [
           homeState.when(
             loading: () => const Center(child: CircularProgressIndicator()),

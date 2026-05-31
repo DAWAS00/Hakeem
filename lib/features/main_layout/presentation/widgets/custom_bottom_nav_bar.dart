@@ -22,8 +22,8 @@ class CustomBottomNavBar extends StatelessWidget {
       routePath: '/dashboard',
     ),
     NavItem(
-      label: 'Schedule',
-      icon: HakimIcons.calendar03,
+      label: 'حكيم',
+      icon: HakimIcons.aiChat01,
       routePath: '/appointments',
     ),
     NavItem(
@@ -32,7 +32,7 @@ class CustomBottomNavBar extends StatelessWidget {
       routePath: '/home',
     ),
     NavItem(
-      label: 'Medical',
+      label: 'صحتي',
       icon: HakimIcons.medicine01,
       routePath: '/records',
     ),
