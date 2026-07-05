@@ -218,6 +218,12 @@ abstract class AppLocalizations {
   /// **'الموافقة'**
   String get consent;
 
+  /// No description provided for @verify.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحقق'**
+  String get verify;
+
   /// No description provided for @personalInfo.
   ///
   /// In ar, this message translates to:
@@ -463,6 +469,36 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'يرجى الموافقة على الشروط وتأكيد صحة البيانات أولاً'**
   String get finishRegistrationError;
+
+  /// No description provided for @otpVerification.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد رقم الجوال'**
+  String get otpVerification;
+
+  /// No description provided for @otpVerificationSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رمز التحقق المرسل إلى جوالك لإتمام إنشاء حسابك'**
+  String get otpVerificationSubtitle;
+
+  /// No description provided for @otpCodeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز التحقق'**
+  String get otpCodeLabel;
+
+  /// No description provided for @otpVerifyButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقق وإتمام التسجيل'**
+  String get otpVerifyButton;
+
+  /// No description provided for @otpResend.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يصلك الرمز؟ إعادة الإرسال'**
+  String get otpResend;
 
   /// No description provided for @contactUs.
   ///

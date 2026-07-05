@@ -69,6 +69,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get consent => 'Consent';
 
   @override
+  String get verify => 'Verify';
+
+  @override
   String get personalInfo => 'Personal Information';
 
   @override
@@ -200,6 +203,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get finishRegistrationError =>
       'Please agree to terms and confirm data accuracy first';
+
+  @override
+  String get otpVerification => 'Verify Your Phone';
+
+  @override
+  String get otpVerificationSubtitle =>
+      'Enter the verification code sent to your phone to finish creating your account';
+
+  @override
+  String get otpCodeLabel => 'Verification Code';
+
+  @override
+  String get otpVerifyButton => 'Verify & Finish Registration';
+
+  @override
+  String get otpResend => 'Didn\'t get the code? Resend';
 
   @override
   String get contactUs => 'Contact Us';

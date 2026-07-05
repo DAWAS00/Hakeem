@@ -4,6 +4,7 @@ import '../../../../../shared/widgets/hakim_icon.dart';
 import '../../../../../core/constants/hakim_colors.dart';
 import 'package:hakeem/core/constants/hakim_spacing.dart';
 import '../../../../../core/l10n/app_localizations.dart';
+import '../../providers/signup_state.dart';
 
 class SignupTopBar extends StatelessWidget {
   const SignupTopBar({super.key, required this.step, required this.onBack});
@@ -53,7 +54,7 @@ class SignupTopBar extends StatelessWidget {
               border: Border.all(color: Theme.of(context).dividerColor),
             ),
             child: Text(
-              '${step + 1} / 4',
+              '${step + 1} / ${SignupStepX.total}',
               style: TextStyle(
                   fontSize: 12,
                   color: HakimColorScheme.of(context).accent,

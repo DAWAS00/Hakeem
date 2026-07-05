@@ -1,14 +1,17 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../core/error_handling/failure_localizer.dart';
 import '../../data/providers/signup_providers.dart';
 import '../../domain/entities/signup_form_data.dart';
 import 'signup_state.dart';
 
-final signupNotifierProvider =
-    NotifierProvider<SignupNotifier, SignupState>(SignupNotifier.new);
+part 'signup_notifier.g.dart';
 
-class SignupNotifier extends Notifier<SignupState> {
+@riverpod
+class SignupNotifier extends _$SignupNotifier {
+  static const _localizer = FailureLocalizer();
+
   @override
   SignupState build() => const SignupState();
 
@@ -30,16 +33,20 @@ class SignupNotifier extends Notifier<SignupState> {
     state = state.copyWith(formData: data);
   }
 
-  Future<void> register() async {
+  Future<bool> _hasConnection() async {
     final connectivity = await Connectivity().checkConnectivity();
-    final hasConnection = connectivity.any(
+    return connectivity.any(
       (r) =>
           r == ConnectivityResult.mobile ||
           r == ConnectivityResult.wifi ||
           r == ConnectivityResult.ethernet,
     );
+  }
 
-    if (!hasConnection) {
+  /// Sends the SMS OTP for [SignupState.formData]'s phone number and, on
+  /// success, advances to [SignupStep.otp].
+  Future<void> sendOtp() async {
+    if (!await _hasConnection()) {
       state = state.copyWith(
         status: SignupStatus.failure,
         errorMessage: 'لا يوجد اتصال بالإنترنت',
@@ -49,32 +56,36 @@ class SignupNotifier extends Notifier<SignupState> {
 
     state = state.copyWith(status: SignupStatus.loading, clearError: true);
 
-    try {
-      final useCase = ref.read(registerUseCaseProvider);
-      await useCase(state.formData);
-      state = state.copyWith(status: SignupStatus.success);
-    } on DioException catch (e) {
-      state = state.copyWith(
+    final useCase = ref.read(sendSignupOtpUseCaseProvider);
+    final result = await useCase(state.formData);
+
+    state = result.fold(
+      (failure) => state.copyWith(
         status: SignupStatus.failure,
-        errorMessage: _mapDioError(e),
-      );
-    } catch (_) {
-      state = state.copyWith(
-        status: SignupStatus.failure,
-        errorMessage: 'حدث خطأ غير متوقع، يرجى المحاولة لاحقاً',
-      );
-    }
+        errorMessage: _localizer.localize(failure),
+      ),
+      (_) => state.copyWith(
+        status: SignupStatus.idle,
+        currentStep: SignupStep.otp,
+        clearError: true,
+      ),
+    );
   }
 
-  String _mapDioError(DioException e) => switch (e.type) {
-        DioExceptionType.connectionTimeout ||
-        DioExceptionType.receiveTimeout =>
-          'انتهت مهلة الاتصال، تحقق من اتصالك',
-        DioExceptionType.badResponse => switch (e.response?.statusCode) {
-            409 => 'هذا الحساب مسجل مسبقاً',
-            422 => 'تحقق من البيانات المدخلة',
-            _ => 'خطأ في الخادم (${e.response?.statusCode})',
-          },
-        _ => 'تعذر الاتصال بالخادم',
-      };
+  /// Verifies the SMS OTP code and completes registration (writes the rest
+  /// of the form's data to `profiles`).
+  Future<void> verifyOtp(String code) async {
+    state = state.copyWith(status: SignupStatus.loading, clearError: true);
+
+    final useCase = ref.read(verifySignupOtpUseCaseProvider);
+    final result = await useCase(data: state.formData, otp: code);
+
+    state = result.fold(
+      (failure) => state.copyWith(
+        status: SignupStatus.failure,
+        errorMessage: _localizer.localize(failure),
+      ),
+      (_) => state.copyWith(status: SignupStatus.success),
+    );
+  }
 }

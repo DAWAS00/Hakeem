@@ -1,3 +1,5 @@
+import '../../../../core/data/json_field_x.dart';
+
 class EmergencyCard {
   const EmergencyCard({
     required this.bloodType,
@@ -14,11 +16,11 @@ class EmergencyCard {
   final String emergencyContactPhone;
 
   factory EmergencyCard.fromJson(Map<String, dynamic> json) => EmergencyCard(
-        bloodType: json['bloodType'] as String,
-        allergies: List<String>.from(json['allergies'] as List),
-        chronicConditions: List<String>.from(json['chronicConditions'] as List),
-        emergencyContactName: json['emergencyContactName'] as String,
-        emergencyContactPhone: json['emergencyContactPhone'] as String,
+        bloodType: json.requireString('bloodType'),
+        allergies: json.requireList<String>('allergies'),
+        chronicConditions: json.requireList<String>('chronicConditions'),
+        emergencyContactName: json.requireString('emergencyContactName'),
+        emergencyContactPhone: json.requireString('emergencyContactPhone'),
       );
 
   Map<String, dynamic> toJson() => {

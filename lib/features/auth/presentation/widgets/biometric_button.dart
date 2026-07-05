@@ -12,7 +12,7 @@ class BiometricButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final canUseBiometric = ref.watch(
-      loginNotifierProvider.select((s) => s.canUseBiometric),
+      loginProvider.select((s) => s.canUseBiometric),
     );
 
     if (!canUseBiometric) return const SizedBox.shrink();
@@ -21,7 +21,7 @@ class BiometricButton extends ConsumerWidget {
       height: 52,
       child: OutlinedButton.icon(
         onPressed: () =>
-            ref.read(loginNotifierProvider.notifier).loginWithBiometric(),
+            ref.read(loginProvider.notifier).loginWithBiometric(),
         icon: HakimIcon(HakimIcons.fingerprint, size: 22, color: HakimColorScheme.of(context).accent),
         label: Text(
           'تسجيل الدخول بالبصمة',

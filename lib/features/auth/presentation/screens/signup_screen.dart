@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/signup_notifier.dart';
+import '../providers/signup_state.dart';
+import '../widgets/error_banner.dart';
 import '../widgets/signup/signup_stepper_bar.dart';
 import '../widgets/signup/signup_top_bar.dart';
 import '../widgets/signup/steps/step_1_personal.dart';
 import '../widgets/signup/steps/step_2_contact.dart';
 import '../widgets/signup/steps/step_3_health.dart';
 import '../widgets/signup/steps/step_4_consent.dart';
+import '../widgets/signup/steps/step_5_otp.dart';
+import '../../domain/entities/signup_form_data.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  ConsumerState<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
-  int _step = 0;
-
+class _SignupScreenState extends ConsumerState<SignupScreen> {
   // Step 1 data
   final _fullNameCtrl    = TextEditingController();
   final _nationalIdCtrl  = TextEditingController();
@@ -57,25 +61,68 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
-  void _next() {
-    if (_step < 3) setState(() => _step++);
-  }
+  void _next() => ref.read(signupProvider.notifier).nextStep();
 
   void _back() {
-    if (_step > 0) {
-      setState(() => _step--);
+    final currentStep = ref.read(signupProvider).currentStep;
+    if (currentStep != SignupStep.identity) {
+      ref.read(signupProvider.notifier).previousStep();
     } else {
       context.pop();
     }
   }
 
-  void _finish() {
-    // TODO: submit to auth provider / repository
+  DateTime? _parseDob() {
+    final parts = _dobCtrl.text.split('/').map((p) => p.trim()).toList();
+    if (parts.length != 3) return null;
+    final day = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    final year = int.tryParse(parts[2]);
+    if (day == null || month == null || year == null) return null;
+    return DateTime(year, month, day);
   }
+
+  SignupFormData _buildFormData() => SignupFormData(
+        fullName: _fullNameCtrl.text.trim(),
+        dateOfBirth: _parseDob(),
+        gender: _gender ?? '',
+        nationalId: _nationalIdCtrl.text.trim(),
+        phone: '+962${_phoneCtrl.text.trim()}',
+        email: _emailCtrl.text.trim(),
+        governorate: _governorate ?? '',
+        city: _city ?? '',
+        bloodType: _bloodType ?? '',
+        chronicDiseases: List.of(_chronicDiseases),
+        allergies: _allergiesCtrl.text.trim(),
+        height: int.tryParse(_heightCtrl.text),
+        weight: int.tryParse(_weightCtrl.text),
+        currentMedications: _medicationsCtrl.text.trim(),
+        acceptTerms: _acceptedTerms,
+        enableNotifications: _notificationsOn,
+        confirmAccuracy: _dataAccuracy,
+      );
+
+  void _finish() {
+    final notifier = ref.read(signupProvider.notifier);
+    notifier.updateFormData(_buildFormData());
+    notifier.sendOtp();
+  }
+
+  void _resendOtp() => ref.read(signupProvider.notifier).sendOtp();
+
+  void _verifyOtp(String code) =>
+      ref.read(signupProvider.notifier).verifyOtp(code);
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final state = ref.watch(signupProvider);
+
+    ref.listen<SignupState>(signupProvider, (_, next) {
+      if (next.status == SignupStatus.success) {
+        context.go('/home');
+      }
+    });
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -88,11 +135,16 @@ class _SignupScreenState extends State<SignupScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              SignupTopBar(step: _step, onBack: _back),
+              SignupTopBar(step: state.currentStep.index, onBack: _back),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                child: SignupStepperBar(currentStep: _step),
+                child: SignupStepperBar(currentStep: state.currentStep.index),
               ),
+              if (state.hasError)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                  child: ErrorBanner(message: state.errorMessage!),
+                ),
               Expanded(
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 260),
@@ -107,8 +159,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   child: KeyedSubtree(
-                    key: ValueKey(_step),
-                    child: _buildStep(),
+                    key: ValueKey(state.currentStep),
+                    child: _buildStep(state),
                   ),
                 ),
               ),
@@ -119,9 +171,9 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildStep() {
-    switch (_step) {
-      case 0:
+  Widget _buildStep(SignupState state) {
+    switch (state.currentStep) {
+      case SignupStep.identity:
         return Step1Personal(
           fullNameCtrl:   _fullNameCtrl,
           nationalIdCtrl: _nationalIdCtrl,
@@ -131,7 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
           onGenderChanged: (v) => setState(() => _gender = v),
           onNext:         _next,
         );
-      case 1:
+      case SignupStep.contact:
         return Step2Contact(
           emailCtrl:         _emailCtrl,
           governorate:       _governorate,
@@ -140,7 +192,7 @@ class _SignupScreenState extends State<SignupScreen> {
           onCityChanged:     (v) => setState(() => _city = v),
           onNext:            _next,
         );
-      case 2:
+      case SignupStep.health:
         return Step3Health(
           bloodType:          _bloodType,
           chronicDiseases:    _chronicDiseases,
@@ -156,7 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
           }),
           onNext: _next,
         );
-      case 3:
+      case SignupStep.consent:
         return Step4Consent(
           acceptedTerms:    _acceptedTerms,
           notificationsOn:  _notificationsOn,
@@ -166,8 +218,12 @@ class _SignupScreenState extends State<SignupScreen> {
           onDataChanged:    (v) => setState(() => _dataAccuracy = v ?? false),
           onFinish:         _finish,
         );
-      default:
-        return const SizedBox.shrink();
+      case SignupStep.otp:
+        return Step5Otp(
+          isLoading: state.isLoading,
+          onVerify:  _verifyOtp,
+          onResend:  _resendOtp,
+        );
     }
   }
 }

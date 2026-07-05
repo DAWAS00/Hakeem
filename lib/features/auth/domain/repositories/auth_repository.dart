@@ -1,12 +1,15 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error_handling/failure.dart';
 import '../entities/user_entity.dart';
 
 abstract interface class AuthRepository {
-  Future<UserEntity> loginWithPhone({
+  Future<Either<Failure, UserEntity>> loginWithPhone({
     required String phone,
     required String password,
   });
 
-  Future<UserEntity> loginWithNationalId({
+  Future<Either<Failure, UserEntity>> loginWithNationalId({
     required String nationalId,
     required String password,
   });

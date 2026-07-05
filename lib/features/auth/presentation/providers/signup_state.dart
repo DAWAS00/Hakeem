@@ -1,16 +1,16 @@
 import '../../domain/entities/signup_form_data.dart';
 
-enum SignupStep { identity, contact, health, consent }
+enum SignupStep { identity, contact, health, consent, otp }
 
 enum SignupStatus { idle, loading, success, failure }
 
 extension SignupStepX on SignupStep {
   int get index => SignupStep.values.indexOf(this);
   int get number => index + 1;
-  static const total = 4;
+  static const total = 5;
 
   bool get isFirst => this == SignupStep.identity;
-  bool get isLast => this == SignupStep.consent;
+  bool get isLast => this == SignupStep.otp;
 
   SignupStep? get next => isLast ? null : SignupStep.values[index + 1];
   SignupStep? get previous => isFirst ? null : SignupStep.values[index - 1];

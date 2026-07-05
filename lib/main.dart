@@ -1,22 +1,47 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker_flutter/talker_flutter.dart';
+import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/providers/app_settings_provider.dart';
 import 'core/l10n/app_localizations.dart';
+import 'core/telemetry/talker_provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance() ; 
-  runApp(
-    ProviderScope(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(prefs),
-      ],
-      child: const HakeemApp(),
-    ),
+  final talker = TalkerFlutter.init(
+    settings: TalkerSettings(useConsoleLogs: true),
   );
+
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    talker.handle(details.exception, details.stack, 'FlutterError');
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    talker.handle(error, stack, 'PlatformDispatcher uncaught error');
+    return true;
+  };
+
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final prefs = await SharedPreferences.getInstance();
+    runApp(
+      ProviderScope(
+        observers: [TalkerRiverpodObserver(talker: talker)],
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(prefs),
+          talkerProvider.overrideWithValue(talker),
+        ],
+        child: const HakeemApp(),
+      ),
+    );
+  }, (error, stackTrace) {
+    talker.handle(error, stackTrace, 'Uncaught zone error');
+  });
 }
 
 class HakeemApp extends ConsumerWidget {

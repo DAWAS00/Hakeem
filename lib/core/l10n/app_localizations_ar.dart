@@ -69,6 +69,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get consent => 'الموافقة';
 
   @override
+  String get verify => 'التحقق';
+
+  @override
   String get personalInfo => 'المعلومات الشخصية';
 
   @override
@@ -197,6 +200,22 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get finishRegistrationError =>
       'يرجى الموافقة على الشروط وتأكيد صحة البيانات أولاً';
+
+  @override
+  String get otpVerification => 'تأكيد رقم الجوال';
+
+  @override
+  String get otpVerificationSubtitle =>
+      'أدخل رمز التحقق المرسل إلى جوالك لإتمام إنشاء حسابك';
+
+  @override
+  String get otpCodeLabel => 'رمز التحقق';
+
+  @override
+  String get otpVerifyButton => 'تحقق وإتمام التسجيل';
+
+  @override
+  String get otpResend => 'لم يصلك الرمز؟ إعادة الإرسال';
 
   @override
   String get contactUs => 'اتصل بنا';

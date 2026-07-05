@@ -1,16 +1,19 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../core/error_handling/failure_localizer.dart';
+import '../../../../core/telemetry/talker_provider.dart';
 import '../../data/providers/auth_providers.dart';
 import '../../domain/enums/login_method.dart';
 import 'login_state.dart';
 
-final loginNotifierProvider =
-    NotifierProvider<LoginNotifier, LoginState>(LoginNotifier.new);
+part 'login_notifier.g.dart';
 
-class LoginNotifier extends Notifier<LoginState> {
+@riverpod
+class LoginNotifier extends _$LoginNotifier {
   final _localAuth = LocalAuthentication();
+  static const _localizer = FailureLocalizer();
 
   @override
   LoginState build() {
@@ -21,10 +24,14 @@ class LoginNotifier extends Notifier<LoginState> {
   Future<void> _checkBiometricSupport() async {
     try {
       final isSupported = await _localAuth.isDeviceSupported();
+      if (!ref.mounted) return;
       if (isSupported) {
         state = state.copyWith(canUseBiometric: true);
       }
-    } catch (_) {}
+    } catch (e, stackTrace) {
+      if (!ref.mounted) return;
+      ref.read(talkerProvider).handle(e, stackTrace, 'Biometric support check failed');
+    }
   }
 
   void switchTab(LoginMethod method) {
@@ -58,25 +65,20 @@ class LoginNotifier extends Notifier<LoginState> {
 
     state = state.copyWith(status: LoginStatus.loading, clearError: true);
 
-    try {
-      final useCase = ref.read(loginUseCaseProvider);
-      await useCase(
-        identifier: identifier,
-        password: password,
-        method: state.activeTab,
-      );
-      state = state.copyWith(status: LoginStatus.success);
-    } on DioException catch (e) {
-      state = state.copyWith(
+    final useCase = ref.read(loginUseCaseProvider);
+    final result = await useCase(
+      identifier: identifier,
+      password: password,
+      method: state.activeTab,
+    );
+
+    state = result.fold(
+      (failure) => state.copyWith(
         status: LoginStatus.failure,
-        errorMessage: _mapDioError(e),
-      );
-    } catch (_) {
-      state = state.copyWith(
-        status: LoginStatus.failure,
-        errorMessage: 'حدث خطأ غير متوقع، يرجى المحاولة لاحقاً',
-      );
-    }
+        errorMessage: _localizer.localize(failure),
+      ),
+      (_) => state.copyWith(status: LoginStatus.success),
+    );
   }
 
   Future<void> loginWithBiometric() async {
@@ -111,16 +113,4 @@ class LoginNotifier extends Notifier<LoginState> {
       );
     }
   }
-
-  String _mapDioError(DioException e) => switch (e.type) {
-        DioExceptionType.connectionTimeout ||
-        DioExceptionType.receiveTimeout =>
-          'انتهت مهلة الاتصال، تحقق من اتصالك',
-        DioExceptionType.badResponse => switch (e.response?.statusCode) {
-            401 => 'بيانات الدخول غير صحيحة',
-            403 => 'الحساب موقوف، تواصل مع الدعم',
-            _ => 'خطأ في الخادم (${e.response?.statusCode})',
-          },
-        _ => 'تعذر الاتصال بالخادم',
-      };
 }

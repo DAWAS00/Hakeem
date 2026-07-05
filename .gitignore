@@ -46,3 +46,6 @@ app.*.map.json
 
 .gemini/
 gha-creds-*.json
+
+# Supabase credentials — copy env.example.json to env.json, never commit it
+env.json

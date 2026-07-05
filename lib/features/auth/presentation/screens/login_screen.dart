@@ -59,9 +59,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(loginNotifierProvider);
+    final state = ref.watch(loginProvider);
 
-    ref.listen<LoginState>(loginNotifierProvider, (_, next) {
+    ref.listen<LoginState>(loginProvider, (_, next) {
       if (next.status == LoginStatus.success) {
         // TODO: navigate to home screen via GoRouter
         ScaffoldMessenger.of(context).showSnackBar(
@@ -148,9 +148,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     obscurePassword: state.obscurePassword,
                     isLoading: state.isLoading,
                     errorMessage: state.hasError ? state.errorMessage : null,
-                    onTabSwitch: ref.read(loginNotifierProvider.notifier).switchTab,
+                    onTabSwitch: ref.read(loginProvider.notifier).switchTab,
                     onTogglePassword:
-                        ref.read(loginNotifierProvider.notifier).togglePassword,
+                        ref.read(loginProvider.notifier).togglePassword,
                     onLoginPressed: _onLoginPressed,
                     onSanadPressed: _onSanadPressed,
                     onForgotPassword: () {

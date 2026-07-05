@@ -1,3 +1,6 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../../../core/error_handling/failure.dart';
 import '../entities/user_entity.dart';
 import '../enums/login_method.dart';
 import '../repositories/auth_repository.dart';
@@ -7,7 +10,7 @@ class LoginUseCase {
 
   final AuthRepository _repository;
 
-  Future<UserEntity> call({
+  Future<Either<Failure, UserEntity>> call({
     required String identifier,
     required String password,
     required LoginMethod method,

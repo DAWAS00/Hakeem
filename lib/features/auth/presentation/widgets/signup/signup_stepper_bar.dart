@@ -12,9 +12,9 @@ class SignupStepperBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final labels = [l10n.identity, l10n.contact, l10n.health, l10n.consent];
+    final labels = [l10n.identity, l10n.contact, l10n.health, l10n.consent, l10n.verify];
     return Row(
-      children: List.generate(4, (i) {
+      children: List.generate(labels.length, (i) {
         final isDone   = i < currentStep;
         final isActive = i == currentStep;
         final stepLockedColor = HakimColorScheme.of(context).borderMuted;
@@ -77,7 +77,7 @@ class SignupStepperBar extends StatelessWidget {
                     ),
                   ),
                   // connector line after (except last)
-                  if (i < 3)
+                  if (i < labels.length - 1)
                     Expanded(
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
